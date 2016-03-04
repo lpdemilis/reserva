@@ -17,7 +17,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/fut_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"			       
+            url = "jdbc:mysql://localhost/reserva_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"			       
             username = "root"
             password = "3dez82"
         }
@@ -28,7 +28,7 @@ environments {
     test {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/fut_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+            url = "jdbc:mysql://localhost/reserva_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
             username = "root"
             password = "3dez82"
         }
@@ -36,7 +36,7 @@ environments {
     production {
 		dataSource {
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost/fut_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
+			url = "jdbc:mysql://localhost/reserva_db?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull"
 			username = "root"
 			password = "3dez82"
 		    properties {
