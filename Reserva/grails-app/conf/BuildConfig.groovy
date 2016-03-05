@@ -74,7 +74,7 @@ grails.project.dependency.resolution = {
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
 		
-		//compile ":spring-security-core:1.2.7.3"
+		compile ":spring-security-core:1.2.7.3"
 		//compile ":spring-security-facebook:0.15"
     }
 }

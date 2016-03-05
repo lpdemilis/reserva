@@ -4,6 +4,8 @@ class Recurso {
 	
 	String nome
 	
+	static hasMany = [reserva:Reserva]
+	
 	static belongsTo = [condominio:Condominio]
 
     static constraints = {
