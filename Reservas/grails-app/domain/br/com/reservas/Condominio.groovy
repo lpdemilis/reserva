@@ -5,7 +5,7 @@ class Condominio {
 	String nome
 	Endereco endereco
 	
-	static hasMany = [recursos:Recurso]
+	static hasMany = [administradores:Usuario, apartamentos:Apartamento, recursos:Recurso]
 
     static constraints = {
 		nome nullable:false

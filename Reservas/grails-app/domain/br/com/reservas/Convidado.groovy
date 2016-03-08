@@ -10,5 +10,6 @@ class Convidado {
 	static belongsTo = [reserva:Reserva]
 
     static constraints = {
+		nome nullable:false 
     }
 }
