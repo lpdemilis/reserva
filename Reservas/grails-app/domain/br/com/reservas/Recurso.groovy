@@ -8,7 +8,7 @@ class Recurso {
 	String descricao
 	Boolean ativo
 	
-	static hasMany = [reserva:Reserva]
+	static hasMany = [reserva:Reserva, indisponibilidades:Indisponibilidade]
 	
 	static belongsTo = [condominio:Condominio]
 
