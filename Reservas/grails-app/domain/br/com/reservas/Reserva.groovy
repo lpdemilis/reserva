@@ -6,6 +6,10 @@ class Reserva {
 	Date dataReserva
 	Boolean aprovada
 	Boolean cancelada
+	Date dataAprovacao
+	Date dataCancelamento
+	
+	static hasMany = [convidados:Convidado]
 	
 	static belongsTo = [usuario:Usuario, recurso:Recurso]
 
