@@ -9,6 +9,7 @@ class Reserva {
 	Date dataAprovacao
 	Date dataCancelamento
 	String comentario
+	BigDecimal valor
 	
 	static hasMany = [convidados:Convidado]
 	
@@ -18,7 +19,8 @@ class Reserva {
 		dataSolicitacao nullable:false 
 		dataEvento nullable:false 
 		aprovada nullable:false 
-		cancelada nullable:false 
+		cancelada nullable:false
+		valor scale: 2
     }
 	
 	static mapping = {
