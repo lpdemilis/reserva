@@ -62,3 +62,21 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'mensalidades', 'error')} ">
+	<label for="mensalidades">
+		<g:message code="condominio.mensalidades.label" default="Mensalidades" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${condominioInstance?.mensalidades?}" var="m">
+    <li><g:link controller="mensalidade" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="mensalidade" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</g:link>
+</li>
+</ul>
+
+</div>
+
+

@@ -3,7 +3,7 @@ package br.com.reservas
 class Apartamento {
 	
 	Integer numero
-	char bloco 
+	String bloco 
 	
 	static hasMany = [usuarios:Usuario]
 	
@@ -11,6 +11,10 @@ class Apartamento {
 
     static constraints = {
 		numero nullable:false
-		bloco nullable:false  
+		bloco nullable:true  
     }
+	
+	String toString(){
+		numero + " " + bloco
+	}
 }
