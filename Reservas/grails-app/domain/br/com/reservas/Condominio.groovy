@@ -11,4 +11,8 @@ class Condominio {
 		nome nullable:false
 		endereco nullable:false
     }
+	
+	String toString() {
+		nome
+	}
 }
