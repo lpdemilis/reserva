@@ -5,7 +5,7 @@ class Apartamento {
 	Integer numero
 	String bloco 
 	
-	static hasMany = [usuarios:Usuario]
+	static hasMany = [convites:Convite]
 	
 	static belongsTo = [condominio:Condominio]
 

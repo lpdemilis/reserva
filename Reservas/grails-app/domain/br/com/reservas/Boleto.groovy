@@ -8,6 +8,8 @@ class Boleto {
 	Date dataPagamento
 	String codigo
 	Boolean pago
+	
+	static belongsTo = [mensalidade:Mensalidade]
 
     static constraints = {
 		valor nullable:false 
