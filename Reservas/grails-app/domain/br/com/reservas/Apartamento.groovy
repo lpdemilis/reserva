@@ -11,7 +11,9 @@ class Apartamento {
 
     static constraints = {
 		numero nullable:false
-		bloco nullable:true  
+		bloco nullable:true 
+		
+		condominio(unique: ['numero','bloco'])
     }
 	
 	String toString(){
