@@ -12,7 +12,17 @@ class ApartamentoController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [apartamentoInstanceList: Apartamento.list(params), apartamentoInstanceTotal: Apartamento.count()]
+		
+		def apartamentoCriteria = Apartamento.createCriteria()
+		def apartamentoInstanceList = apartamentoCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			if(params.condominio && Long.valueOf(params.condominio) != 0){
+				condominio{
+					eq('id', Long.valueOf(params.condominio))
+				}
+			}			
+		}
+		
+        [apartamentoInstanceList: apartamentoInstanceList, apartamentoInstanceTotal: apartamentoInstanceList.size()]
     }
 
     def create() {
@@ -56,8 +66,8 @@ class ApartamentoController {
 			flash.message = message(code: 'default.created.message', args: [message(code: 'apartamento.label', default: 'Apartamento'), apartamentoInstance.id])
 			redirect(action: "show", id: apartamentoInstance.id)
 		}else{
-			flash.message = message(code: 'default.created.message', args: [message(code: 'apartamento.label', default: 'Apartamento'), apartamentoInstance.id])
-			redirect(action: "list", condominioInstance: apartamentoInstance.condominio)
+			flash.message = message(code: 'default.created.message', args: [message(code: 'apartamento.label', default: 'Grupo de Apartamentos'), ""])
+			redirect(action: "list", params: [condominio: apartamentoInstance.condominio.id])
 		}
     }
 
