@@ -10,8 +10,8 @@ class Recurso {
 	BigDecimal valor
 	Integer capacidade
 	Integer tempoReserva
-	
-	static hasMany = [reserva:Reserva, indisponibilidades:Indisponibilidade]
+		
+	static hasMany = [reserva:Reserva, indisponibilidades:Indisponibilidade, tipoReserva:TipoReserva]
 	
 	static belongsTo = [condominio:Condominio]
 
