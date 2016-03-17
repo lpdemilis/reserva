@@ -8,7 +8,7 @@ class Imagem {
 	static belongsTo = [recurso:Recurso]
 	  
 	static constraints = {
-		imagem(nullable:true, maxSize: 16384 /* 16K */)
+		imagem(nullable:true, maxSize: 2048000 /* 2mb */)
 		imagemType(nullable:true)
 	}    
 }
