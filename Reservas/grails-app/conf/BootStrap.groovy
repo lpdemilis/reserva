@@ -52,24 +52,24 @@ class BootStrap {
 		tipoReserva =TipoReserva.get(1);
 		if (tipoReserva == null) {
 			tipoReserva = new TipoReserva();
-			tipoReserva.nome = Charset.forName("UTF-8").encode("Apartamento obrigatório");
-			tipoReserva.descricao = Charset.forName("UTF-8").encode("A reserva somente poderá ser feita por um usuário relacionado à um apartamento.");
+			tipoReserva.nome = "Apartamento obrigat\u00F3rio";
+			tipoReserva.descricao = "A reserva somente poder\u00E1 ser feita por um usu\u00E1rio relacionado \u00E0 um apartamento.";
 			tipoReserva.save();
 		}
 		
 		tipoReserva =TipoReserva.get(2);
 		if (tipoReserva == null) {
 			tipoReserva = new TipoReserva();
-			tipoReserva.nome = Charset.forName("UTF-8").encode("Condomínio obrigatório");
-			tipoReserva.descricao = Charset.forName("UTF-8").encode("A reserva somente poderá ser feita por um usuário relacionado ao condominio.");
+			tipoReserva.nome = "Condom\u00EDnio obrigat\u00F3rio";
+			tipoReserva.descricao = "A reserva somente poder\u00E1 ser feita por um usu\u00E1rio relacionado ao condominio.";
 			tipoReserva.save();
 		}
 		
 		tipoReserva =TipoReserva.get(3);
 		if (tipoReserva == null) {
 			tipoReserva = new TipoReserva();
-			tipoReserva.nome = Charset.forName("UTF-8").encode("Todos os usuários");			
-			tipoReserva.descricao = Charset.forName("UTF-8").encode("A reserva poderá ser feita por todos os usuários.");
+			tipoReserva.nome = "Todos os usu\u00E1rios";			
+			tipoReserva.descricao = "A reserva poder\u00E1 ser feita por todos os usu\u00E1rios.";
 			tipoReserva.save();
 		}
 		/** Tipo Reserva **/
