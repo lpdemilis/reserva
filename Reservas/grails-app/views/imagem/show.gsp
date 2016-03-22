@@ -26,7 +26,7 @@
 				<g:if test="${imagemInstance?.imagem}">
 				<li class="fieldcontain">
 					<span id="imagem-label" class="property-label"><g:message code="imagem.imagem.label" default="Imagem" /></span>
-					<span id="imagem-label" class="property-label"><img class="imagem-miniatura" src="${createLink(controller:'imagem', action:'imagem', id:imagemInstance.id)}" /></span>
+					<span class="property-value" aria-labelledby="imagem-label"><img class="imagem-miniatura" src="${createLink(controller:'imagem', action:'imagem', id:imagemInstance.id)}" /></span>
 					
 				</li>
 				</g:if>

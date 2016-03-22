@@ -24,9 +24,11 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="imagem" title="${message(code: 'imagem.imagem.label', default: 'Imagem')}" />
-				
-						<th><g:message code="imagem.recurso.label" default="Recurso" /></th>
+						<g:sortableColumn property="recurso.condominio" title="${message(code: 'imagem.recurso.condominio.label', default: 'Condomínio')}" />
+						
+						<g:sortableColumn property="recurso" title="${message(code: 'imagem.recurso.label', default: 'Recurso')}" />
+						
+						<th><g:message code="imagem.imagem.label" default="Imagem" /></th>
 					
 					</tr>
 				</thead>
@@ -34,9 +36,28 @@
 				<g:each in="${imagemInstanceList}" status="i" var="imagemInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${imagemInstance.id}">${fieldValue(bean: imagemInstance, field: "imagem")}</g:link></td>
-					
-						<td>${fieldValue(bean: imagemInstance, field: "recurso")}</td>
+						<td>
+							<g:if test="${imagemInstance.recurso.condominio?.id}">
+								<g:link controller="condominio" action="show" id="${imagemInstance.recurso.condominio.id}">
+									${fieldValue(bean: imagemInstance, field: "recurso.condominio")}
+								</g:link>	
+							</g:if>	
+							<g:else>
+								-
+							</g:else>
+						</td>
+						
+						<td>
+							<g:link controller="recurso" action="show" id="${imagemInstance.recurso.id}">
+								${fieldValue(bean: imagemInstance, field: "recurso")}
+							</g:link>	
+						</td>
+						
+						<td>
+							<g:link action="show" id="${imagemInstance.id}">								
+								<span id="imagem-label" class="property-label"><img class="imagem-miniatura" src="${createLink(controller:'imagem', action:'imagem', id:imagemInstance.id)}" /></span>
+							</g:link>
+						</td>						
 					
 					</tr>
 				</g:each>

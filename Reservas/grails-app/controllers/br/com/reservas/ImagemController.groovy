@@ -16,6 +16,11 @@ class ImagemController {
     }
 
     def create() {
+		if (!params.recurso?.id) {
+			flash.message = message(code: 'default.recurso.not.found.message')
+			redirect(action: "list")
+			return
+		}
         [imagemInstance: new Imagem(params)]
     }
 
