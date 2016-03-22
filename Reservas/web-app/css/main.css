@@ -606,3 +606,12 @@ a.skip {
 	max-width: 100px;
 	max-height: 100px;	
 }
+
+.one-to-many li{
+	list-style-type: none;
+}
+
+.disabled{
+	font-style: italic;
+	color: #CCCCCC;
+}
