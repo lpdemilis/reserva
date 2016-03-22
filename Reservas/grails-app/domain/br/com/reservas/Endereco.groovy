@@ -10,12 +10,12 @@ class Endereco {
 	Cidade cidade
 	
     static constraints = {
-		logradouro nullable:true
+		logradouro nullable:false, blank:false
 		complemento nullable:true
-		numero nullable:true
-		bairro nullable:true
+		numero nullable:false, blank:false
+		bairro nullable:false, blank:false
 		cep nullable:true
-		cidade nullable:false	 
+		cidade nullable:false, blank:false	 
     }
 	
 	String toString() {

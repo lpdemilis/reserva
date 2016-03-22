@@ -2,21 +2,13 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'nome', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'nome', 'error')} required">
 	<label for="nome">
 		<g:message code="condominio.nome.label" default="Nome" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="nome" value="${condominioInstance?.nome}"/>
+	<g:textField name="nome" value="${condominioInstance?.nome}" required=""/>
 </div>
-
-<%--<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'endereco', 'error')} required">--%>
-<%--	<label for="endereco">--%>
-<%--		<g:message code="condominio.endereco.label" default="Endereco" />--%>
-<%--		<span class="required-indicator">*</span>--%>
-<%--	</label>--%>
-<%--	<g:select id="endereco" name="endereco.id" from="${br.com.reservas.Endereco.list()}" optionKey="id" required="" value="${condominioInstance?.endereco?.id}" class="many-to-one"/>--%>
-<%--</div>--%>
 
 <g:render template="/endereco/form" model="['enderecoInstance':condominioInstance?.endereco]"/>
 
@@ -34,14 +26,19 @@
 		
 	</label>
 	
-<ul class="one-to-many">
-<g:each in="${condominioInstance?.apartamentos?}" var="a">
-    <li><g:link controller="apartamento" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>
-</li>
-</ul>
+	<ul class="one-to-many">
+		<g:each in="${condominioInstance?.apartamentos?}" var="a">
+		    <li><g:link controller="apartamento" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+		</g:each>
+		<li class="add">
+			<g:if test="${condominioInstance?.id}">
+				<g:link controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>	
+			</g:if>
+			<g:else>
+				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</span>				
+			</g:else>			
+		</li>
+	</ul>
 
 </div>
 
@@ -51,14 +48,19 @@
 		
 	</label>
 	
-<ul class="one-to-many">
-<g:each in="${condominioInstance?.recursos?}" var="r">
-    <li><g:link controller="recurso" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="recurso" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</g:link>
-</li>
-</ul>
+	<ul class="one-to-many">
+		<g:each in="${condominioInstance?.recursos?}" var="r">
+		    <li><g:link controller="recurso" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+		</g:each>
+		<li class="add">
+			<g:if test="${condominioInstance?.id}">
+				<g:link controller="recurso" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</g:link>	
+			</g:if>
+			<g:else>
+				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</span>				
+			</g:else>			
+		</li>
+	</ul>
 
 </div>
 
@@ -68,14 +70,19 @@
 		
 	</label>
 	
-<ul class="one-to-many">
-<g:each in="${condominioInstance?.mensalidades?}" var="m">
-    <li><g:link controller="mensalidade" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="mensalidade" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</g:link>
-</li>
-</ul>
+	<ul class="one-to-many">
+		<g:each in="${condominioInstance?.mensalidades?}" var="m">
+		    <li><g:link controller="mensalidade" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+		</g:each>
+		<li class="add">
+			<g:if test="${condominioInstance?.id}">
+				<g:link controller="mensalidade" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</g:link>	
+			</g:if>
+			<g:else>
+				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</span>				
+			</g:else>
+		</li>
+	</ul>
 
 </div>
 

@@ -8,8 +8,8 @@ class Condominio {
 	static hasMany = [administradores:Usuario, usuarios:Usuario, apartamentos:Apartamento, recursos:Recurso, mensalidades:Mensalidade, convites:Convite]
 
     static constraints = {
-		nome nullable:false
-		endereco nullable:false
+		nome nullable:false, blank: false
+		endereco nullable:false, blank:false
     }
 	
 	String toString() {
