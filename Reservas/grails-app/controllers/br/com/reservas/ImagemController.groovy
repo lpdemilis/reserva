@@ -102,11 +102,11 @@ class ImagemController {
 	
 	def imagem() {
 		Imagem imagemInstance = Imagem.get(params.id)
-		if (!imagemInstance || !imagemInstance.tipoImagem) {
+		if (!imagemInstance) {
 		  response.sendError(404)
 		  return
 		}
-		response.contentType = imagemInstance.tipoImagem
+
 		response.contentLength = imagemInstance.imagem.size()
 		OutputStream out = response.outputStream
 		out.write(imagemInstance.imagem)

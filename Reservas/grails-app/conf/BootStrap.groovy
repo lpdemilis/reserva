@@ -1,9 +1,8 @@
-import java.nio.charset.Charset;
-
-import br.com.reservas.Cidade;
-import br.com.reservas.Condominio;
-import br.com.reservas.Endereco;
-import br.com.reservas.TipoReserva;
+import br.com.reservas.Cidade
+import br.com.reservas.Condominio
+import br.com.reservas.Endereco
+import br.com.reservas.Recurso
+import br.com.reservas.TipoReserva
 
 class BootStrap {
 
@@ -20,12 +19,24 @@ class BootStrap {
 			enderecoInstance.numero = 155;
 			enderecoInstance.bairro = "Itacorubi";
 			enderecoInstance.cep = "88034-600";
-			enderecoInstance.cidade = Cidade.findByNome("Florianopolis");
-			enderecoInstance.save()
+			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
+			enderecoInstance.save(flush: true)
 			
 			condominioInstance.endereco = enderecoInstance;
-			condominioInstance.save() 			
+			condominioInstance.save(flush: true) 			
 		}
+		
+		/** Recursos **/
+		Recurso recursoInstance = Recurso.get(1);
+		if (recursoInstance == null) {
+			recursoInstance = new Recurso();
+			recursoInstance.nome = "Sal\u00E3o de Festas";
+			recursoInstance.descricao = "";			
+			recursoInstance.condominio = condominioInstance;
+			
+			recursoInstance.save(flush: true)
+		}
+		/** Recursos **/
 		
 		condominioInstance = Condominio.findByNome("Grenoble");
 		if (condominioInstance == null) {
@@ -38,14 +49,26 @@ class BootStrap {
 			enderecoInstance.numero = 1965;
 			enderecoInstance.bairro = "Centro";
 			enderecoInstance.cep = "88034-000";
-			enderecoInstance.cidade = Cidade.findByNome("Florianopolis");
-			enderecoInstance.save()
+			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
+			enderecoInstance.save(flush: true)
 			
 			condominioInstance.endereco = enderecoInstance;
-			condominioInstance.save()			
+			condominioInstance.save(flush: true)			
 		}
-		/** Condominios **/
 		
+		/** Recursos **/
+		recursoInstance = Recurso.get(2);
+		if (recursoInstance == null) {
+			recursoInstance = new Recurso();
+			recursoInstance.nome = "Sal\u00E3o de Festas";
+			recursoInstance.descricao = "";
+			recursoInstance.condominio = condominioInstance;
+			
+			recursoInstance.save(flush: true)
+		}
+		/** Recursos **/		
+		/** Condominios **/
+						
 		/** Tipo Reserva **/
 		TipoReserva tipoReserva;
 		
@@ -72,8 +95,9 @@ class BootStrap {
 			tipoReserva.descricao = "A reserva poder\u00E1 ser feita por todos os usu\u00E1rios.";
 			tipoReserva.save();
 		}
-		/** Tipo Reserva **/
+		/** Tipo Reserva **/	
     }
+	
     def destroy = {
     }
 }

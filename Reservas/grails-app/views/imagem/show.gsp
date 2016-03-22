@@ -25,20 +25,12 @@
 			
 				<g:if test="${imagemInstance?.imagem}">
 				<li class="fieldcontain">
-					<span id="imagem-label" class="property-label"><img class="imagem" src="${createLink(controller:'imagem', action:'imagem', id:imagemInstance.id)}" /></span>
+					<span id="imagem-label" class="property-label"><g:message code="imagem.imagem.label" default="Imagem" /></span>
+					<span id="imagem-label" class="property-label"><img class="imagem-miniatura" src="${createLink(controller:'imagem', action:'imagem', id:imagemInstance.id)}" /></span>
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${imagemInstance?.tipoImagem}">
-				<li class="fieldcontain">
-					<span id="tipoImagem-label" class="property-label"><g:message code="imagem.tipoImagem.label" default="Tipo Imagem" /></span>
-					
-						<span class="property-value" aria-labelledby="tipoImagem-label"><g:fieldValue bean="${imagemInstance}" field="tipoImagem"/></span>
-					
-				</li>
-				</g:if>
-			
+						
 				<g:if test="${imagemInstance?.recurso}">
 				<li class="fieldcontain">
 					<span id="recurso-label" class="property-label"><g:message code="imagem.recurso.label" default="Recurso" /></span>

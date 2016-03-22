@@ -21,7 +21,7 @@ class Recurso {
 		numeroMaxReservas nullable:false
 		ativo nullable:false   
 		tempoReserva nullable: false
-		valor scale: 2
+		valor nullable:true, scale: 2
 		capacidade nullable:true 
     }
 	
@@ -29,7 +29,8 @@ class Recurso {
 		exigeConfirmacao defaultValue: true
 		numeroMaxReservas defaultValue: 1
 		ativo defaultValue: true
-		tempoReserva defaultValue: 24		
+		tempoReserva defaultValue: 24
+		descricao defaltValue: ""		
 	}
 	
 	String toString(){
