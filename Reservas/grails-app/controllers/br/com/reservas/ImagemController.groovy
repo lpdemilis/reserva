@@ -17,7 +17,7 @@ class ImagemController {
 
     def create() {
 		if (!params.recurso?.id) {
-			flash.message = message(code: 'default.recurso.not.found.message')
+			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'images.label', default: 'as imagens')])
 			redirect(controller:"recurso", action: "create")
 			return
 		}
