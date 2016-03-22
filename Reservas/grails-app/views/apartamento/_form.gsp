@@ -18,13 +18,15 @@
 	<g:textField name="bloco" value="${apartamentoInstance?.bloco}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'condominio', 'error')} required">
-	<label for="condominio">
-		<g:message code="apartamento.condominio.label" default="Condominio" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" required="" value="${apartamentoInstance?.condominio?.id}" class="many-to-one"/>
-</div>
+<%--<div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'condominio', 'error')} required">--%>
+<%--	<label for="condominio">--%>
+<%--		<g:message code="apartamento.condominio.label" default="Condominio" />--%>
+<%--		<span class="required-indicator">*</span>--%>
+<%--	</label>--%>
+<%--	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" required="" value="${apartamentoInstance?.condominio?.id}" class="many-to-one"/>--%>
+<%--</div>--%>
+
+<g:hiddenField id="condominio" name="condominio.id" required="" value="${apartamentoInstance?.condominio?.id}" />
 
 <div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'convites', 'error')} ">
 	<label for="convites">

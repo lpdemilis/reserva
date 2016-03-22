@@ -16,6 +16,11 @@ class MensalidadeController {
     }
 
     def create() {
+		if (!params.condominio?.id) {
+			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'mensalidades.label', default: 'as mensalidades')])
+			redirect(controller:"condominio", action: "create")
+			return
+		}
         [mensalidadeInstance: new Mensalidade(params)]
     }
 

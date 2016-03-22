@@ -27,7 +27,7 @@ class ApartamentoController {
 
     def create() {
 		if (!params.condominio?.id) {
-			flash.message = message(code: 'default.condominio.not.found.message')
+			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'apartamentos.label', default: 'os apartamentos')])
 			redirect(controller:"condominio", action: "create")
 			return
 		}
