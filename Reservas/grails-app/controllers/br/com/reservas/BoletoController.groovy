@@ -17,11 +17,15 @@ class BoletoController {
 
     def create() {
 		if (!params.mensalidade?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'mensalidade.label', default: 'mensalidade'), message(code: 'boleto.label', default: 'o boleto')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'mensalidade.label', default: 'mensalidade'), message(code: 'boleto.label', default: 'o boleto')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'mensalidade.label', default: 'mensalidade'), message(code: 'boleto.label', default: 'o boleto')])
+			}
 			redirect(controller:"mensalidade", action: "create")
 			return
 		}
-		
+				
         [boletoInstance: new Boleto(params)]
     }
 

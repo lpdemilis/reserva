@@ -17,7 +17,11 @@ class RecursoController {
 
     def create() {
 		if (!params.condominio?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'recursos.label', default: 'os recursos')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'recursos.label', default: 'os recursos')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'recursos.label', default: 'os recursos')])
+			}
 			redirect(controller:"condominio", action: "create")
 			return
 		}

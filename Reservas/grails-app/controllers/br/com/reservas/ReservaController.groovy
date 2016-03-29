@@ -16,23 +16,35 @@ class ReservaController {
     }
 
     def create() {
-		if (!params.usuario?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'usuario.label', default: 'usu\u00E1rio'), message(code: 'reserva.label', default: 'a reserva')])
-			redirect(controller:"usuario", action: "create")
+//		if (!params.usuario?.id) {
+//			if(flash.message == null){
+//				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'usuario.label', default: 'usu\u00E1rio'), message(code: 'reserva.label', default: 'a reserva')])
+//			}else{
+//				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'usuario.label', default: 'usu\u00E1rio'), message(code: 'reserva.label', default: 'a reserva')])
+//			}
+//			redirect(controller:"usuario", action: "create")
+//			return
+//		}
+		
+		if (!params.apartamento?.id) {
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
+			}
+			redirect(controller:"apartamento", action: "create")
 			return
 		}
 		
-		if (!params.apartamento?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
-			redirect(controller:"apartamento", action: "create")
-			return
-		}	
-				
 		if (!params.recurso?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reserva.label', default: 'a reserva')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
+			}
 			redirect(controller:"recurso", action: "create")
 			return
-		}		
+		}
 		
         [reservaInstance: new Reserva(params)]
     }

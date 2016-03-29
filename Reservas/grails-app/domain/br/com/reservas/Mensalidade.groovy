@@ -7,6 +7,8 @@ class Mensalidade {
 	
 	static hasMany = [boleto:Boleto]
 	
+	static belongsTo = [condominio:Condominio]
+	
     static constraints = {
 		mes nullable:false
 		ano nullable:false 

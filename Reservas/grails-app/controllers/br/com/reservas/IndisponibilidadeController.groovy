@@ -17,7 +17,11 @@ class IndisponibilidadeController {
 
     def create() {
 		if (!params.recurso?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'indisponibilidades.label', default: 'as indisponibilidades')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'indisponibilidades.label', default: 'as indisponibilidades')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'indisponibilidades.label', default: 'as indisponibilidades')])
+			}
 			redirect(controller:"recurso", action: "create")
 			return
 		}

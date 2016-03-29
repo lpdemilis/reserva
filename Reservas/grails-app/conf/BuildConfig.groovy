@@ -42,7 +42,9 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        runtime "mysql:mysql-connector-java:5.1.22"		
+        runtime "mysql:mysql-connector-java:5.1.22"
+		
+		compile "org.grails.plugins:flash-helper:0.9.9"
     }
 
     plugins {

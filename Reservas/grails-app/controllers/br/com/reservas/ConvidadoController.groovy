@@ -17,7 +17,11 @@ class ConvidadoController {
 
     def create() {
 		if (!params.reserva?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'reserva.label', default: 'reserva'), message(code: 'convidado.label', default: 'o convidado')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'reserva.label', default: 'reserva'), message(code: 'convidados.label', default: 'os convidados')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'reserva.label', default: 'reserva'), message(code: 'convidados.label', default: 'os convidados')])
+			}
 			redirect(controller:"reserva", action: "create")
 			return
 		}

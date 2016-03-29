@@ -17,7 +17,11 @@ class EnderecoController {
 
     def create() {
 		if (!params.condominio?.id) {
-			flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'endereco.label', default: 'o endere\u00E7o')])
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'endereco.label', default: 'o endere\u00E7o')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'endereco.label', default: 'o endere\u00E7o')])
+			}
 			redirect(controller:"condominio", action: "create")
 			return
 		}
