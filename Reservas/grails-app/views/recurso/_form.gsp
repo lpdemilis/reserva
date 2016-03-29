@@ -63,7 +63,9 @@
 		<g:message code="recurso.condominio.label" default="Condominio" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" required="" value="${recursoInstance?.condominio?.id}" class="many-to-one"/>
+<%--	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" required="" value="${recursoInstance?.condominio?.id}" class="many-to-one"/>--%>
+	<g:textField name="condominio.nome" value="${recursoInstance?.condominio?.nome}" disabled/>
+	<g:hiddenField id="condominio" name="condominio.id" required="" value="${recursoInstance?.condominio?.id}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'descricao', 'error')} ">
