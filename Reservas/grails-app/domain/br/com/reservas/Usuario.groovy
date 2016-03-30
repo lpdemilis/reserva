@@ -4,6 +4,7 @@ class Usuario {
 
 	transient springSecurityService
 
+	String nome
 	String username
 	String password
 	boolean enabled
@@ -13,8 +14,9 @@ class Usuario {
 	String email
 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		nome blank: false
+		username blank: false, unique: true, nullable: false
+		password blank: false, nullable: false
 		email blank: false, nullable: false, unique: true
 	}
 
@@ -27,10 +29,12 @@ class Usuario {
 	}
 
 	def beforeInsert() {
+		username = email
 		encodePassword()
 	}
 
 	def beforeUpdate() {
+		username = email
 		if (isDirty('password')) {
 			encodePassword()
 		}
