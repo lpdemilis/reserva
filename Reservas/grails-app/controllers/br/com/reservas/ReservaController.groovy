@@ -5,6 +5,15 @@ import org.springframework.dao.DataIntegrityViolationException
 class ReservaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	def beforeInterceptor = [action:this.&auth] //, except:["index", "list", "show"]]
+	
+	def auth() {
+		if(!session.usuario) {
+			redirect(uri: "/")
+			return false
+		}
+	}
 
     def index() {
         redirect(action: "list", params: params)
@@ -16,16 +25,6 @@ class ReservaController {
     }
 
     def create() {
-//		if (!params.usuario?.id) {
-//			if(flash.message == null){
-//				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'usuario.label', default: 'usu\u00E1rio'), message(code: 'reserva.label', default: 'a reserva')])
-//			}else{
-//				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'usuario.label', default: 'usu\u00E1rio'), message(code: 'reserva.label', default: 'a reserva')])
-//			}
-//			redirect(controller:"usuario", action: "create")
-//			return
-//		}
-		
 		if (!params.apartamento?.id) {
 			if(flash.message == null){
 				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])

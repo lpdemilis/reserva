@@ -5,6 +5,15 @@ import org.springframework.dao.DataIntegrityViolationException
 class BoletoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	def beforeInterceptor = [action:this.&auth] //, except:["index", "list", "show"]]
+	
+	def auth() {
+		if(!session.usuario) {
+			redirect(uri: "/")
+			return false
+		}
+	}
 
     def index() {
         redirect(action: "list", params: params)
