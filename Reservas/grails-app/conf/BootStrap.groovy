@@ -125,16 +125,16 @@ class BootStrap {
 		}
 		
 		Plano planoInstance3 = Plano.get(3);
-		if (planoInstance2 == null) {
-			planoInstance2 = new Plano();
-			planoInstance2.dataInicio = new Date();
-			//planoInstance2.dataFim = new Date();
-			planoInstance2.valor = 100.00;
-			planoInstance2.ativo = true;
-			planoInstance2.nuMaxRecursos = 10;
-			planoInstance2.nuMaxApartamentos = 100;
-			planoInstance2.nuMaxCondominios = 2;
-			planoInstance2.save(flush: true);
+		if (planoInstance3 == null) {
+			planoInstance3 = new Plano();
+			planoInstance3.dataInicio = new Date();
+			//planoInstance3.dataFim = new Date();
+			planoInstance3.valor = 100.00;
+			planoInstance3.ativo = true;
+			planoInstance3.nuMaxRecursos = 10;
+			planoInstance3.nuMaxApartamentos = 100;
+			planoInstance3.nuMaxCondominios = 2;
+			planoInstance3.save(flush: true);
 		}
 		/** Planos **/
 				

@@ -8,13 +8,20 @@ class PlanoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 		
+	def springSecurityService
+	
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [planoInstanceList: Plano.list(params), planoInstanceTotal: Plano.count()]
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		[planoInstanceList: usuario.planos, planoInstanceTotal: usuario.planos.size()]
+				
+//        [planoInstanceList: Plano.list(params), planoInstanceTotal: Plano.count()]
     }
 
     def create() {
