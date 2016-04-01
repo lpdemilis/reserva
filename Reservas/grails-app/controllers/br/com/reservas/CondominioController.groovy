@@ -8,13 +8,29 @@ class CondominioController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [condominioInstanceList: Condominio.list(params), condominioInstanceTotal: Condominio.count()]
+		def usuario = springSecurityService.currentUser
+		
+		def condominioCriteria = Condominio.createCriteria()
+		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			or {
+				administradores{
+					eq('id', usuario.id)
+				}
+				
+				usuarios{
+					eq('id', usuario.id)
+				}
+			}
+		}
+		
+        [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()]
     }
 
     def create() {

@@ -3,6 +3,7 @@ import br.com.reservas.Cidade
 import br.com.reservas.Condominio
 import br.com.reservas.Endereco
 import br.com.reservas.Papel
+import br.com.reservas.Plano
 import br.com.reservas.Recurso
 import br.com.reservas.TipoReserva
 import br.com.reservas.Usuario
@@ -95,6 +96,47 @@ class BootStrap {
 		}
 		/** Papel Usuário **/
 		/** Usuário **/
+		
+		/** Planos **/
+		Plano planoInstance1 = Plano.get(1);
+		if (planoInstance1 == null) {
+			planoInstance1 = new Plano();
+			planoInstance1.dataInicio = new Date();
+			//planoInstance1.dataFim = new Date();
+			planoInstance1.valor = 50.00;
+			planoInstance1.ativo = true;
+			planoInstance1.nuMaxRecursos = 5;
+			planoInstance1.nuMaxApartamentos = 50; 
+			planoInstance1.nuMaxCondominios = 1;
+			planoInstance1.save(flush: true);
+		}
+		
+		Plano planoInstance2 = Plano.get(2);
+		if (planoInstance2 == null) {
+			planoInstance2 = new Plano();
+			planoInstance2.dataInicio = new Date();
+			//planoInstance2.dataFim = new Date();
+			planoInstance2.valor = 70.00;
+			planoInstance2.ativo = true;
+			planoInstance2.nuMaxRecursos = 7;
+			planoInstance2.nuMaxApartamentos = 70;
+			planoInstance2.nuMaxCondominios = 1;
+			planoInstance2.save(flush: true);
+		}
+		
+		Plano planoInstance3 = Plano.get(3);
+		if (planoInstance2 == null) {
+			planoInstance2 = new Plano();
+			planoInstance2.dataInicio = new Date();
+			//planoInstance2.dataFim = new Date();
+			planoInstance2.valor = 100.00;
+			planoInstance2.ativo = true;
+			planoInstance2.nuMaxRecursos = 10;
+			planoInstance2.nuMaxApartamentos = 100;
+			planoInstance2.nuMaxCondominios = 2;
+			planoInstance2.save(flush: true);
+		}
+		/** Planos **/
 				
 		/** Condominios **/
 		Condominio condominioInstance = Condominio.findByNome("Achilles Ceccato");
@@ -112,6 +154,8 @@ class BootStrap {
 			enderecoInstance.save(flush: true);
 			
 			condominioInstance.endereco = enderecoInstance;
+			condominioInstance.plano = planoInstance1;
+			
 			condominioInstance.save(flush: true); 			
 		}
 		
@@ -142,6 +186,8 @@ class BootStrap {
 			enderecoInstance.save(flush: true);
 			
 			condominioInstance.endereco = enderecoInstance;
+			condominioInstance.plano = planoInstance1;
+			
 			condominioInstance.save(flush: true);			
 		}
 		

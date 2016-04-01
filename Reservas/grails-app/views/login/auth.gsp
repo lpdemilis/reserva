@@ -96,7 +96,7 @@
 		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 			<p>
 				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
-				<input type='text' class='text_' name='j_username' id='username' value="administrador@email.com.br"/>
+				<input type='text' class='text_' name='j_username' id='username' value="usuario@email.com.br"/>
 			</p>
 
 			<p>

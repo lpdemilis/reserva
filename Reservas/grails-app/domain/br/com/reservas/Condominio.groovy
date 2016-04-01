@@ -6,6 +6,8 @@ class Condominio {
 	Endereco endereco
 	
 	static hasMany = [administradores:Usuario, usuarios:Usuario, apartamentos:Apartamento, recursos:Recurso, mensalidades:Mensalidade, convites:Convite]
+	
+	static belongsTo = [plano: Plano]
 
     static constraints = {
 		nome nullable:false, blank: false
