@@ -4,6 +4,7 @@ class Mensalidade {
 	
 	Integer mes
 	Integer ano
+	Plano plano
 	
 	static hasMany = [boleto:Boleto]
 	
@@ -11,6 +12,7 @@ class Mensalidade {
 	
     static constraints = {
 		mes nullable:false
-		ano nullable:false 
+		ano nullable:false
+		plano nullable:false 
     }
 }
