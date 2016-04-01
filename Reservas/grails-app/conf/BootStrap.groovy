@@ -48,6 +48,17 @@ class BootStrap {
 		}
 		
 		/** Papel Usuário **/
+		UsuarioPapel usuarioPapelInstanceUser = UsuarioPapel.findByPapelAndUsuario(papelInstanceUser, usuarioInstanceAdmin);
+		if (usuarioPapelInstanceUser == null) {
+			usuarioPapelInstanceUser = new UsuarioPapel();
+			usuarioPapelInstanceUser.usuario = usuarioInstanceAdmin;
+			usuarioPapelInstanceUser.papel = papelInstanceUser;
+		
+			usuarioPapelInstanceUser.save(flush: true);
+		}
+		/** Papel Usuário **/
+		
+		/** Papel Usuário **/
 		UsuarioPapel usuarioPapelInstanceAdmin = UsuarioPapel.findByPapelAndUsuario(papelInstanceAdmin, usuarioInstanceAdmin);
 		if (usuarioPapelInstanceAdmin == null) {
 			usuarioPapelInstanceAdmin = new UsuarioPapel();
@@ -74,7 +85,7 @@ class BootStrap {
 		}		
 		
 		/** Papel Usuário **/
-		UsuarioPapel usuarioPapelInstanceUser = UsuarioPapel.findByPapelAndUsuario(papelInstanceUser, usuarioInstanceUser);
+		usuarioPapelInstanceUser = UsuarioPapel.findByPapelAndUsuario(papelInstanceUser, usuarioInstanceUser);
 		if (usuarioPapelInstanceUser == null) {
 			usuarioPapelInstanceUser = new UsuarioPapel();
 			usuarioPapelInstanceUser.usuario = usuarioInstanceUser;

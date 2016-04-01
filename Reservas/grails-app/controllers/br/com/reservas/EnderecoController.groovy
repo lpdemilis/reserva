@@ -1,19 +1,12 @@
 package br.com.reservas
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.security.access.annotation.Secured
 
+@Secured(['ROLE_USER'])
 class EnderecoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-	
-	def beforeInterceptor = [action:this.&auth] //, except:["index", "list", "show"]]
-	
-	def auth() {
-		if(!session.usuario) {
-			redirect(uri: "/")
-			return false
-		}
-	}
 
     def index() {
         redirect(action: "list", params: params)
