@@ -17,6 +17,8 @@ class CondominioController {
     def list(Integer max) {
 		def usuario = springSecurityService.currentUser
 		
+		def verificarCriacaoCondominio = verificarCriacaoCondominio()
+		
 		def condominioCriteria = Condominio.createCriteria()
 		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			or {
@@ -30,7 +32,7 @@ class CondominioController {
 			}
 		}
 		
-        [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()]
+        [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size(), verificarCriacaoCondominio:verificarCriacaoCondominio]
     }
 
     def create() {
@@ -122,4 +124,17 @@ class CondominioController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def verificarCriacaoCondominio() {
+		Usuario usuario = springSecurityService.currentUser
+		def nuCondominiosDisponiveis = 0 
+		for (plano in usuario.planos) {
+			nuCondominiosDisponiveis += plano.nuMaxCondominios
+		} 
+		
+		if (nuCondominiosDisponiveis > 0) {
+			true
+		}
+		false
+	}
 }

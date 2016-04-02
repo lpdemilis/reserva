@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list usuario">
 			
+				<g:if test="${usuarioInstance?.nome}">
+				<li class="fieldcontain">
+					<span id="nome-label" class="property-label"><g:message code="usuario.nome.label" default="Nome" /></span>
+					
+						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${usuarioInstance}" field="nome"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${usuarioInstance?.username}">
 				<li class="fieldcontain">
 					<span id="username-label" class="property-label"><g:message code="usuario.username.label" default="Username" /></span>
@@ -82,6 +91,17 @@
 					<span id="passwordExpired-label" class="property-label"><g:message code="usuario.passwordExpired.label" default="Password Expired" /></span>
 					
 						<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${usuarioInstance?.passwordExpired}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${usuarioInstance?.planos}">
+				<li class="fieldcontain">
+					<span id="planos-label" class="property-label"><g:message code="usuario.planos.label" default="Planos" /></span>
+					
+						<g:each in="${usuarioInstance.planos}" var="p">
+						<span class="property-value" aria-labelledby="planos-label"><g:link controller="plano" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>

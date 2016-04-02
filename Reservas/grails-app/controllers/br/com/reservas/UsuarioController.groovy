@@ -101,4 +101,8 @@ class UsuarioController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def verificarCriacaoCondominio(){
+		true
+	}
 }

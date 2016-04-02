@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'nome', 'error')} required">
+	<label for="nome">
+		<g:message code="usuario.nome.label" default="Nome" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="nome" required="" value="${usuarioInstance?.nome}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'username', 'error')} required">
 	<label for="username">
 		<g:message code="usuario.username.label" default="Username" />
@@ -56,5 +64,13 @@
 		
 	</label>
 	<g:checkBox name="passwordExpired" value="${usuarioInstance?.passwordExpired}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'planos', 'error')} ">
+	<label for="planos">
+		<g:message code="usuario.planos.label" default="Planos" />
+		
+	</label>
+	<g:select name="planos" from="${br.com.reservas.Plano.list()}" multiple="multiple" optionKey="id" size="5" value="${usuarioInstance?.planos*.id}" class="many-to-many"/>
 </div>
 
