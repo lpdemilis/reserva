@@ -8,6 +8,8 @@ class UsuarioController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
 	def index() {
         redirect(action: "list", params: params)
     }
@@ -101,8 +103,16 @@ class UsuarioController {
             redirect(action: "show", id: id)
         }
     }
-	
-	def verificarCriacaoCondominio(){
-		true
-	}
+			
+	def adicionarPlano(){
+		Usuario usuario = springSecurityService.currentUser
+		
+		Plano planoInstance = Plano.get(params.planoInstanceId)
+		
+		usuario.planos.add(planoInstance)
+		usuario.save(flush: true)
+				
+		redirect(controller: "plano", action: "list")
+		//render(template: "/plano/list", model: [meusPlanosInstanceList: usuario.planos, meusPlanosInstanceTotal: usuario.planos.size()])
+	}		
 }

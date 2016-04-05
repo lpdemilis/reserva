@@ -19,9 +19,7 @@ class PlanoController {
 		
 		Usuario usuario = springSecurityService.currentUser
 		
-		[planoInstanceList: usuario.planos, planoInstanceTotal: usuario.planos.size()]
-				
-//        [planoInstanceList: Plano.list(params), planoInstanceTotal: Plano.count()]
+		[planoInstanceList: Plano.list(params), planoInstanceTotal: Plano.count(), meusPlanosInstanceList: usuario.planos, meusPlanosInstanceTotal: usuario.planos.size()]
     }
 
     def create() {

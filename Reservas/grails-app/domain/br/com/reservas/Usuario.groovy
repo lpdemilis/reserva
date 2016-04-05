@@ -12,7 +12,7 @@ class Usuario {
 	boolean accountLocked
 	boolean passwordExpired
 	String email
-	
+			
 	static hasMany = [planos: Plano]
 
 	static constraints = {

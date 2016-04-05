@@ -128,13 +128,15 @@ class CondominioController {
 	def verificarCriacaoCondominio() {
 		Usuario usuario = springSecurityService.currentUser
 		def nuCondominiosDisponiveis = 0 
+		
 		for (plano in usuario.planos) {
-			nuCondominiosDisponiveis += plano.nuMaxCondominios
+			nuCondominiosDisponiveis += plano.nuMaxCondominios			
 		} 
 		
 		if (nuCondominiosDisponiveis > 0) {
-			true
+			return true
 		}
-		false
+		
+		return false
 	}
 }

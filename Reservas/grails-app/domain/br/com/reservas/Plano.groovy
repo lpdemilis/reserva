@@ -11,8 +11,8 @@ class Plano {
 	Integer nuMaxCondominios
 	
 	static hasMany = [condominios:Condominio]
-		
-    static constraints = {
+	
+	static constraints = {
 		dataInicio nullable:false
 		dataFim nullable:true
 		valor nullable:false
