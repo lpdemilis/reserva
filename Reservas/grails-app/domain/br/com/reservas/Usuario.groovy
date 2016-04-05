@@ -14,6 +14,7 @@ class Usuario {
 	String email
 			
 	static hasMany = [planos: Plano]
+	List planos
 
 	static constraints = {
 		nome blank: false
