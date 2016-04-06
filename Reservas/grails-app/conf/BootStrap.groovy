@@ -5,6 +5,7 @@ import br.com.reservas.Endereco
 import br.com.reservas.Papel
 import br.com.reservas.Plano
 import br.com.reservas.Recurso
+import br.com.reservas.TipoPlano;
 import br.com.reservas.TipoReserva
 import br.com.reservas.Usuario
 import br.com.reservas.UsuarioPapel
@@ -39,7 +40,8 @@ class BootStrap {
 			usuarioInstanceAdmin.nome = 'Administrador';
 			usuarioInstanceAdmin.email = 'administrador@email.com.br';
 			usuarioInstanceAdmin.username = 'administrador@email.com.br';
-			usuarioInstanceAdmin.password = springSecurityService.encodePassword("123456");
+			//usuarioInstanceAdmin.password = springSecurityService.encodePassword("123456");
+			usuarioInstanceAdmin.password = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
 			usuarioInstanceAdmin.enabled = true;
 			usuarioInstanceAdmin.accountExpired = false;
 			usuarioInstanceAdmin.accountLocked = false;
@@ -76,7 +78,8 @@ class BootStrap {
 			usuarioInstanceUser.nome = 'Usu\u00E1rio';
 			usuarioInstanceUser.email = 'usuario@email.com.br';
 			usuarioInstanceUser.username = 'usuario@email.com.br';
-			usuarioInstanceUser.password = springSecurityService.encodePassword("123456");
+			//usuarioInstanceUser.password = springSecurityService.encodePassword("123456");
+			usuarioInstanceUser.password = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
 			usuarioInstanceUser.enabled = true;
 			usuarioInstanceUser.accountExpired = false;
 			usuarioInstanceUser.accountLocked = false;
@@ -97,112 +100,109 @@ class BootStrap {
 		/** Papel Usuário **/
 		/** Usuário **/
 		
-		/** Planos **/
-		Plano planoInstance1 = Plano.get(1);
-		if (planoInstance1 == null) {
-			planoInstance1 = new Plano();
-			planoInstance1.dataInicio = new Date();
-			//planoInstance1.dataFim = new Date();
-			planoInstance1.valor = 50.00;
-			planoInstance1.ativo = true;
-			planoInstance1.nuMaxRecursos = 5;
-			planoInstance1.nuMaxApartamentos = 50; 
-			planoInstance1.nuMaxCondominios = 1;
-			planoInstance1.save(flush: true);
+		/** TipoPlano **/
+		TipoPlano tipoPlanoInstance1 = TipoPlano.get(1);
+		if (tipoPlanoInstance1 == null) {
+			tipoPlanoInstance1 = new TipoPlano();
+			tipoPlanoInstance1.dataCriacao = new Date();
+			//tipoPlanoInstance1.dataFim = new Date();
+			tipoPlanoInstance1.valor = 50.00;
+			tipoPlanoInstance1.ativo = true;
+			tipoPlanoInstance1.nuMaxRecursos = 5;
+			tipoPlanoInstance1.nuMaxApartamentos = 50;			
+			tipoPlanoInstance1.save(flush: true);
 		}
 		
-		Plano planoInstance2 = Plano.get(2);
-		if (planoInstance2 == null) {
-			planoInstance2 = new Plano();
-			planoInstance2.dataInicio = new Date();
-			//planoInstance2.dataFim = new Date();
-			planoInstance2.valor = 70.00;
-			planoInstance2.ativo = true;
-			planoInstance2.nuMaxRecursos = 7;
-			planoInstance2.nuMaxApartamentos = 70;
-			planoInstance2.nuMaxCondominios = 1;
-			planoInstance2.save(flush: true);
+		TipoPlano tipoPlanoInstance2 = TipoPlano.get(2);
+		if (tipoPlanoInstance2 == null) {
+			tipoPlanoInstance2 = new TipoPlano();
+			tipoPlanoInstance2.dataCriacao = new Date();
+			//tipoPlanoInstance2.dataFim = new Date();
+			tipoPlanoInstance2.valor = 70.00;
+			tipoPlanoInstance2.ativo = true;
+			tipoPlanoInstance2.nuMaxRecursos = 7;
+			tipoPlanoInstance2.nuMaxApartamentos = 70;
+			tipoPlanoInstance2.save(flush: true);
 		}
 		
-		Plano planoInstance3 = Plano.get(3);
-		if (planoInstance3 == null) {
-			planoInstance3 = new Plano();
-			planoInstance3.dataInicio = new Date();
+		TipoPlano tipoPlanoInstance3 = TipoPlano.get(3);
+		if (tipoPlanoInstance3 == null) {
+			tipoPlanoInstance3 = new TipoPlano();
+			tipoPlanoInstance3.dataCriacao = new Date();
 			//planoInstance3.dataFim = new Date();
-			planoInstance3.valor = 100.00;
-			planoInstance3.ativo = true;
-			planoInstance3.nuMaxRecursos = 10;
-			planoInstance3.nuMaxApartamentos = 100;
-			planoInstance3.nuMaxCondominios = 2;
-			planoInstance3.save(flush: true);
+			tipoPlanoInstance3.valor = 100.00;
+			tipoPlanoInstance3.ativo = true;
+			tipoPlanoInstance3.nuMaxRecursos = 10;
+			tipoPlanoInstance3.nuMaxApartamentos = 100;
+			tipoPlanoInstance3.save(flush: true);
 		}
 		/** Planos **/
 				
-		/** Condominios **/
-		Condominio condominioInstance = Condominio.findByNome("Achilles Ceccato");
-		if (condominioInstance == null) {
-			condominioInstance = new Condominio();
-			condominioInstance.nome = "Achilles Ceccato";
-			
-			Endereco enderecoInstance = new Endereco();
-			enderecoInstance.logradouro = "Rua Salvatina Feliciana dos Santos";
-			enderecoInstance.complemento = "";
-			enderecoInstance.numero = 155;
-			enderecoInstance.bairro = "Itacorubi";
-			enderecoInstance.cep = "88034-600";
-			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
-			enderecoInstance.save(flush: true);
-			
-			condominioInstance.endereco = enderecoInstance;
-			condominioInstance.plano = planoInstance1;
-			
-			condominioInstance.save(flush: true); 			
-		}
+//		/** Condominios **/
+//		Condominio condominioInstance = Condominio.findByNome("Achilles Ceccato");
+//		if (condominioInstance == null) {
+//			condominioInstance = new Condominio();
+//			condominioInstance.nome = "Achilles Ceccato";
+//			
+//			Endereco enderecoInstance = new Endereco();
+//			enderecoInstance.logradouro = "Rua Salvatina Feliciana dos Santos";
+//			enderecoInstance.complemento = "";
+//			enderecoInstance.numero = 155;
+//			enderecoInstance.bairro = "Itacorubi";
+//			enderecoInstance.cep = "88034-600";
+//			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
+//			enderecoInstance.save(flush: true);
+//			
+//			condominioInstance.endereco = enderecoInstance;
+//			condominioInstance.plano = planoInstance1;
+//			
+//			condominioInstance.save(flush: true); 			
+//		}
 		
-		/** Recursos **/
-		Recurso recursoInstance = Recurso.get(1);
-		if (recursoInstance == null) {
-			recursoInstance = new Recurso();
-			recursoInstance.nome = "Sal\u00E3o de Festas";
-			recursoInstance.descricao = "";			
-			recursoInstance.condominio = condominioInstance;
-			
-			recursoInstance.save(flush: true);
-		}
-		/** Recursos **/
+//		/** Recursos **/
+//		Recurso recursoInstance = Recurso.get(1);
+//		if (recursoInstance == null) {
+//			recursoInstance = new Recurso();
+//			recursoInstance.nome = "Sal\u00E3o de Festas";
+//			recursoInstance.descricao = "";			
+//			recursoInstance.condominio = condominioInstance;
+//			
+//			recursoInstance.save(flush: true);
+//		}
+//		/** Recursos **/
 		
-		condominioInstance = Condominio.findByNome("Grenoble");
-		if (condominioInstance == null) {
-			condominioInstance = new Condominio();
-			condominioInstance.nome = "Grenoble";
-			
-			Endereco enderecoInstance = new Endereco();
-			enderecoInstance.logradouro = "Rua Presidente Coutinho";
-			enderecoInstance.complemento = "";
-			enderecoInstance.numero = 1965;
-			enderecoInstance.bairro = "Centro";
-			enderecoInstance.cep = "88034-000";
-			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
-			enderecoInstance.save(flush: true);
-			
-			condominioInstance.endereco = enderecoInstance;
-			condominioInstance.plano = planoInstance1;
-			
-			condominioInstance.save(flush: true);			
-		}
+//		condominioInstance = Condominio.findByNome("Grenoble");
+//		if (condominioInstance == null) {
+//			condominioInstance = new Condominio();
+//			condominioInstance.nome = "Grenoble";
+//			
+//			Endereco enderecoInstance = new Endereco();
+//			enderecoInstance.logradouro = "Rua Presidente Coutinho";
+//			enderecoInstance.complemento = "";
+//			enderecoInstance.numero = 1965;
+//			enderecoInstance.bairro = "Centro";
+//			enderecoInstance.cep = "88034-000";
+//			enderecoInstance.cidade = Cidade.findByNome("Florian\u00F3polis");
+//			enderecoInstance.save(flush: true);
+//			
+//			condominioInstance.endereco = enderecoInstance;
+//			condominioInstance.plano = planoInstance1;
+//			
+//			condominioInstance.save(flush: true);			
+//		}
 		
-		/** Recursos **/
-		recursoInstance = Recurso.get(2);
-		if (recursoInstance == null) {
-			recursoInstance = new Recurso();
-			recursoInstance.nome = "Sal\u00E3o de Festas";
-			recursoInstance.descricao = "";
-			recursoInstance.condominio = condominioInstance;
-			
-			recursoInstance.save(flush: true);
-		}
-		/** Recursos **/		
-		/** Condominios **/
+//		/** Recursos **/
+//		recursoInstance = Recurso.get(2);
+//		if (recursoInstance == null) {
+//			recursoInstance = new Recurso();
+//			recursoInstance.nome = "Sal\u00E3o de Festas";
+//			recursoInstance.descricao = "";
+//			recursoInstance.condominio = condominioInstance;
+//			
+//			recursoInstance.save(flush: true);
+//		}
+//		/** Recursos **/		
+//		/** Condominios **/
 						
 		/** Tipo Reserva **/
 		TipoReserva tipoReserva;
