@@ -28,13 +28,13 @@
 					
 						<g:sortableColumn property="dataFim" title="${message(code: 'plano.dataFim.label', default: 'Data Fim')}" />
 					
-						<g:sortableColumn property="valor" title="${message(code: 'plano.valor.label', default: 'Valor')}" />
-					
 						<g:sortableColumn property="ativo" title="${message(code: 'plano.ativo.label', default: 'Ativo')}" />
 					
-						<g:sortableColumn property="nuMaxRecursos" title="${message(code: 'plano.nuMaxRecursos.label', default: 'Nu Max Recursos')}" />
+						<th><g:message code="plano.tipoPlano.label" default="Tipo Plano" /></th>
 					
-						<g:sortableColumn property="nuMaxApartamentos" title="${message(code: 'plano.nuMaxApartamentos.label', default: 'Nu Max Apartamentos')}" />
+						<th><g:message code="plano.condominio.label" default="Condominio" /></th>
+					
+						<th><g:message code="plano.usuario.label" default="Usuario" /></th>
 						
 						<th><g:message code="plano.acao.label" default="Ação" /></th>
 					
@@ -48,13 +48,13 @@
 					
 						<td><g:formatDate date="${planoInstance.dataFim}" /></td>
 					
-						<td>${fieldValue(bean: planoInstance, field: "valor")}</td>
-					
 						<td><g:formatBoolean boolean="${planoInstance.ativo}" /></td>
 					
-						<td>${fieldValue(bean: planoInstance, field: "nuMaxRecursos")}</td>
+						<td>${fieldValue(bean: planoInstance, field: "tipoPlano")}</td>
 					
-						<td>${fieldValue(bean: planoInstance, field: "nuMaxApartamentos")}</td>
+						<td>${fieldValue(bean: planoInstance, field: "condominio")}</td>
+					
+						<td>${fieldValue(bean: planoInstance, field: "usuario")}</td>
 						
 						<td>
 							<g:formRemote name="myForm" url="[controller: 'usuario', action: 'adicionarPlano']" update="meus_planos">

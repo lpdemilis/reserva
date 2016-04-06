@@ -41,15 +41,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${planoInstance?.valor}">
-				<li class="fieldcontain">
-					<span id="valor-label" class="property-label"><g:message code="plano.valor.label" default="Valor" /></span>
-					
-						<span class="property-value" aria-labelledby="valor-label"><g:fieldValue bean="${planoInstance}" field="valor"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${planoInstance?.ativo}">
 				<li class="fieldcontain">
 					<span id="ativo-label" class="property-label"><g:message code="plano.ativo.label" default="Ativo" /></span>
@@ -59,29 +50,29 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${planoInstance?.nuMaxRecursos}">
+				<g:if test="${planoInstance?.tipoPlano}">
 				<li class="fieldcontain">
-					<span id="nuMaxRecursos-label" class="property-label"><g:message code="plano.nuMaxRecursos.label" default="Nu Max Recursos" /></span>
+					<span id="tipoPlano-label" class="property-label"><g:message code="plano.tipoPlano.label" default="Tipo Plano" /></span>
 					
-						<span class="property-value" aria-labelledby="nuMaxRecursos-label"><g:fieldValue bean="${planoInstance}" field="nuMaxRecursos"/></span>
+						<span class="property-value" aria-labelledby="tipoPlano-label"><g:link controller="tipoPlano" action="show" id="${planoInstance?.tipoPlano?.id}">${planoInstance?.tipoPlano?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${planoInstance?.nuMaxApartamentos}">
+				<g:if test="${planoInstance?.condominio}">
 				<li class="fieldcontain">
-					<span id="nuMaxApartamentos-label" class="property-label"><g:message code="plano.nuMaxApartamentos.label" default="Nu Max Apartamentos" /></span>
+					<span id="condominio-label" class="property-label"><g:message code="plano.condominio.label" default="Condominio" /></span>
 					
-						<span class="property-value" aria-labelledby="nuMaxApartamentos-label"><g:fieldValue bean="${planoInstance}" field="nuMaxApartamentos"/></span>
+						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${planoInstance?.condominio?.id}">${planoInstance?.condominio?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${planoInstance?.nuMaxCondominios}">
+				<g:if test="${planoInstance?.usuario}">
 				<li class="fieldcontain">
-					<span id="nuMaxCondominios-label" class="property-label"><g:message code="plano.nuMaxCondominios.label" default="Nu Max Condominios" /></span>
+					<span id="usuario-label" class="property-label"><g:message code="plano.usuario.label" default="Usuario" /></span>
 					
-						<span class="property-value" aria-labelledby="nuMaxCondominios-label"><g:fieldValue bean="${planoInstance}" field="nuMaxCondominios"/></span>
+						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${planoInstance?.usuario?.id}">${planoInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
