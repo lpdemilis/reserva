@@ -4,22 +4,18 @@ class Plano {
 	
 	Date dataInicio
 	Date dataFim
-	BigDecimal valor
 	Boolean ativo
-	Integer nuMaxRecursos
-	Integer nuMaxApartamentos
-	Integer nuMaxCondominios
+	TipoPlano tipoPlano
+	Condominio condominio
 	
-	static hasMany = [condominios:Condominio]
+	static belongsTo = [usuario: Usuario]
 	
 	static constraints = {
 		dataInicio nullable:false
 		dataFim nullable:true
-		valor nullable:false
 		ativo nullable:false
-		nuMaxRecursos nullable:false
-		nuMaxApartamentos nullable:false
-		nuMaxCondominios nullable:false
+		tipoPlano nullable: false
+		condominio nullable: true
     }
 	
 	static mapping = {
