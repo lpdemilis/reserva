@@ -36,11 +36,16 @@ class CondominioController {
     }
 
     def create() {
-		def meusPlanosInstanceList
-		
-		//meusPlanosInstanceList
-		
-		
+		Usuario usuario = springSecurityService.currentUser
+						
+		def planoCriteria = Plano.createCriteria()
+		def meusPlanosInstanceList = planoCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			and{
+				eq('usuario.id', usuario.id)			
+				isNull("condominio")
+			}
+		}
+				
         [condominioInstance: new Condominio(params), meusPlanosInstanceList: meusPlanosInstanceList]
     }
 

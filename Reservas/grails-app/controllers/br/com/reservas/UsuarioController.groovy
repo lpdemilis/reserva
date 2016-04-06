@@ -1,5 +1,7 @@
 package br.com.reservas
 
+import java.util.Date;
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -107,10 +109,16 @@ class UsuarioController {
 	def adicionarPlano(){
 		Usuario usuario = springSecurityService.currentUser
 		
-		Plano planoInstance = Plano.get(params.planoInstanceId)
+		TipoPlano tipoPlanoInstance = TipoPlano.get(params.tipoPlanoInstanceId)
 		
+		Plano planoInstance = new Plano()
+		planoInstance.dataInicio = new Date()
+		planoInstance.ativo = true
+		planoInstance.tipoPlano = tipoPlanoInstance
+		planoInstance.usuario = usuario
+				
 		usuario.planos.add(planoInstance)
-		usuario.save(flush: true)
+		usuario.save()
 				
 		redirect(controller: "plano", action: "list")
 		//render(template: "/plano/list", model: [meusPlanosInstanceList: usuario.planos, meusPlanosInstanceTotal: usuario.planos.size()])

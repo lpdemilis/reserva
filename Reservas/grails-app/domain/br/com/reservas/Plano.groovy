@@ -19,6 +19,6 @@ class Plano {
     }
 	
 	static mapping = {
-		ativo defaultValue:false
+		ativo defaultValue:true
 	}
 }
