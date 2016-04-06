@@ -35,6 +35,8 @@
 						<g:sortableColumn property="nuMaxRecursos" title="${message(code: 'tipoPlano.nuMaxRecursos.label', default: 'Nu Max Recursos')}" />
 					
 						<g:sortableColumn property="nuMaxApartamentos" title="${message(code: 'tipoPlano.nuMaxApartamentos.label', default: 'Nu Max Apartamentos')}" />
+						
+						<th><g:message code="plano.acao.label" default="Ação" /></th>
 					
 					</tr>
 				</thead>
@@ -53,6 +55,13 @@
 						<td>${fieldValue(bean: tipoPlanoInstance, field: "nuMaxRecursos")}</td>
 					
 						<td>${fieldValue(bean: tipoPlanoInstance, field: "nuMaxApartamentos")}</td>
+						
+						<td>
+							<g:formRemote name="myForm" url="[controller: 'usuario', action: 'adicionarPlano']" update="meus_planos">
+								<g:hiddenField name="tipoPlanoInstanceId" value="${tipoPlanoInstance.id}"/>
+								<g:actionSubmit class="confirm" value="Adicionar Plano" name="adicionarPlano" />
+							</g:formRemote>
+						</td>
 					
 					</tr>
 				</g:each>
