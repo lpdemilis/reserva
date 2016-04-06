@@ -35,8 +35,6 @@
 						<th><g:message code="plano.condominio.label" default="Condominio" /></th>
 					
 						<th><g:message code="plano.usuario.label" default="Usuario" /></th>
-						
-						<th><g:message code="plano.acao.label" default="Ação" /></th>
 					
 					</tr>
 				</thead>
@@ -55,13 +53,6 @@
 						<td>${fieldValue(bean: planoInstance, field: "condominio")}</td>
 					
 						<td>${fieldValue(bean: planoInstance, field: "usuario")}</td>
-						
-						<td>
-							<g:formRemote name="myForm" url="[controller: 'usuario', action: 'adicionarPlano']" update="meus_planos">
-								<g:hiddenField name="planoInstanceId" value="${planoInstance.id}"/>
-								<g:actionSubmit class="confirm" value="Adicionar Plano" name="adicionarPlano" />
-							</g:formRemote>
-						</td>
 					
 					</tr>
 				</g:each>
@@ -71,10 +62,5 @@
 				<g:paginate total="${planoInstanceTotal}" />
 			</div>
 		</div>
-		
-		<div id="meus_planos">
-			<g:render template="/plano/list" var="meusPlanosInstanceList"/>
-		</div>
-
 	</body>
 </html>
