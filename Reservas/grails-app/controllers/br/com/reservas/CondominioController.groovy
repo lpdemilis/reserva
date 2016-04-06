@@ -36,7 +36,12 @@ class CondominioController {
     }
 
     def create() {
-        [condominioInstance: new Condominio(params)]
+		def meusPlanosInstanceList
+		
+		//meusPlanosInstanceList
+		
+		
+        [condominioInstance: new Condominio(params), meusPlanosInstanceList: meusPlanosInstanceList]
     }
 
     def save() {
@@ -129,8 +134,8 @@ class CondominioController {
 		Usuario usuario = springSecurityService.currentUser
 		def nuCondominiosDisponiveis = 0 
 		
-		for (plano in usuario.planos) {
-			nuCondominiosDisponiveis += plano.nuMaxCondominios			
+		for (Plano plano in usuario.planos) {
+			nuCondominiosDisponiveis += plano.tipoPlano.nuMaxCondominios			
 		} 
 		
 		if (nuCondominiosDisponiveis > 0) {
