@@ -1,7 +1,9 @@
 package br.com.reservas
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.security.access.annotation.Secured
 
+@Secured(['ROLE_USER'])
 class TipoPlanoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

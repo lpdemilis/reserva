@@ -6,7 +6,8 @@ class Plano {
 	Date dataFim
 	Boolean ativo
 	TipoPlano tipoPlano
-	Condominio condominio
+		
+	static hasOne = [condominio: Condominio]
 	
 	static belongsTo = [usuario: Usuario]
 	

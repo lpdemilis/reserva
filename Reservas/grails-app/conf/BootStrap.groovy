@@ -110,7 +110,6 @@ class BootStrap {
 			tipoPlanoInstance1.ativo = true;
 			tipoPlanoInstance1.nuMaxRecursos = 5;
 			tipoPlanoInstance1.nuMaxApartamentos = 50;
-			tipoPlanoInstance1.nuMaxCondominios = 1;			
 			tipoPlanoInstance1.save(flush: true);
 		}
 		
@@ -123,7 +122,6 @@ class BootStrap {
 			tipoPlanoInstance2.ativo = true;
 			tipoPlanoInstance2.nuMaxRecursos = 7;
 			tipoPlanoInstance2.nuMaxApartamentos = 70;
-			tipoPlanoInstance2.nuMaxCondominios = 1;
 			tipoPlanoInstance2.save(flush: true);
 		}
 		
@@ -136,7 +134,6 @@ class BootStrap {
 			tipoPlanoInstance3.ativo = true;
 			tipoPlanoInstance3.nuMaxRecursos = 10;
 			tipoPlanoInstance3.nuMaxApartamentos = 100;
-			tipoPlanoInstance3.nuMaxCondominios = 1;
 			tipoPlanoInstance3.save(flush: true);
 		}
 		/** Planos **/

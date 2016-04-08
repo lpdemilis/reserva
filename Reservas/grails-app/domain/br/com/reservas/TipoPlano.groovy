@@ -8,7 +8,6 @@ class TipoPlano {
 	Boolean ativo
 	Integer nuMaxRecursos
 	Integer nuMaxApartamentos
-	Integer nuMaxCondominios
 	
 	static constraints = {
 		dataCriacao nullable:false
@@ -17,7 +16,6 @@ class TipoPlano {
 		ativo nullable:false
 		nuMaxRecursos nullable:false
 		nuMaxApartamentos nullable:false
-		nuMaxCondominios nullable:false
 	}
 	
 	static mapping = {

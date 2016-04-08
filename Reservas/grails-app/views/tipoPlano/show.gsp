@@ -77,15 +77,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${tipoPlanoInstance?.nuMaxCondominios}">
-				<li class="fieldcontain">
-					<span id="nuMaxCondominios-label" class="property-label"><g:message code="tipoPlano.nuMaxCondominios.label" default="Nu Max Condominios" /></span>
-					
-						<span class="property-value" aria-labelledby="nuMaxCondominios-label"><g:fieldValue bean="${tipoPlanoInstance}" field="nuMaxCondominios"/></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

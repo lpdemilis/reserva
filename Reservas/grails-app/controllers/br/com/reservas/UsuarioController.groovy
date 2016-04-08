@@ -104,23 +104,5 @@ class UsuarioController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'usuario.label', default: 'Usuario'), id])
             redirect(action: "show", id: id)
         }
-    }
-			
-	def adicionarPlano(){
-		Usuario usuario = springSecurityService.currentUser
-		
-		TipoPlano tipoPlanoInstance = TipoPlano.get(params.tipoPlanoInstanceId)
-		
-		Plano planoInstance = new Plano()
-		planoInstance.dataInicio = new Date()
-		planoInstance.ativo = true
-		planoInstance.tipoPlano = tipoPlanoInstance
-		planoInstance.usuario = usuario
-				
-		usuario.planos.add(planoInstance)
-		usuario.save()
-				
-		redirect(controller: "plano", action: "list")
-		//render(template: "/plano/list", model: [meusPlanosInstanceList: usuario.planos, meusPlanosInstanceTotal: usuario.planos.size()])
-	}		
+    }		
 }

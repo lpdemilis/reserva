@@ -140,7 +140,7 @@ class CondominioController {
 		def nuCondominiosDisponiveis = 0 
 		
 		for (Plano plano in usuario.planos) {
-			nuCondominiosDisponiveis += plano.tipoPlano.nuMaxCondominios			
+			nuCondominiosDisponiveis++			
 		} 
 		
 		if (nuCondominiosDisponiveis > 0) {

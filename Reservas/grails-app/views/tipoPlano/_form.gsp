@@ -49,12 +49,3 @@
 	</label>
 	<g:field name="nuMaxApartamentos" type="number" value="${tipoPlanoInstance.nuMaxApartamentos}" required=""/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: tipoPlanoInstance, field: 'nuMaxCondominios', 'error')} required">
-	<label for="nuMaxCondominios">
-		<g:message code="tipoPlano.nuMaxCondominios.label" default="Nu Max Condominios" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="nuMaxCondominios" type="number" value="${tipoPlanoInstance.nuMaxCondominios}" required=""/>
-</div>
-
