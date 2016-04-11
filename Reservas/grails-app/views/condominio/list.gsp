@@ -29,6 +29,8 @@
 						<g:sortableColumn property="nome" title="${message(code: 'condominio.nome.label', default: 'Nome')}" />
 					
 						<th><g:message code="condominio.endereco.label" default="Endereco" /></th>
+						
+						<th><g:message code="condominio.administradores.label" default="Administradores" /></th>
 					
 					</tr>
 				</thead>
@@ -39,6 +41,12 @@
 						<td><g:link action="show" id="${condominioInstance.id}">${fieldValue(bean: condominioInstance, field: "nome")}</g:link></td>
 					
 						<td>${fieldValue(bean: condominioInstance, field: "endereco")}</td>
+						
+						<td>
+							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">
+								<g:link controller="usuario" action="show" id="${administradorInstance.id}">${fieldValue(bean: administradorInstance, field: "nome")}</g:link><br>
+							</g:each> 
+						</td>
 					
 					</tr>
 				</g:each>

@@ -100,7 +100,9 @@
 					<span id="planos-label" class="property-label"><g:message code="usuario.planos.label" default="Planos" /></span>
 					
 						<g:each in="${usuarioInstance.planos}" var="p">
-						<span class="property-value" aria-labelledby="planos-label"><g:link controller="plano" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+							<g:if test="${p?.id}">
+								<span class="property-value" aria-labelledby="planos-label"><g:link controller="plano" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+							</g:if>	
 						</g:each>
 					
 				</li>

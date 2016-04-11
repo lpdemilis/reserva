@@ -53,7 +53,7 @@ class CondominioController {
         def condominioInstance = new Condominio(params)
 		
 		def enderecoInstance = new Endereco(params)
-		enderecoInstance.save()
+		//enderecoInstance.save()
 		condominioInstance.endereco = enderecoInstance
 				
         if (!condominioInstance.save(flush: true)) {
@@ -137,10 +137,14 @@ class CondominioController {
 	
 	def verificarCriacaoCondominio() {
 		Usuario usuario = springSecurityService.currentUser
-		def nuCondominiosDisponiveis = 0 
+		def nuCondominiosDisponiveis = 0
 		
-		for (Plano plano in usuario.planos) {
-			nuCondominiosDisponiveis++			
+		for (Plano plano in usuario.planos) {			
+			if (plano != null){
+				if (plano.condominio == null){
+					nuCondominiosDisponiveis++
+				}
+			}			
 		} 
 		
 		if (nuCondominiosDisponiveis > 0) {
