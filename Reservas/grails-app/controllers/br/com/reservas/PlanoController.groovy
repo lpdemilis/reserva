@@ -23,16 +23,24 @@ class PlanoController {
     }
 
     def create() {
-        [planoInstance: new Plano(params)]
+		Usuario usuario = springSecurityService.currentUser
+		
+        [planoInstance: new Plano(params), usuarioInstance: usuario]
     }
 
     def save() {
-        def planoInstance = new Plano(params)
-        if (!planoInstance.save(flush: true)) {
-            render(view: "create", model: [planoInstance: planoInstance])
-            return
-        }
-
+		def condominioInstance = new Condominio(params)
+		def planoInstance = new Plano(params)
+		def enderecoInstance = new Endereco(params)
+		enderecoInstance.save()
+		condominioInstance.endereco = enderecoInstance
+		planoInstance.condominio = condominioInstance
+		
+		if (!planoInstance.save(flush: true)) {
+			render(view: "create", model: [planoInstance: planoInstance])
+	        return
+		}
+        
         flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano'), planoInstance.id])
         redirect(action: "show", id: planoInstance.id)
     }

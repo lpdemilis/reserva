@@ -16,7 +16,7 @@ class Plano {
 		dataFim nullable:true
 		ativo nullable:false
 		tipoPlano nullable: false
-		condominio nullable: true
+		//condominio nullable: true
     }
 	
 	static mapping = {

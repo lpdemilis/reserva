@@ -20,14 +20,14 @@
 	<g:select name="administradores" from="${br.com.reservas.Usuario.list()}" multiple="multiple" optionKey="id" size="5" value="${condominioInstance?.administradores*.id}" class="many-to-many"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'plano', 'error')} required">
-	<label for="plano">
-		<g:message code="condominio.plano.label" default="Plano" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="plano" name="plano.id" from="${meusPlanosInstanceList}" optionKey="id" required="" value="${condominioInstance?.plano?.id}" class="many-to-one" noSelection="['':'Selecione um Plano...']"/>
-		
-</div>
+<%--<div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'plano', 'error')} required">--%>
+<%--	<label for="plano">--%>
+<%--		<g:message code="condominio.plano.label" default="Plano" />--%>
+<%--		<span class="required-indicator">*</span>--%>
+<%--	</label>--%>
+<%--	<g:select id="plano" name="plano.id" from="${meusPlanosInstanceList}" optionKey="id" required="" value="${condominioInstance?.plano?.id}" class="many-to-one" noSelection="['':'Selecione um Plano...']"/>--%>
+<%--		--%>
+<%--</div>--%>
 
 <div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'apartamentos', 'error')} ">
 	<label for="apartamentos">

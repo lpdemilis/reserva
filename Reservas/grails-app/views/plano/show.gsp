@@ -59,15 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${planoInstance?.condominio}">
-				<li class="fieldcontain">
-					<span id="condominio-label" class="property-label"><g:message code="plano.condominio.label" default="Condominio" /></span>
-					
-						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${planoInstance?.condominio?.id}">${planoInstance?.condominio?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${planoInstance?.usuario}">
 				<li class="fieldcontain">
 					<span id="usuario-label" class="property-label"><g:message code="plano.usuario.label" default="Usuario" /></span>
@@ -76,6 +67,17 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${planoInstance?.condominio}">
+<%--				<li class="fieldcontain">--%>
+<%--					<span id="condominio-label" class="property-label"><g:message code="plano.condominio.label" default="Condominio" /></span>--%>
+<%--					--%>
+<%--						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${planoInstance?.condominio?.id}">${planoInstance?.condominio?.encodeAsHTML()}</g:link></span>--%>
+<%--					--%>
+<%--				</li>--%>
+					<g:render template="/condominio/show" model="['condominioInstance':planoInstance?.condominio]"/>
+				</g:if>
+				
 			
 			</ol>
 			<g:form>

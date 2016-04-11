@@ -57,10 +57,14 @@
 						<td>${fieldValue(bean: tipoPlanoInstance, field: "nuMaxApartamentos")}</td>
 						
 						<td>
-							<g:formRemote name="myForm" url="[controller: 'usuario', action: 'adicionarPlano']" update="meus_planos">
+<%--							<g:formRemote name="myForm" url="[controller: 'usuario', action: 'adicionarPlano']" update="meus_planos">--%>
+<%--								<g:hiddenField name="tipoPlanoInstanceId" value="${tipoPlanoInstance.id}"/>--%>
+<%--								<g:actionSubmit class="confirm" value="Adicionar Plano" name="adicionarPlano" />--%>
+<%--							</g:formRemote>--%>
+							<g:form controller="plano" action="create">
 								<g:hiddenField name="tipoPlanoInstanceId" value="${tipoPlanoInstance.id}"/>
-								<g:actionSubmit class="confirm" value="Adicionar Plano" name="adicionarPlano" />
-							</g:formRemote>
+								<g:submitButton class="confirm" value="Adicionar Plano" name="adicionarPlano" />
+							</g:form>
 						</td>
 					
 					</tr>
