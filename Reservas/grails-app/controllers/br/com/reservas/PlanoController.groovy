@@ -29,16 +29,39 @@ class PlanoController {
     }
 
     def save() {
-		def condominioInstance = new Condominio(params)
-		def planoInstance = new Plano(params)
-		def enderecoInstance = new Endereco(params)
+		Condominio condominioInstance = new Condominio(params)
+		Plano planoInstance = new Plano(params)
+		Endereco enderecoInstance = new Endereco(params)
 		enderecoInstance.save()
 		condominioInstance.endereco = enderecoInstance
 		planoInstance.condominio = condominioInstance
 		
 		if (!planoInstance.save(flush: true)) {
 			render(view: "create", model: [planoInstance: planoInstance])
-	        return
+		return
+		}
+						
+		Date data = new Date()
+		
+		Mensalidade mensalidadeInstance = new Mensalidade()
+		mensalidadeInstance.mes = data.getAt(Calendar.MONTH)
+		mensalidadeInstance.ano  = data.getAt(Calendar.YEAR)
+		mensalidadeInstance.plano = planoInstance
+		mensalidadeInstance.condominio = condominioInstance
+		mensalidadeInstance.save()
+					
+		Boleto boletoInstance = new Boleto()
+		boletoInstance.valor = planoInstance.tipoPlano.valor
+		boletoInstance.dataGeracao = data
+		boletoInstance.dataVencimento = data
+		boletoInstance.dataPagamento = null
+		boletoInstance.codigo = 123456
+		boletoInstance.pago = false
+		boletoInstance.mensalidade = mensalidadeInstance
+								
+		if (!boletoInstance.save(flush: true)) {
+			render(view: "create", model: [planoInstance: planoInstance])
+		return
 		}
         
         flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano'), planoInstance.id])
