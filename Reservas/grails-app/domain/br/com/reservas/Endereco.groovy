@@ -9,6 +9,8 @@ class Endereco {
 	String cep
 	Cidade cidade
 	
+	//static belongsTo = [condominio: Condominio]
+	
     static constraints = {
 		logradouro nullable:false, blank:false
 		complemento nullable:true
