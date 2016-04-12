@@ -14,7 +14,8 @@ class Boleto {
     static constraints = {
 		valor nullable:false 
 		dataGeracao nullable:false 
-		dataVencimento nullable:false 
+		dataVencimento nullable:false
+		dataPagamento nullable:true
 		codigo blank:false, nullable:false
 		pago nullable:false 
     }
