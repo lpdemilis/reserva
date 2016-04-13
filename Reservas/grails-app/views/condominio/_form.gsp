@@ -12,13 +12,18 @@
 
 <g:render template="/endereco/form" model="['enderecoInstance':condominioInstance?.endereco]"/>
 
-<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'administradores', 'error')} ">
-	<label for="administradores">
-		<g:message code="condominio.administradores.label" default="Administradores" />
-		
-	</label>
-	<g:select name="administradores" from="${br.com.reservas.Usuario.list()}" multiple="multiple" optionKey="id" size="5" value="${condominioInstance?.administradores*.id}" class="many-to-many"/>
-</div>
+<g:if test="${condominioInstance?.id}">
+	<div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'administradores', 'error')} ">
+		<label for="administradores">
+			<g:message code="condominio.administradores.label" default="Administradores" />
+			
+		</label>
+		<g:select name="administradores" from="${br.com.reservas.Usuario.list()}" multiple="multiple" optionKey="id" size="5" value="${condominioInstance?.administradores*.id}" class="many-to-many"/>
+	</div>
+</g:if>
+<g:else>
+	<g:hiddenField name="administradores" value="${usuarioInstance?.id}" />
+</g:else>
 
 <%--<div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'plano', 'error')} required">--%>
 <%--	<label for="plano">--%>

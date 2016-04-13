@@ -34,6 +34,7 @@ class PlanoController {
 		Endereco enderecoInstance = new Endereco(params)
 		
 		if (!enderecoInstance.save()) {
+			flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano')])
 			render(view: "create", model: [planoInstance: planoInstance])
 		return
 		}
@@ -43,6 +44,7 @@ class PlanoController {
 		
 		if (!planoInstance.save(flush: true)) {
 			enderecoInstance.delete()
+			flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano')])
 			render(view: "create", model: [planoInstance: planoInstance])
 		return
 		}
@@ -57,6 +59,7 @@ class PlanoController {
 		if (!mensalidadeInstance.save()) {
 			enderecoInstance.delete()
 			planoInstance.delete()
+			flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano')])
 			render(view: "create", model: [planoInstance: planoInstance])
 		return
 		}
@@ -73,7 +76,8 @@ class PlanoController {
 		if (!boletoInstance.save(flush: true)) {
 			enderecoInstance.delete()
 			planoInstance.delete()
-			mensalidadeInstance.delete()			
+			mensalidadeInstance.delete()
+			flash.message = message(code: 'default.created.message', args: [message(code: 'plano.label', default: 'Plano')])
 			render(view: "create", model: [planoInstance: planoInstance])
 		return
 		}
