@@ -54,7 +54,12 @@ class PlanoController {
 		mensalidadeInstance.ano  = data.getAt(Calendar.YEAR)
 		mensalidadeInstance.plano = planoInstance
 		mensalidadeInstance.condominio = condominioInstance
-		mensalidadeInstance.save()
+		if (!mensalidadeInstance.save()) {
+			enderecoInstance.delete()
+			planoInstance.delete()
+			render(view: "create", model: [planoInstance: planoInstance])
+		return
+		}
 					
 		Boleto boletoInstance = new Boleto()
 		boletoInstance.valor = planoInstance.tipoPlano.valor
@@ -66,7 +71,9 @@ class PlanoController {
 		boletoInstance.mensalidade = mensalidadeInstance
 								
 		if (!boletoInstance.save(flush: true)) {
-			mensalidadeInstance.delete()
+			enderecoInstance.delete()
+			planoInstance.delete()
+			mensalidadeInstance.delete()			
 			render(view: "create", model: [planoInstance: planoInstance])
 		return
 		}
