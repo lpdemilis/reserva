@@ -36,6 +36,16 @@ class CondominioController {
     }
 
     def create() {
+		if (!params.plano?.id) {
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'plano.label', default: 'plano'), message(code: 'condominio.label', default: 'o condom\u00EDnio')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'plano.label', default: 'plano'), message(code: 'condominio.label', default: 'o condom\u00EDnio')])
+			}
+			redirect(controller:"plano", action: "create")
+			return
+		}
+		
 		Usuario usuario = springSecurityService.currentUser
 						
 		def planoCriteria = Plano.createCriteria()
