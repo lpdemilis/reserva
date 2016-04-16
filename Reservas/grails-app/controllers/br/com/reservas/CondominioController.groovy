@@ -42,7 +42,7 @@ class CondominioController {
 			}else{
 				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'plano.label', default: 'plano'), message(code: 'condominio.label', default: 'o condom\u00EDnio')])
 			}
-			redirect(controller:"plano", action: "create")
+			redirect(controller:"tipoPlano", action: "list")
 			return
 		}
 		
