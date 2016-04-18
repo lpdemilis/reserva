@@ -21,4 +21,12 @@ class TipoPlano {
 	static mapping = {
 		ativo defaultValue:false
 	}
+	
+	String toString(){
+		"R\$ " + String.format("%.2f", (double)valor) + " ( " + nuMaxApartamentos + " apartamentos e " + nuMaxRecursos + " recursos)"
+	}
+	
+	String encodeAsHTML(){
+		"Valor: R\$ " + String.format("%.2f", (double)valor) + "<br>N&ordm; m&aacute;ximo de condom&iacute;nios: 01<br>N&ordm; m&aacute;ximo de apartamentos:  " + nuMaxApartamentos + "<br>N&ordm; m&aacute;ximo de recursos: " + nuMaxRecursos
+	}
 }

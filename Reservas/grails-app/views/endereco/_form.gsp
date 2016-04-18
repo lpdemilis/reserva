@@ -20,7 +20,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'numero', 'error')} required">
 	<label for="numero">
-		<g:message code="endereco.numero.label" default="Numero" />
+		<g:message code="endereco.numero.label" default="Número" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="numero" type="number" value="${enderecoInstance?.numero}" required=""/>
@@ -36,7 +36,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'cep', 'error')} ">
 	<label for="cep">
-		<g:message code="endereco.cep.label" default="Cep" />
+		<g:message code="endereco.cep.label" default="CEP" />
 		
 	</label>
 	<g:textField name="cep" value="${enderecoInstance?.cep}"/>

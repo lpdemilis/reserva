@@ -18,7 +18,7 @@
 		<r:layoutResources />
 	</head>
 	<body>
-		<div id="siteLogo" role="banner"><a href="${createLink(uri: '/')}"><img src="${resource(dir: 'images', file: 'site_logo.png')}" alt="Reservas"/></a><div id="loginHeader"><g:loginControl /></div></div>
+		<div id="siteLogo" role="banner"><a href="${createLink(uri: '/')}"><img class="siteImg" src="${resource(dir: 'images', file: 'calendar_icon.png')}" alt="Reservas"/></a><div id="loginHeader"><g:loginControl /></div></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

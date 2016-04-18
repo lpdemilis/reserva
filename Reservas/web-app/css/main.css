@@ -12,10 +12,10 @@ h1, h2, h3, h4, h5, h6 {
 
 html {
 	background-color: #ddd;
-	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
-	background-image: linear-gradient(top, #aaa, #ddd);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
+	background-image: -moz-linear-gradient(center top, #eee, #ddd);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eee), color-stop(1, #ddd));
+	background-image: linear-gradient(top, #eee, #ddd);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#eeeeee', EndColorStr = '#dddddd');
 	background-repeat: no-repeat;
 	height: 100%;
 	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
@@ -25,7 +25,7 @@ html {
 }
 
 html.no-cssgradients {
-	background-color: #aaa;
+	background-color: #ddd;
 }
 
 .ie6 html {
@@ -42,20 +42,24 @@ body {
 	margin: 0 auto;
 	max-width: 960px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-	   -moz-box-shadow: 0 0 0.3em #255b17;
-	-webkit-box-shadow: 0 0 0.3em #255b17;
-	        box-shadow: 0 0 0.3em #255b17;
+	   -moz-box-shadow: 0 0 0.3em rgb(122, 194, 233);
+	-webkit-box-shadow: 0 0 0.3em rgb(122, 194, 233);
+	        box-shadow: 0 0 0.3em rgb(122, 194, 233);
 }
 
 #siteLogo {
-	background-color: #abbf78;
+	background-color: rgb(39, 42, 52);
+}
+
+.siteImg {
+	height: 100px;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
 .ie6 body,
 .ie7 body,
 .ie8 body {
-	border-color: #255b17;
+	border-color: #7ecefd;
 	border-style: solid;
 	border-width: 0 1px;
 }
@@ -65,7 +69,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #7ecefd;
 }
 
 a:hover, a:active {
@@ -73,7 +77,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #7ecefd;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,7 +112,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: rgb(39, 42, 52);
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -118,7 +122,7 @@ img {
 }
 
 .footer a {
-	color: #255b17;
+	color: #7ecefd;
 }
 
 .spinner {
@@ -283,7 +287,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #7ecefd;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
@@ -621,16 +625,20 @@ a.skip {
 }
 
 .tipoPlano ul{
-	list-style: none outside none;	        
+	list-style: none outside none;
+	padding-left: 15px;	        
 }
 	
 .tipoPlano li{
 	float: left;
-	display: block;	
+	display: block;
+	width: 33.3%;	
 }
 
 .tipoPlano-box{
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
+	background-image: url(../images/box.jpg);
+	background-repeat: repeat-x;
 	background-color: white;
 	padding: 10px;
 	margin: 10px;		
@@ -643,20 +651,30 @@ a.skip {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	font-weight: bold;
+	color: #7ecefd;
 }
 
 .tipoPlano-box-descricao {
 	line-height: 1.5em;
 	margin-left: 5px;
 	margin-right: 5px;
+	color: #FFF;	
 }
 
 .tipoPlano-box-descricao span{
 	font-weight: bold;	
+	color: #7ecefd;
 }
 
 .tipoPlano-box-adicionar {
 	text-align: center;
-	padding-top: 20px;
+	padding-top: 55px;
 	padding-bottom: 10px;
+}
+
+.tipoPlano-box-adicionar input{
+	background-color: #7ecefd;
+	padding: 10px;
+	color: #FFF;
+	font-weight: bold; 	
 }

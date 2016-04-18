@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'nome', 'error')} required">
 	<label for="nome">
-		<g:message code="condominio.nome.label" default="Nome" />
+		<g:message code="condominio.nome.label" default="Nome do Condomínio" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="nome" value="${condominioInstance?.nome}" required=""/>
