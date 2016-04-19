@@ -673,14 +673,21 @@ a.skip {
 	padding-bottom: 10px;
 }
 
-.tipoPlano-box-adicionar input{
+.tipoPlano-box-adicionar input[type="submit"]{
 	background-color: #7ecefd;
 	padding: 10px;
 	color: #FFF;
 	font-weight: bold;
 	text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 	border: 1px solid #EEEEEE; 	
+	cursor: pointer;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
 }
+
+.tipoPlano-box-adicionar input[type="submit"]:hover{
+	border: 1px solid #CCCCCC;	
+}
+
 
 #login .inner{
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
@@ -712,8 +719,17 @@ a.skip {
 	width: 100px;
 	margin-top: 20px;
 	cursor: pointer;	
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
+}
+
+#login .inner input[type="submit"]:hover{
+	border: 1px solid #CCCCCC;	
 }
 
 #remember_me_holder{
 	display: initial;
+}
+
+.login_message {
+	text-align: center;
 }
