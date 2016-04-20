@@ -15,6 +15,14 @@
 				<g:if test="${verificarCriacaoCondominio}">
 					<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				</g:if>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+					<g:if test="${!params.todos}">
+						<li><g:link class="list" action="list" params="['todos':true]"><g:message code="default.todos.condominio.label" args="[entityName]" default="Todos os Condomínios"/></g:link></li>
+					</g:if>	
+				</sec:ifAnyGranted>
+				<g:if test="${params.todos}">
+					<li><g:link class="list" action="list"><g:message code="default.meus.condominio.label" args="[entityName]" default="Meus Condomínios"/></g:link></li>
+				</g:if>
 			</ul>
 		</div>
 		<div id="list-condominio" class="content scaffold-list" role="main">
@@ -28,7 +36,7 @@
 					
 						<g:sortableColumn property="nome" title="${message(code: 'condominio.nome.label', default: 'Nome')}" />
 					
-						<th><g:message code="condominio.endereco.label" default="Endereco" /></th>
+						<th><g:message code="condominio.endereco.label" default="Endereço" /></th>
 						
 						<th><g:message code="condominio.administradores.label" default="Administradores" /></th>
 					
@@ -40,7 +48,7 @@
 					
 						<td><g:link action="show" id="${condominioInstance.id}">${fieldValue(bean: condominioInstance, field: "nome")}</g:link></td>
 					
-						<td>${fieldValue(bean: condominioInstance, field: "endereco")}</td>
+						<td>${condominioInstance.endereco.toHTML()}</td>
 						
 						<td>
 							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">

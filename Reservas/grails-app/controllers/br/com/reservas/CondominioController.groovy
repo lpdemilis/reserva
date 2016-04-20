@@ -15,6 +15,7 @@ class CondominioController {
     }
 
     def list(Integer max) {
+		println params
 		def usuario = springSecurityService.currentUser
 		
 		def verificarCriacaoCondominio = verificarCriacaoCondominio()

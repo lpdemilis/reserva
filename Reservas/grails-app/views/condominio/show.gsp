@@ -25,7 +25,7 @@
 			
 				<g:if test="${condominioInstance?.nome}">
 				<li class="fieldcontain">
-					<span id="nome-label" class="property-label"><g:message code="condominio.nome.label" default="Nome" /></span>
+					<span id="nome-label" class="property-label"><g:message code="condominio.nome.label" default="Nome do Condomínio" /></span>
 					
 						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${condominioInstance}" field="nome"/></span>
 					
@@ -34,9 +34,9 @@
 			
 				<g:if test="${condominioInstance?.endereco}">
 				<li class="fieldcontain">
-					<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereco" /></span>
+					<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereço" /></span>
 					
-						<span class="property-value" aria-labelledby="endereco-label"><g:link controller="endereco" action="show" id="${condominioInstance?.endereco?.id}">${condominioInstance?.endereco?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="endereco-label"><g:link controller="endereco" action="show" id="${condominioInstance?.endereco?.id}">${condominioInstance?.endereco?.toHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

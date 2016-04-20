@@ -25,6 +25,42 @@ class Endereco {
 	}
 	
 	String toHTML() {
-		logradouro + ", " + numero + "<br>" + complemento + "<br>" + bairro + "<br>" + cidade.toString() + "-" + cidade.estado.uf + "<br>" + cep
+		StringBuilder sb = new StringBuilder()
+		
+		if(logradouro){
+			sb.append(logradouro)
+			
+			if(numero){
+				sb.append(", ")
+				sb.append(numero)
+			}
+			
+			sb.append("<br>")
+		}
+				
+		if(complemento){
+			 sb.append(complemento)
+			 sb.append("<br>")
+		}
+		
+		if(bairro){
+			 sb.append(bairro)
+			 sb.append("<br>")
+		}
+		
+		if(cidade){
+			sb.append(cidade.toString())
+			if(cidade.estado.uf){
+				sb.append("-")
+				sb.append(cidade.estado.uf)
+				sb.append("<br>")
+			}
+		}
+		
+		if(cep){
+			sb.append(cep)
+		}
+		
+		sb.toString()
 	}
 }

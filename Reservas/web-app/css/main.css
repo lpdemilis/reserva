@@ -139,12 +139,13 @@ img {
 /* NAVIGATION MENU */
 
 .nav {
-	background-color: #efefef;
+	background-color: #EEE;
 	padding: 0.5em 0.75em;
 	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
 	        box-shadow: 0 0 3px 1px #aaaaaa;
 	zoom: 1;
+	border-bottom: 10px solid #7ecefd;
 }
 
 .nav ul {
@@ -480,7 +481,7 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-	background: #E1F2B6;
+	background: #f2faff;	
 }
 
 /* PAGINATION */
@@ -637,34 +638,48 @@ a.skip {
 
 .tipoPlano-box{
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
-	background-image: url(../images/box.jpg);
+	background-image: url(../images/box.png);
 	background-repeat: repeat-x;
 	background-color: white;
 	padding: 10px;
 	margin: 10px;		
-	width: 260px;
+	width: 270px;
 }
 
 .tipoPlano-box-valor {
 	text-align: center;
 	font-size: 26px;
 	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-bottom: 5px;
 	font-weight: bold;
 	color: #7ecefd;
 /* 	text-shadow: 1px 1px 0px rgba(255,255,255,0.5); */
+}
+
+.tipoPlano-box-valor-mes {
+	text-align: center;
+	color: #cccccc;
+	padding-bottom: 15px;
+	font-style: italic; 
 }
 
 .tipoPlano-box-descricao {
 	line-height: 1.5em;
 	margin-left: 5px;
 	margin-right: 5px;
-	color: #FFF;	
+	color: #cccccc;	
 }
 
 .tipoPlano-box-descricao span{
 	font-weight: bold;	
 	color: #7ecefd;
+}
+
+.tipoPlano-box-descricao .marker{
+	font-size: small;
+    vertical-align: bottom;
+    padding-right: 5px;
+    color: #CCCCCC;
 }
 
 .tipoPlano-box-adicionar {
@@ -691,10 +706,10 @@ a.skip {
 
 #login .inner{
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37) !important;
-	background-image: url(../images/box.jpg);
+	background-image: url(../images/box.png);
 	background-repeat: repeat-x;
 	background-color: white !important;
-	background-position-y: -90px;
+	background-position: 0px -110px;
 	padding: 10px;	
 }
 

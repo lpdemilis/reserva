@@ -66,7 +66,7 @@
 		float: none;
 		margin-left: 0;
 		text-align: left;
-		width: 200px
+<%--		width: 200px--%>
 	}
 
 	#login .inner .login_message {
