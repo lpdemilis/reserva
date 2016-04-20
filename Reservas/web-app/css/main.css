@@ -44,7 +44,7 @@ body {
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em rgb(122, 194, 233);
 	-webkit-box-shadow: 0 0 0.3em rgb(122, 194, 233);
-	        box-shadow: 0 0 0.3em rgb(122, 194, 233);
+	        box-shadow: 0 0 0.3em rgb(122, 194, 233);	     
 }
 
 #siteLogo {
@@ -196,7 +196,7 @@ img {
 }
 
 .nav a.home {
-	background-image: url(../images/skin/house.png);
+	background-image: url(../images/home.png);
 }
 
 .nav a.list {
@@ -230,7 +230,7 @@ fieldset,
 
 .fieldcontain label,
 .fieldcontain .property-label {
-	color: #666666;
+	color: #999999;
 	text-align: right;
 	width: 25%;
 }
