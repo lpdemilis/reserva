@@ -17,6 +17,34 @@ class Apartamento {
     }
 	
 	String toString(){
-		numero + " " + bloco
+		StringBuilder sb = new StringBuilder()
+		
+		sb.append("Ap. ")
+		
+		if(numero){
+			sb.append(numero)
+			
+			if(bloco){
+				sb.append(" Bloco ")
+				sb.append(bloco)
+			}
+		}
+		sb.toString()
+	}
+	
+	String toHTML(){
+		StringBuilder sb = new StringBuilder()
+		
+		sb.append("Ap. ")
+		
+		if(numero){
+			sb.append(numero)
+			
+			if(bloco){
+				sb.append(" Bloco ")
+				sb.append(bloco)
+			}
+		}
+		sb.toString()
 	}
 }

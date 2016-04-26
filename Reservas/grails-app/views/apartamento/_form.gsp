@@ -7,7 +7,7 @@
 		<g:message code="apartamento.numero.label" default="Numero" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="numero" type="number" value="${apartamentoInstance.numero}" required=""/>
+	<g:field name="numero" type="text" value="${apartamentoInstance.numero}" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'bloco', 'error')} ">

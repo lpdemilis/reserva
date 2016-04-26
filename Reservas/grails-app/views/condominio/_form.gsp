@@ -41,8 +41,8 @@
 	</label>
 	
 	<ul class="one-to-many">
-		<g:each in="${condominioInstance?.apartamentos?}" var="a">
-		    <li><g:link controller="apartamento" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
+		<g:each in="${condominioInstance?.apartamentos?.sort { it.id }}" var="a">
+		    <li><g:link controller="apartamento" action="show" id="${a.id}">${a?.toHTML()}</g:link></li>
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">

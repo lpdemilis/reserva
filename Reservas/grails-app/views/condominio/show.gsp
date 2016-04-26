@@ -13,7 +13,9 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<g:if test="${verificarCriacaoCondominio}">
+					<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				</g:if>	
 			</ul>
 		</div>
 		<div id="show-condominio" class="content scaffold-show" role="main">
@@ -56,8 +58,8 @@
 				<li class="fieldcontain">
 					<span id="apartamentos-label" class="property-label"><g:message code="condominio.apartamentos.label" default="Apartamentos" /></span>
 					
-						<g:each in="${condominioInstance.apartamentos}" var="a">
-						<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						<g:each in="${condominioInstance.apartamentos.sort { it.id }}" var="a">
+						<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="show" id="${a.id}">${a?.toHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

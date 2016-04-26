@@ -15,4 +15,8 @@ class Mensalidade {
 		ano nullable:false
 		plano nullable:false 
     }
+	
+	String toString(){
+		mes + "/" + ano
+	}
 }

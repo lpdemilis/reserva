@@ -83,8 +83,10 @@ class CondominioController {
             redirect(action: "list")
             return
         }
+		
+		def verificarCriacaoCondominio = verificarCriacaoCondominio()
 
-        [condominioInstance: condominioInstance]
+        [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio]
     }
 
     def edit(Long id) {
