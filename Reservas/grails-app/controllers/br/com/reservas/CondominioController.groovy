@@ -3,7 +3,7 @@ package br.com.reservas
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class CondominioController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -15,7 +15,6 @@ class CondominioController {
     }
 
     def list(Integer max) {
-		println params
 		def usuario = springSecurityService.currentUser
 		
 		def verificarCriacaoCondominio = verificarCriacaoCondominio()

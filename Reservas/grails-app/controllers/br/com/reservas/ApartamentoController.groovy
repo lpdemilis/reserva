@@ -1,9 +1,10 @@
 package br.com.reservas
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class ApartamentoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -13,6 +14,12 @@ class ApartamentoController {
     }
 
     def list(Integer max) {
+//		if(!SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
+//			flash.message = message(code: 'default.permissao.negada.label')			
+//			redirect(uri: "/")
+//			return
+//		}
+		
         params.max = Math.min(max ?: 10, 100)
 		
 		def apartamentoCriteria = Apartamento.createCriteria()

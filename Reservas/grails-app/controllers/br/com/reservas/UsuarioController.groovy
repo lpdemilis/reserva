@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-//@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class UsuarioController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

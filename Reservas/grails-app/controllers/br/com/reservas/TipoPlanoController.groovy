@@ -3,16 +3,18 @@ package br.com.reservas
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class TipoPlanoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
+	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+	def index() {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
+	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+	def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [tipoPlanoInstanceList: TipoPlano.list(params), tipoPlanoInstanceTotal: TipoPlano.count()]
     }

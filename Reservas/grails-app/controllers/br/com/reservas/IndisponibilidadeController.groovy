@@ -3,7 +3,7 @@ package br.com.reservas
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class IndisponibilidadeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

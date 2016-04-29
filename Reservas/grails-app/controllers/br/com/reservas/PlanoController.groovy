@@ -3,7 +3,7 @@ package br.com.reservas
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
-@Secured(['ROLE_USER'])
+@Secured(['ROLE_ADMIN'])
 class PlanoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -22,12 +22,14 @@ class PlanoController {
 		[planoInstanceList: Plano.list(params), planoInstanceTotal: Plano.count(), meusPlanosInstanceList: usuario.planos, meusPlanosInstanceTotal: usuario.planos.size()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		Usuario usuario = springSecurityService.currentUser
 		
         [planoInstance: new Plano(params), usuarioInstance: usuario]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
 		Condominio condominioInstance = new Condominio(params)
 		Plano planoInstance = new Plano(params)
@@ -86,6 +88,7 @@ class PlanoController {
         redirect(action: "show", id: planoInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def planoInstance = Plano.get(id)
         if (!planoInstance) {
@@ -97,7 +100,7 @@ class PlanoController {
         [planoInstance: planoInstance]
     }
 
-    def edit(Long id) {
+	def edit(Long id) {
         def planoInstance = Plano.get(id)
         if (!planoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'plano.label', default: 'Plano'), id])
