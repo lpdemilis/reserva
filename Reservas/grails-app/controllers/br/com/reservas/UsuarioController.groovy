@@ -36,6 +36,7 @@ class UsuarioController {
         redirect(action: "show", id: usuarioInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {

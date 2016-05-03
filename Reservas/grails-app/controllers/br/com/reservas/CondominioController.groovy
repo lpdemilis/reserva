@@ -75,6 +75,7 @@ class CondominioController {
         redirect(action: "show", id: condominioInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def condominioInstance = Condominio.get(id)
         if (!condominioInstance) {

@@ -10,10 +10,12 @@ class PlanoController {
 		
 	def springSecurityService
 	
+	@Secured(['ROLE_USER'])
     def index() {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['ROLE_USER'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 		

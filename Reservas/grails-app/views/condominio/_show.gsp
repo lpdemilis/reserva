@@ -1,18 +1,18 @@
 	<h1><g:message code="default.show.label" args="['Condomínio']" /></h1>
 	<g:if test="${condominioInstance?.nome}">
 		<li class="fieldcontain">
-			<span id="nome-label" class="property-label"><g:message code="condominio.nome.label" default="Nome" /></span>
+			<span id="nome-label" class="property-label"><g:message code="condominio.nome.label" default="Nome do Condomínio" /></span>
 						
-				<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${condominioInstance}" field="nome"/></span>
+				<span class="property-value" aria-labelledby="nome-label"><g:link controller="condominio" action="show" id="${condominioInstance?.id}"><g:fieldValue bean="${condominioInstance}" field="nome"/></g:link></span>
 						
 		</li>
 	</g:if>
 			
 	<g:if test="${condominioInstance?.endereco}">
 		<li class="fieldcontain">
-			<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereco" /></span>
+			<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereço" /></span>
 						
-				<span class="property-value" aria-labelledby="endereco-label"><g:link controller="endereco" action="show" id="${condominioInstance?.endereco?.id}">${condominioInstance?.endereco?.toHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="endereco-label">${condominioInstance?.endereco?.toHTML()}</span>
 						
 		</li>
 	</g:if>

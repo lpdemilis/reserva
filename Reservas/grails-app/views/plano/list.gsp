@@ -13,6 +13,14 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+					<g:if test="${!params.todos}">
+						<li><g:link class="list" action="list" params="['todos':true]"><g:message code="default.todos.plano.label" args="[entityName]" default="Todos os Planos"/></g:link></li>
+					</g:if>	
+				</sec:ifAnyGranted>
+				<g:if test="${params.todos}">
+					<li><g:link class="list" action="list"><g:message code="default.meus.planos.label" args="[entityName]" default="Meus Planos"/></g:link></li>
+				</g:if>
 			</ul>
 		</div>
 		<div id="list-plano" class="content scaffold-list" role="main">

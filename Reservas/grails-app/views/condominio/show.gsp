@@ -38,7 +38,7 @@
 				<li class="fieldcontain">
 					<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereço" /></span>
 					
-						<span class="property-value" aria-labelledby="endereco-label"><g:link controller="endereco" action="show" id="${condominioInstance?.endereco?.id}">${condominioInstance?.endereco?.toHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="endereco-label">${condominioInstance?.endereco?.toHTML()}</span>
 					
 				</li>
 				</g:if>

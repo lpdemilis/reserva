@@ -25,16 +25,17 @@
 			
 				<g:if test="${planoInstance?.tipoPlano}">
 				<li class="fieldcontain">
-					<span id="tipoPlano-label" class="property-label"><g:message code="plano.tipoPlano.label" default="Tipo Plano" /></span>
+					<span id="tipoPlano-label" class="property-label"><g:message code="plano.tipoPlano.label" default="Tipo de Plano" /></span>
 					
-						<span class="property-value" aria-labelledby="tipoPlano-label"><g:link controller="tipoPlano" action="show" id="${planoInstance?.tipoPlano?.id}">${planoInstance?.tipoPlano?.encodeAsHTML()}</g:link></span>
+<%--						<span class="property-value" aria-labelledby="tipoPlano-label"><g:link controller="tipoPlano" action="show" id="${planoInstance?.tipoPlano?.id}">${planoInstance?.tipoPlano?.encodeAsHTML()}</g:link></span>--%>
+						<span class="property-value" aria-labelledby="tipoPlano-label">${planoInstance?.tipoPlano?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${planoInstance?.dataInicio}">
 				<li class="fieldcontain">
-					<span id="dataInicio-label" class="property-label"><g:message code="plano.dataInicio.label" default="Data Inicio" /></span>
+					<span id="dataInicio-label" class="property-label"><g:message code="plano.dataInicio.label" default="Data de Início" /></span>
 					
 						<span class="property-value" aria-labelledby="dataInicio-label"><g:formatDate format="dd/MM/yyyy" date="${planoInstance?.dataInicio}" /></span>
 					
@@ -43,7 +44,7 @@
 			
 				<g:if test="${planoInstance?.dataFim}">
 				<li class="fieldcontain">
-					<span id="dataFim-label" class="property-label"><g:message code="plano.dataFim.label" default="Data Fim" /></span>
+					<span id="dataFim-label" class="property-label"><g:message code="plano.dataFim.label" default="Data de Fim" /></span>
 					
 						<span class="property-value" aria-labelledby="dataFim-label"><g:formatDate date="${planoInstance?.dataFim}" /></span>
 					
@@ -61,7 +62,7 @@
 										
 				<g:if test="${planoInstance?.usuario}">
 				<li class="fieldcontain">
-					<span id="usuario-label" class="property-label"><g:message code="plano.usuario.label" default="Usuario" /></span>
+					<span id="usuario-label" class="property-label"><g:message code="plano.usuario.label" default="Usuário" /></span>
 					
 						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${planoInstance?.usuario?.id}">${planoInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					
