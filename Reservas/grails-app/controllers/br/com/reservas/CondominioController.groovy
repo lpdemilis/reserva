@@ -9,11 +9,13 @@ class CondominioController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def springSecurityService
-	
+
+	@Secured(['ROLE_USER'])
     def index() {
         redirect(action: "list", params: params)
     }
-
+	
+	@Secured(['ROLE_USER'])
     def list(Integer max) {
 		def usuario = springSecurityService.currentUser
 		
@@ -89,15 +91,28 @@ class CondominioController {
         [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
-        def condominioInstance = Condominio.get(id)
+		def condominioInstance = Condominio.get(id)
         if (!condominioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'condominio.label', default: 'Condominio'), id])
             redirect(action: "list")
             return
         }
-
-        [condominioInstance: condominioInstance]
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		if(!condominioInstance.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
+		
+		def cidadeCriteria = Cidade.createCriteria()
+		def cidadeInstanceList = cidadeCriteria.list(){
+			eq('estado.id', condominioInstance.endereco.cidade.estado.id)			
+		}
+				
+        [condominioInstance: condominioInstance, cidadeInstanceList: cidadeInstanceList, cidadeInstance: condominioInstance.endereco.cidade]
     }
 
     def update(Long id, Long version) {

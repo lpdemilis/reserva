@@ -32,34 +32,34 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="dataInicio" title="${message(code: 'plano.dataInicio.label', default: 'Data Inicio')}" />
+						<th><g:message code="plano.tipoPlano.label" default="Tipo de Plano" /></th>
+						
+						<th><g:message code="plano.condominio.label" default="Condomínio" /></th>
+	
+						<g:sortableColumn property="dataInicio" title="${message(code: 'plano.dataInicio.label', default: 'Data de Início')}" />
 					
-						<g:sortableColumn property="dataFim" title="${message(code: 'plano.dataFim.label', default: 'Data Fim')}" />
+						<g:sortableColumn property="dataFim" title="${message(code: 'plano.dataFim.label', default: 'Data de Fim')}" />
 					
 						<g:sortableColumn property="ativo" title="${message(code: 'plano.ativo.label', default: 'Ativo')}" />
-					
-						<th><g:message code="plano.tipoPlano.label" default="Tipo Plano" /></th>
-					
-						<th><g:message code="plano.condominio.label" default="Condominio" /></th>
-					
-						<th><g:message code="plano.usuario.label" default="Usuario" /></th>
+																	
+						<th><g:message code="plano.usuario.label" default="Usuário" /></th>
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${planoInstanceList}" status="i" var="planoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						
+						<td>${planoInstance.tipoPlano.encodeAsHTML()}</td>
+						
+						<td><g:link controller="condominio" action="show" id="${planoInstance.id}">${fieldValue(bean: planoInstance, field: "condominio")}</g:link></td>
 					
-						<td><g:link action="show" id="${planoInstance.id}">${fieldValue(bean: planoInstance, field: "dataInicio")}</g:link></td>
+						<td><g:formatDate format="dd/MM/yyyy" date="${planoInstance.dataInicio}" /></td>
 					
-						<td><g:formatDate date="${planoInstance.dataFim}" /></td>
+						<td><g:formatDate format="dd/MM/yyyy" date="${planoInstance.dataFim}" /></td>
 					
 						<td><g:formatBoolean boolean="${planoInstance.ativo}" /></td>
-					
-						<td>${fieldValue(bean: planoInstance, field: "tipoPlano")}</td>
-					
-						<td>${fieldValue(bean: planoInstance, field: "condominio")}</td>
-					
+											
 						<td>${fieldValue(bean: planoInstance, field: "usuario")}</td>
 					
 					</tr>

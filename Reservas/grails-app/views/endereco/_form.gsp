@@ -47,7 +47,7 @@
 		<g:message code="endereco.estado.label" default="Estado" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="estado" name="estado.id" from="${br.com.reservas.Estado.list()}" optionKey="id" required="" value="${enderecoInstance?.cidade?.estado?.id}" class="many-to-one" noSelection="['':'Selecione um Estado...']"/>
+	<g:select id="estado" name="estado.id" from="${br.com.reservas.Estado.list()}" optionKey="id" required="" value="${enderecoInstance?.cidade?.estado?.id}" class="many-to-one" noSelection="['':'Selecione um Estado...']" onchange="${remoteFunction(controller: 'cidade', action: 'buscaCidades', params: '\'estado=\' + this.value', update:'cidadeSelect')}" />
 		
 </div>
 
@@ -56,6 +56,9 @@
 		<g:message code="endereco.cidade.label" default="Cidade" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="cidade" name="cidade.id" from="${br.com.reservas.Cidade.list()}" optionKey="id" required="" value="${enderecoInstance?.cidade?.id}" class="many-to-one" noSelection="['':'Selecione uma Cidade...']" />
+<%--	<g:select id="cidade" name="cidade.id" from="${cidadeInstanceList}" optionKey="id" required="" value="${enderecoInstance?.cidade?.id}" class="many-to-one" noSelection="['':'Selecione uma Cidade...']" />--%>
+	<div id="cidadeSelect" style="display: inline;">
+		<g:render template="/cidade/cidade" model="[cidades: cidades, cidade:enderecoInstance?.cidade?.id]" ></g:render>
+	</div>
 </div>
 

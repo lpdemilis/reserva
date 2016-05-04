@@ -53,6 +53,7 @@ class EnderecoController {
     }
 
     def edit(Long id) {
+		println "AQUI"
         def enderecoInstance = Endereco.get(id)
         if (!enderecoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'endereco.label', default: 'Endereco'), id])
