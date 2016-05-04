@@ -111,8 +111,10 @@ class CondominioController {
 		def cidadeInstanceList = cidadeCriteria.list(){
 			eq('estado.id', condominioInstance.endereco.cidade.estado.id)			
 		}
+		
+		def verificarCriacaoCondominio = verificarCriacaoCondominio()
 				
-        [condominioInstance: condominioInstance, cidadeInstanceList: cidadeInstanceList, cidadeInstance: condominioInstance.endereco.cidade]
+        [condominioInstance: condominioInstance, cidadeInstanceList: cidadeInstanceList, cidadeInstance: condominioInstance.endereco.cidade, verificarCriacaoCondominio: verificarCriacaoCondominio]
     }
 
     def update(Long id, Long version) {
