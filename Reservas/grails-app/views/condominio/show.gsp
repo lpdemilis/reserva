@@ -47,8 +47,10 @@
 				<li class="fieldcontain">
 					<span id="administradores-label" class="property-label"><g:message code="condominio.administradores.label" default="Administradores" /></span>
 					
-						<g:each in="${condominioInstance.administradores}" var="a">
-						<span class="property-value" aria-labelledby="administradores-label"><g:link controller="usuario" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						<g:each in="${condominioInstance.administradores.sort { it.nome }}" var="a">
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="administradores-label"><g:link controller="usuario" action="show" id="${a.id}"><span class="marker">► </span>${a?.encodeAsHTML()}</g:link></span>
+							</div>	
 						</g:each>
 					
 				</li>
@@ -59,7 +61,9 @@
 					<span id="apartamentos-label" class="property-label"><g:message code="condominio.apartamentos.label" default="Apartamentos" /></span>
 					
 						<g:each in="${condominioInstance.apartamentos.sort { it.id }}" var="a">
-						<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="show" id="${a.id}">${a?.toHTML()}</g:link></span>
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="show" id="${a.id}"><span class="marker">► </span>${a?.toHTML()}</g:link></span>
+							</div>
 						</g:each>
 					
 				</li>
@@ -69,8 +73,10 @@
 				<li class="fieldcontain">
 					<span id="recursos-label" class="property-label"><g:message code="condominio.recursos.label" default="Recursos" /></span>
 					
-						<g:each in="${condominioInstance.recursos}" var="r">
-						<span class="property-value" aria-labelledby="recursos-label"><g:link controller="recurso" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						<g:each in="${condominioInstance.recursos.sort { it.nome }}" var="r">
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="recursos-label"><g:link controller="recurso" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link></span>
+							</div>	
 						</g:each>
 					
 				</li>

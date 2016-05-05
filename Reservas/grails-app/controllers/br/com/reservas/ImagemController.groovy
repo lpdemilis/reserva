@@ -8,6 +8,8 @@ class ImagemController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
 	def index() {
         redirect(action: "list", params: params)
     }
@@ -17,6 +19,7 @@ class ImagemController {
         [imagemInstanceList: Imagem.list(params), imagemInstanceTotal: Imagem.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		if (!params.recurso?.id) {
 			if(flash.message == null){
@@ -27,9 +30,20 @@ class ImagemController {
 			redirect(controller:"recurso", action: "create")
 			return
 		}
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def recursoInstance = Recurso.get(params.recurso?.id)
+		
+		if(!recursoInstance.condominio.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
+		
         [imagemInstance: new Imagem(params)]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
         def imagemInstance = new Imagem(params)
         if (!imagemInstance.save(flush: true)) {
@@ -38,9 +52,11 @@ class ImagemController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'imagem.label', default: 'Imagem'), imagemInstance.id])
-        redirect(action: "show", id: imagemInstance.id)
+        //redirect(action: "show", id: imagemInstance.id)
+		redirect(controller: "recurso", action: "show", id: imagemInstance.recurso.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def imagemInstance = Imagem.get(id)
         if (!imagemInstance) {
@@ -111,6 +127,7 @@ class ImagemController {
         }
     }
 	
+	@Secured(['ROLE_USER'])
 	def imagem() {
 		Imagem imagemInstance = Imagem.get(params.id)
 		if (!imagemInstance) {
@@ -122,5 +139,5 @@ class ImagemController {
 		OutputStream out = response.outputStream
 		out.write(imagemInstance.imagem)
 		out.close()
-	  }
+	}
 }

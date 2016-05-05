@@ -78,7 +78,7 @@ class RecursoController {
 		
 		Usuario usuario = springSecurityService.currentUser
 		
-		def condominioInstance = Condominio.get(params.condominio?.id)
+		def condominioInstance = Condominio.get(recursoInstance.condominio?.id)
 		
 		if(!condominioInstance.administradores.contains(usuario)){
 			redirect(controller: "login", action: "denied")

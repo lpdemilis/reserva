@@ -511,7 +511,7 @@ th:hover, tr:hover {
 
 .pagination a:hover, .pagination a:focus,
 .pagination .currentStep {
-	background-color: #999999;
+	background-color: #CCCCCC;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -556,7 +556,7 @@ th:hover, tr:hover {
 
 .buttons input:hover, .buttons input:focus,
 .buttons a:hover, .buttons a:focus {
-	background-color: #999999;
+	background-color: #CCCCCC;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -692,6 +692,11 @@ a.skip {
     color: #CCCCCC;
 }
 
+.property-value .marker, .fieldcontain-list span .marker, .fieldcontain-list-item span .marker {
+	text-decoration: none;
+	color: #CCC;
+}
+
 .tipoPlano-box-adicionar {
 	text-align: center;
 	padding-top: 55px;
@@ -766,4 +771,12 @@ a.skip {
 
 .login_message {
 	text-align: center;
+}
+
+.fieldcontain-list span, .fieldcontain-list-item {
+	margin-bottom: 10px; 
+}
+ 
+.fieldcontain-list span a, .fieldcontain-list-item span a {
+	text-decoration: none;		
 }

@@ -12,7 +12,9 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<sec:ifAnyGranted roles="ROLE_ADMIN">
+					<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				</sec:ifAnyGranted>	
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
@@ -25,7 +27,7 @@
 			
 				<g:if test="${recursoInstance?.nome}">
 				<li class="fieldcontain">
-					<span id="nome-label" class="property-label"><g:message code="recurso.nome.label" default="Nome" /></span>
+					<span id="nome-label" class="property-label"><g:message code="recurso.nome.label" default="Nome do recurso" /></span>
 					
 						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${recursoInstance}" field="nome"/></span>
 					
@@ -34,7 +36,7 @@
 			
 				<g:if test="${recursoInstance?.exigeConfirmacao}">
 				<li class="fieldcontain">
-					<span id="exigeConfirmacao-label" class="property-label"><g:message code="recurso.exigeConfirmacao.label" default="Exige Confirmacao" /></span>
+					<span id="exigeConfirmacao-label" class="property-label"><g:message code="recurso.exigeConfirmacao.label" default="Exige confirmação" /></span>
 					
 						<span class="property-value" aria-labelledby="exigeConfirmacao-label"><g:formatBoolean boolean="${recursoInstance?.exigeConfirmacao}" /></span>
 					
@@ -43,7 +45,7 @@
 			
 				<g:if test="${recursoInstance?.numeroMaxReservas}">
 				<li class="fieldcontain">
-					<span id="numeroMaxReservas-label" class="property-label"><g:message code="recurso.numeroMaxReservas.label" default="Numero Max Reservas" /></span>
+					<span id="numeroMaxReservas-label" class="property-label"><g:message code="recurso.numeroMaxReservas.label" default="Nº máximo de reservas" /></span>
 					
 						<span class="property-value" aria-labelledby="numeroMaxReservas-label"><g:fieldValue bean="${recursoInstance}" field="numeroMaxReservas"/></span>
 					
@@ -61,7 +63,7 @@
 			
 				<g:if test="${recursoInstance?.tempoReserva}">
 				<li class="fieldcontain">
-					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo Reserva" /></span>
+					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo da reserva (horas)" /></span>
 					
 						<span class="property-value" aria-labelledby="tempoReserva-label"><g:fieldValue bean="${recursoInstance}" field="tempoReserva"/></span>
 					
@@ -70,7 +72,7 @@
 			
 				<g:if test="${recursoInstance?.valor}">
 				<li class="fieldcontain">
-					<span id="valor-label" class="property-label"><g:message code="recurso.valor.label" default="Valor" /></span>
+					<span id="valor-label" class="property-label"><g:message code="recurso.valor.label" default="Valor (R\$)" /></span>
 					
 						<span class="property-value" aria-labelledby="valor-label"><g:fieldValue bean="${recursoInstance}" field="valor"/></span>
 					
@@ -79,7 +81,7 @@
 			
 				<g:if test="${recursoInstance?.capacidade}">
 				<li class="fieldcontain">
-					<span id="capacidade-label" class="property-label"><g:message code="recurso.capacidade.label" default="Capacidade" /></span>
+					<span id="capacidade-label" class="property-label"><g:message code="recurso.capacidade.label" default="Capacidade (pessoas)" /></span>
 					
 						<span class="property-value" aria-labelledby="capacidade-label"><g:fieldValue bean="${recursoInstance}" field="capacidade"/></span>
 					
@@ -88,7 +90,7 @@
 			
 				<g:if test="${recursoInstance?.condominio}">
 				<li class="fieldcontain">
-					<span id="condominio-label" class="property-label"><g:message code="recurso.condominio.label" default="Condominio" /></span>
+					<span id="condominio-label" class="property-label"><g:message code="recurso.condominio.label" default="Nome do condomínio" /></span>
 					
 						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${recursoInstance?.condominio?.id}">${recursoInstance?.condominio?.encodeAsHTML()}</g:link></span>
 					
@@ -97,7 +99,7 @@
 			
 				<g:if test="${recursoInstance?.descricao}">
 				<li class="fieldcontain">
-					<span id="descricao-label" class="property-label"><g:message code="recurso.descricao.label" default="Descricao" /></span>
+					<span id="descricao-label" class="property-label"><g:message code="recurso.descricao.label" default="Descrição" /></span>
 					
 						<span class="property-value" aria-labelledby="descricao-label"><g:fieldValue bean="${recursoInstance}" field="descricao"/></span>
 					
@@ -119,8 +121,10 @@
 				<li class="fieldcontain">
 					<span id="indisponibilidades-label" class="property-label"><g:message code="recurso.indisponibilidades.label" default="Indisponibilidades" /></span>
 					
-						<g:each in="${recursoInstance.indisponibilidades}" var="i">
-						<span class="property-value" aria-labelledby="indisponibilidades-label"><g:link controller="indisponibilidade" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></span>
+						<g:each in="${recursoInstance.indisponibilidades.sort { it.dataInicio }}" var="i">
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="indisponibilidades-label"><g:link controller="indisponibilidade" action="show" id="${i.id}"><span class="marker">► </span>${i?.encodeAsHTML()}</g:link></span>
+							</div>	
 						</g:each>
 					
 				</li>
@@ -131,7 +135,9 @@
 					<span id="reserva-label" class="property-label"><g:message code="recurso.reserva.label" default="Reserva" /></span>
 					
 						<g:each in="${recursoInstance.reserva}" var="r">
-						<span class="property-value" aria-labelledby="reserva-label"><g:link controller="reserva" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="reserva-label"><g:link controller="reserva" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link></span>
+							</div>	
 						</g:each>
 					
 				</li>
@@ -139,10 +145,12 @@
 			
 				<g:if test="${recursoInstance?.tipoReserva}">
 				<li class="fieldcontain">
-					<span id="tipoReserva-label" class="property-label"><g:message code="recurso.tipoReserva.label" default="Tipo Reserva" /></span>
+					<span id="tipoReserva-label" class="property-label"><g:message code="recurso.tipoReserva.label" default="Tipo da reserva" /></span>
 					
-						<g:each in="${recursoInstance.tipoReserva}" var="t">
-						<span class="property-value" aria-labelledby="tipoReserva-label"><g:link controller="tipoReserva" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						<g:each in="${recursoInstance.tipoReserva.sort { it.nome }}" var="t">
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="tipoReserva-label"><g:link controller="tipoReserva" action="show" id="${t.id}"><span class="marker">► </span>${t?.encodeAsHTML()}</g:link></span>
+							</div>	
 						</g:each>
 					
 				</li>

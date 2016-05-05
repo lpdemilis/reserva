@@ -42,7 +42,13 @@
 	
 	<ul class="one-to-many">
 		<g:each in="${condominioInstance?.apartamentos?.sort { it.id }}" var="a">
-		    <li><g:link controller="apartamento" action="show" id="${a.id}">${a?.toHTML()}</g:link></li>
+		    <li>
+		    	<div class="fieldcontain-list-item">
+		    		<span>
+		    			<g:link controller="apartamento" action="show" id="${a.id}"><span class="marker">► </span>${a?.toHTML()}</g:link>
+		    		</span>
+		    	</div>		
+		    </li>
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
@@ -64,7 +70,13 @@
 	
 	<ul class="one-to-many">
 		<g:each in="${condominioInstance?.recursos?}" var="r">
-		    <li><g:link controller="recurso" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+		    <li>
+		    	<div class="fieldcontain-list-item">
+		    		<span>
+		    			<g:link controller="recurso" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link>
+		    		</span>	
+		    	</div>	
+		    </li>
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
@@ -86,7 +98,15 @@
 	
 	<ul class="one-to-many">
 		<g:each in="${condominioInstance?.mensalidades?}" var="m">
-		    <li><g:link controller="mensalidade" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+		    <li>
+		    	<div class="fieldcontain-list-item">
+		    		<span>
+		    			<g:link controller="mensalidade" action="show" id="${m.id}"><span class="marker">► </span>${m?.encodeAsHTML()}</g:link>
+		    		</span>
+		    	</div>		
+		    			
+		    </li>
+		    			
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
