@@ -53,8 +53,8 @@
 						<td>${condominioInstance.endereco.toHTML()}</td>
 						
 						<td>
-							<g:each in="${condominioInstance.recursos}" status="k" var="recursoInstance">
-								*
+							<g:each in="${condominioInstance.recursos.sort { it.nome }}" status="k" var="recursoInstance">
+								<div><g:link controller="recurso" action="show" id="${recursoInstance.id}">${recursoInstance}</g:link></div>
 							</g:each>
 						</td>
 						

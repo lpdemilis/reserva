@@ -46,10 +46,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
-				<g:link controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>	
+				<g:link class="adicionar-button" controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>	
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</span>				
+				<div class="disabled">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</div>				
 			</g:else>			
 		</li>
 	</ul>
@@ -68,10 +68,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
-				<g:link controller="recurso" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</g:link>	
+				<g:link class="adicionar-button" controller="recurso" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</g:link>	
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</span>				
+				<div class="disabled">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</div>				
 			</g:else>			
 		</li>
 	</ul>
@@ -90,10 +90,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
-				<g:link controller="mensalidade" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</g:link>	
+				<g:link class="adicionar-button" controller="mensalidade" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</g:link>	
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</span>				
+				<div class="disabled">${message(code: 'default.add.label', args: [message(code: 'mensalidade.label', default: 'Mensalidade')])}</div>				
 			</g:else>
 		</li>
 	</ul>

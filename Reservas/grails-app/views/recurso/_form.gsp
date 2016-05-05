@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'nome', 'error')} ">
 	<label for="nome">
-		<g:message code="recurso.nome.label" default="Nome" />
+		<g:message code="recurso.nome.label" default="Nome do Recurso" />
 		
 	</label>
 	<g:textField name="nome" value="${recursoInstance?.nome}"/>
@@ -12,7 +12,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'exigeConfirmacao', 'error')} ">
 	<label for="exigeConfirmacao">
-		<g:message code="recurso.exigeConfirmacao.label" default="Exige Confirmacao" />
+		<g:message code="recurso.exigeConfirmacao.label" default="Exige confirmação" />
 		
 	</label>
 	<g:checkBox name="exigeConfirmacao" value="${recursoInstance?.exigeConfirmacao}" />
@@ -20,7 +20,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'numeroMaxReservas', 'error')} required">
 	<label for="numeroMaxReservas">
-		<g:message code="recurso.numeroMaxReservas.label" default="Numero Max Reservas" />
+		<g:message code="recurso.numeroMaxReservas.label" default="Nº máximo de reservas" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="numeroMaxReservas" type="number" value="${recursoInstance.numeroMaxReservas}" required=""/>
@@ -36,7 +36,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'tempoReserva', 'error')} required">
 	<label for="tempoReserva">
-		<g:message code="recurso.tempoReserva.label" default="Tempo Reserva" />
+		<g:message code="recurso.tempoReserva.label" default="Tempo da reserva (horas)" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="tempoReserva" type="number" value="${recursoInstance.tempoReserva}" required=""/>
@@ -44,15 +44,15 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'valor', 'error')} ">
 	<label for="valor">
-		<g:message code="recurso.valor.label" default="Valor" />
+		<g:message code="recurso.valor.label" default="Valor (R\$)" />
 		
 	</label>
-	<g:field type="number" name="valor" value="${fieldValue(bean: recursoInstance, field: 'valor')}"/>
+	<g:field type="number" step="any" name="valor" value="${fieldValue(bean: recursoInstance, field: 'valor')}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'capacidade', 'error')} ">
 	<label for="capacidade">
-		<g:message code="recurso.capacidade.label" default="Capacidade" />
+		<g:message code="recurso.capacidade.label" default="Capacidade (pessoas)" />
 		
 	</label>
 	<g:field name="capacidade" type="number" value="${recursoInstance.capacidade}"/>
@@ -60,7 +60,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'condominio', 'error')} required">
 	<label for="condominio">
-		<g:message code="recurso.condominio.label" default="Condominio" />
+		<g:message code="recurso.condominio.label" default="Nome do condomínio" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="condominio.nome" value="${recursoInstance?.condominio?.nome}" disabled=""/>
@@ -69,10 +69,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'descricao', 'error')} ">
 	<label for="descricao">
-		<g:message code="recurso.descricao.label" default="Descricao" />
+		<g:message code="recurso.descricao.label" default="Descrição" />
 		
 	</label>
-	<g:textField name="descricao" value="${recursoInstance?.descricao}"/>
+	<g:textArea name="descricao" value="${recursoInstance?.descricao}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'imagens', 'error')} ">
@@ -87,10 +87,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${recursoInstance?.id}">
-				<g:link controller="imagem" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'imagem.label', default: 'Imagem')])}</g:link>
+				<g:link class="adicionar-button" controller="imagem" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'imagem.label', default: 'Imagem')])}</g:link>
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'imagem.label', default: 'Imagem')])}</span>				
+				<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'imagem.label', default: 'Imagem')])}</div>				
 			</g:else>	
 		</li>
 	</ul>
@@ -109,10 +109,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${recursoInstance?.id}">
-				<g:link controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
+				<g:link class="adicionar-button" controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</span>				
+				<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</div>				
 			</g:else>	
 		</li>
 	</ul>
@@ -121,7 +121,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'reserva', 'error')} ">
 	<label for="reserva">
-		<g:message code="recurso.reserva.label" default="Reserva" />
+		<g:message code="recurso.reserva.label" default="Reservas" />
 		
 	</label>
 	
@@ -131,10 +131,10 @@
 		</g:each>
 		<li class="add">
 			<g:if test="${recursoInstance?.id}">
-				<g:link controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	
+				<g:link class="adicionar-button" controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	
 			</g:if>
 			<g:else>
-				<span class="disabled">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</span>				
+				<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</div>				
 			</g:else>	
 		</li>
 	</ul>
@@ -143,7 +143,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'tipoReserva', 'error')} ">
 	<label for="tipoReserva">
-		<g:message code="recurso.tipoReserva.label" default="Tipo Reserva" />
+		<g:message code="recurso.tipoReserva.label" default="Tipo da reserva" />
 		
 	</label>
 	<g:select name="tipoReserva" from="${br.com.reservas.TipoReserva.list()}" multiple="multiple" optionKey="id" size="5" value="${recursoInstance?.tipoReserva*.id}" class="many-to-many"/>

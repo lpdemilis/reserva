@@ -22,7 +22,7 @@ class Recurso {
 		ativo nullable:false   
 		tempoReserva nullable: false
 		valor nullable:true, scale: 2
-		capacidade nullable:true 
+		capacidade nullable:true		  
     }
 	
 	static mapping = {
@@ -30,7 +30,7 @@ class Recurso {
 		numeroMaxReservas defaultValue: 1
 		ativo defaultValue: true
 		tempoReserva defaultValue: 24
-		descricao defaltValue: ""		
+		descricao defaltValue: "", type: 'text'
 	}
 	
 	String toString(){

@@ -8,6 +8,8 @@ class RecursoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
 	def index() {
         redirect(action: "list", params: params)
     }
@@ -17,6 +19,7 @@ class RecursoController {
         [recursoInstanceList: Recurso.list(params), recursoInstanceTotal: Recurso.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		if (!params.condominio?.id) {
 			if(flash.message == null){
@@ -27,9 +30,20 @@ class RecursoController {
 			redirect(controller:"condominio", action: "create")
 			return
 		}
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(params.condominio?.id)
+		
+		if(!condominioInstance.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
+		
         [recursoInstance: new Recurso(params)]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
         def recursoInstance = new Recurso(params)
         if (!recursoInstance.save(flush: true)) {
@@ -41,6 +55,7 @@ class RecursoController {
         redirect(action: "show", id: recursoInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def recursoInstance = Recurso.get(id)
         if (!recursoInstance) {
@@ -52,6 +67,7 @@ class RecursoController {
         [recursoInstance: recursoInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
         def recursoInstance = Recurso.get(id)
         if (!recursoInstance) {
@@ -59,6 +75,15 @@ class RecursoController {
             redirect(action: "list")
             return
         }
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(params.condominio?.id)
+		
+		if(!condominioInstance.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
 
         [recursoInstance: recursoInstance]
     }
@@ -92,6 +117,7 @@ class RecursoController {
         redirect(action: "show", id: recursoInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def delete(Long id) {
         def recursoInstance = Recurso.get(id)
         if (!recursoInstance) {
@@ -99,11 +125,21 @@ class RecursoController {
             redirect(action: "list")
             return
         }
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(recursoInstance.condominio?.id)
+		
+		if(!condominioInstance.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
 
         try {
             recursoInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'recurso.label', default: 'Recurso'), id])
-            redirect(action: "list")
+            //redirect(action: "list")
+			redirect(controller: "condominio", action: "show", id: condominioInstance.id)
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'recurso.label', default: 'Recurso'), id])
