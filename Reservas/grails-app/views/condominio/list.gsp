@@ -54,13 +54,13 @@
 						
 						<td>
 							<g:each in="${condominioInstance.recursos.sort { it.nome }}" status="k" var="recursoInstance">
-								<div><g:link controller="recurso" action="show" id="${recursoInstance.id}">${recursoInstance}</g:link></div>
+								<div class="tab-value"><g:link controller="recurso" action="show" id="${recursoInstance.id}"><span class="marker">► </span>${recursoInstance}</g:link></div>
 							</g:each>
 						</td>
 						
 						<td>
 							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">
-								<g:link controller="usuario" action="show" id="${administradorInstance.id}">${fieldValue(bean: administradorInstance, field: "nome")}</g:link><br>
+								<div class="tab-value"><g:link controller="usuario" action="show" id="${administradorInstance.id}"><span class="marker">► </span>${fieldValue(bean: administradorInstance, field: "nome")}</g:link></div>
 							</g:each> 
 						</td>
 					

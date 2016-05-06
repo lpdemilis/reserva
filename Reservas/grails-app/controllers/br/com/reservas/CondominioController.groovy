@@ -28,9 +28,9 @@ class CondominioController {
 //					eq('id', usuario.id)
 //				}
 //				
-//				usuarios{
-//					eq('id', usuario.id)
-//				}
+				usuarios{
+					eq('id', usuario.id)
+				}
 //			}
 		}
 		
@@ -179,6 +179,19 @@ class CondominioController {
 		
 		if (nuCondominiosDisponiveis > 0) {
 			return true
+		}
+		
+		return false
+	}
+	
+	def verificarAdministrador(Long id) {
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(id)
+		
+		
+		if(condominioInstance?.administradores.contains(usuario)){
+			return true		
 		}
 		
 		return false

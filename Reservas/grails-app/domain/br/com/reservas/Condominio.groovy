@@ -17,4 +17,9 @@ class Condominio {
 	String toString() {
 		nome
 	}
+	
+	Boolean verificarAdministrador() {
+		CondominioController condominioController = new CondominioController()
+		condominioController.verificarAdministrador(this.id)		
+	}
 }

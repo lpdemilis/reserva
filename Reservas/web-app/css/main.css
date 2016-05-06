@@ -692,9 +692,13 @@ a.skip {
     color: #CCCCCC;
 }
 
-.property-value .marker, .fieldcontain-list span .marker, .fieldcontain-list-item span .marker {
+.property-value .marker, .fieldcontain-list span .marker, .fieldcontain-list-item span .marker, .tab-value .marker {
 	text-decoration: none;
 	color: #CCC;
+}
+
+.tab-value a{
+	text-decoration: none;
 }
 
 .tipoPlano-box-adicionar {
