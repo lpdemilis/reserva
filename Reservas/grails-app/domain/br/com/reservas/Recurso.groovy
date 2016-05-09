@@ -10,6 +10,7 @@ class Recurso {
 	BigDecimal valor
 	Integer capacidade
 	Integer tempoReserva
+	UnidadeTempoReserva unidadeTempoReserva
 		
 	static hasMany = [reserva:Reserva, indisponibilidades:Indisponibilidade, tipoReserva:TipoReserva, imagens:Imagem]
 	
@@ -21,6 +22,7 @@ class Recurso {
 		numeroMaxReservas nullable:false
 		ativo nullable:false   
 		tempoReserva nullable: false
+		unidadeTempoReserva nullable: false
 		valor nullable:true, scale: 2
 		capacidade nullable:true		  
     }

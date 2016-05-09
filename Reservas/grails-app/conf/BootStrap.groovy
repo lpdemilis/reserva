@@ -7,6 +7,7 @@ import br.com.reservas.Plano
 import br.com.reservas.Recurso
 import br.com.reservas.TipoPlano;
 import br.com.reservas.TipoReserva
+import br.com.reservas.UnidadeTempoReserva;
 import br.com.reservas.Usuario
 import br.com.reservas.UsuarioPapel
 
@@ -230,7 +231,35 @@ class BootStrap {
 			tipoReserva.descricao = "A reserva poder\u00E1 ser feita por todos os usu\u00E1rios.";
 			tipoReserva.save();
 		}
-		/** Tipo Reserva **/	
+		/** Tipo Reserva **/
+		
+		/** Unidade Tempo Reserva **/
+		UnidadeTempoReserva unidadeTempoReserva;
+		
+		unidadeTempoReserva = UnidadeTempoReserva.get(1);
+		if (unidadeTempoReserva == null) {
+			unidadeTempoReserva = new UnidadeTempoReserva();
+			unidadeTempoReserva.nome = "Minuto(s)";
+			unidadeTempoReserva.descricao = "";
+			unidadeTempoReserva.save();
+		}
+		
+		unidadeTempoReserva = UnidadeTempoReserva.get(2);
+		if (unidadeTempoReserva == null) {
+			unidadeTempoReserva = new UnidadeTempoReserva();
+			unidadeTempoReserva.nome = "Hora(s)";
+			unidadeTempoReserva.descricao = "";
+			unidadeTempoReserva.save();
+		}
+		
+		unidadeTempoReserva = UnidadeTempoReserva.get(3);
+		if (unidadeTempoReserva == null) {
+			unidadeTempoReserva = new UnidadeTempoReserva();
+			unidadeTempoReserva.nome = "Dia(s)";
+			unidadeTempoReserva.descricao = "";
+			unidadeTempoReserva.save();
+		}
+		/** Unidade Tempo Reserva **/
     }
 	
     def destroy = {

@@ -63,7 +63,7 @@
 			
 				<g:if test="${recursoInstance?.tempoReserva}">
 				<li class="fieldcontain">
-					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo da reserva (horas)" /></span>
+					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo da reserva ( ${recursoInstance?.unidadeTempoReserva} )" /></span>
 					
 						<span class="property-value" aria-labelledby="tempoReserva-label"><g:fieldValue bean="${recursoInstance}" field="tempoReserva"/></span>
 					

@@ -23,17 +23,17 @@ class CondominioController {
 		
 		def condominioCriteria = Condominio.createCriteria()
 		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
-//			or {
-//				administradores{
-//					eq('id', usuario.id)
-//				}
-//				
+			or {
+				administradores{
+					eq('id', usuario.id)
+				}
+				
 				usuarios{
 					eq('id', usuario.id)
 				}
-//			}
+			}
 		}
-		
+				
         [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size(), verificarCriacaoCondominio:verificarCriacaoCondominio]
     }
 

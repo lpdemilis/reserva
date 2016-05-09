@@ -36,10 +36,11 @@
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'tempoReserva', 'error')} required">
 	<label for="tempoReserva">
-		<g:message code="recurso.tempoReserva.label" default="Tempo da reserva (horas)" />
+		<g:message code="recurso.tempoReserva.label" default="Tempo da reserva" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="tempoReserva" type="number" value="${recursoInstance.tempoReserva}" required=""/>
+	<g:select id="unidadeTempoReserva" name="unidadeTempoReserva.id" from="${br.com.reservas.UnidadeTempoReserva.list()}" optionKey="id" required="" value="${recursoInstance?.unidadeTempoReserva?.id}" class="many-to-one" noSelection="['':'Unidade de tempo...']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'valor', 'error')} ">
