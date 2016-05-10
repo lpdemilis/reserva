@@ -6,6 +6,33 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'recurso.label', default: 'Recurso')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		
+		<link href='http://fullcalendar.io/js/fullcalendar-2.7.1/fullcalendar.css' rel='stylesheet' />
+		<link href='http://fullcalendar.io/js/fullcalendar-2.7.1/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script src='http://fullcalendar.io/js/fullcalendar-2.7.1/fullcalendar.js'></script>
+		
+		<script type="text/javascript">
+			$(function() { // document ready
+			  
+			  	$('#calendar').fullCalendar({
+					header: {
+								left: 'prev,next today',
+								center: 'title',
+								right: 'month,agendaWeek,agendaDay'
+				    },
+	//			    defaultDate: '2014-11-12',
+				    editable: true,
+				    eventLimit: true, // allow "more" link when too many events
+				    events: [
+							  ${recursoInstance.listaReservas()}
+				    ]
+				});
+			  
+			});
+		</script>
+				
 	</head>
 	<body>
 		<a href="#show-recurso" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -157,6 +184,9 @@
 				</g:if>
 			
 			</ol>
+			
+			<div id='calendar'></div>
+			
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${recursoInstance?.id}" />

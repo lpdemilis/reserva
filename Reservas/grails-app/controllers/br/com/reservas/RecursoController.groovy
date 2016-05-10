@@ -146,4 +146,28 @@ class RecursoController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def listaReservas(id){
+		
+		def recursoInstance = Recurso.get(id)
+		
+		StringBuilder reservasSB = new StringBuilder()
+		
+		if(recursoInstance){
+			for (reserva in recursoInstance.reserva) {
+				reservasSB.append("{")
+				reservasSB.append("title: '")
+				reservasSB.append(recursoInstance.nome)
+				reservasSB.append("',")
+				reservasSB.append("start: '")
+				reservasSB.append(reserva.dataEvento)
+				reservasSB.append("'")
+		//		reservasSB.append(",")
+		//		reservasSB.append("end: '2016-05-11T16:00:00'")
+				reservasSB.append("},")
+			}
+		}
+		
+		reservasSB.toString() 
+	}
 }

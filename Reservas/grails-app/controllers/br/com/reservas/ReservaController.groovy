@@ -17,14 +17,22 @@ class ReservaController {
         [reservaInstanceList: Reserva.list(params), reservaInstanceTotal: Reserva.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
+		def recursoInstance = Recurso.get(params.recurso?.id)
+				
 		if (!params.apartamento?.id) {
 			if(flash.message == null){
 				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
 			}else{
 				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
 			}
-			redirect(controller:"apartamento", action: "create")
+			
+			if(recursoInstance?.condominio){
+				redirect(controller:"condominio", action: "show", id: recursoInstance.condominio.id)
+			}else{
+				redirect(controller:"condominio", action: "list")
+			}
 			return
 		}
 		

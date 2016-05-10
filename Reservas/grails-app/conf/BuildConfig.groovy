@@ -45,11 +45,14 @@ grails.project.dependency.resolution = {
         runtime "mysql:mysql-connector-java:5.1.22"
 		
 		compile "org.grails.plugins:flash-helper:0.9.9"
+		
+//		compile "org.grails.plugins:full-calendar:1.5.1.0"		
     }
 
     plugins {
         runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.8.3"
+        runtime ":jquery:1.11.1"
+		runtime ":jquery-ui:1.10.4"
         runtime ":resources:1.2"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
@@ -67,5 +70,7 @@ grails.project.dependency.resolution = {
 		//compile ":spring-security-facebook:0.15"
 		
 		//runtime ":twitter-bootstrap:3.3.4"
+		
+		compile ":full-calendar:1.5.1.0"
     }
 }

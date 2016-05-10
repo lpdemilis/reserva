@@ -8,17 +8,30 @@ import org.springframework.security.access.annotation.Secured
 class ApartamentoController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+	
+	def springSecurityService
 
     def index() {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['ROLE_USER'])
     def list(Integer max) {
-//		if(!SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
-//			flash.message = message(code: 'default.permissao.negada.label')			
-//			redirect(uri: "/")
-//			return
-//		}
+		if(!params.condominio){
+			if(!SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
+				redirect(controller: "login", action: "denied")
+				return
+			}
+		}
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(params.condominio)
+		
+		if(!condominioInstance.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
 		
         params.max = Math.min(max ?: 10, 100)
 		
@@ -34,7 +47,18 @@ class ApartamentoController {
         [apartamentoInstanceList: apartamentoInstanceList, apartamentoInstanceTotal: apartamentoInstanceList.size()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(params.condominio?.id)
+		
+		if(!condominioInstance?.administradores?.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
+		
+		
 		if (!params.condominio?.id) {
 			if(flash.message == null){
 				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'condominio.label', default: 'condom\u00EDnio'), message(code: 'apartamentos.label', default: 'os apartamentos')])
@@ -46,7 +70,8 @@ class ApartamentoController {
 		}
         [apartamentoInstance: new Apartamento(params)]
     }
-
+	
+	@Secured(['ROLE_USER'])
     def save() {
 		def aux1
 		def aux2
@@ -70,12 +95,15 @@ class ApartamentoController {
 		
 		for (bloco in blocos) {
 			for (numero in apartamentos) {
-				params.bloco = bloco
-				params.numero = numero
-				apartamentoInstance = new Apartamento(params)
-				if (!apartamentoInstance.save()) {
-					render(view: "create", model: [apartamentoInstance: apartamentoInstance])
-					return
+				apartamentoInstance = Apartamento.findByBlocoAndNumero(bloco, numero)
+				if(!apartamentoInstance?.id){
+					params.bloco = bloco
+					params.numero = numero
+					apartamentoInstance = new Apartamento(params)
+					if (!apartamentoInstance.save()) {
+						render(view: "create", model: [apartamentoInstance: apartamentoInstance])
+						return
+					}
 				}
 			}
 		}		
@@ -89,6 +117,7 @@ class ApartamentoController {
 		}
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def apartamentoInstance = Apartamento.get(id)
         if (!apartamentoInstance) {
@@ -100,6 +129,7 @@ class ApartamentoController {
         [apartamentoInstance: apartamentoInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
         def apartamentoInstance = Apartamento.get(id)
         if (!apartamentoInstance) {
@@ -111,6 +141,7 @@ class ApartamentoController {
         [apartamentoInstance: apartamentoInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def update(Long id, Long version) {
         def apartamentoInstance = Apartamento.get(id)
         if (!apartamentoInstance) {
@@ -140,6 +171,7 @@ class ApartamentoController {
         redirect(action: "show", id: apartamentoInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def delete(Long id) {
         def apartamentoInstance = Apartamento.get(id)
         if (!apartamentoInstance) {

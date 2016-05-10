@@ -18,14 +18,6 @@
 	<g:textField name="bloco" value="${apartamentoInstance?.bloco}"/>
 </div>
 
-<%--<div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'condominio', 'error')} required">--%>
-<%--	<label for="condominio">--%>
-<%--		<g:message code="apartamento.condominio.label" default="Condominio" />--%>
-<%--		<span class="required-indicator">*</span>--%>
-<%--	</label>--%>
-<%--	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" required="" value="${apartamentoInstance?.condominio?.id}" class="many-to-one"/>--%>
-<%--</div>--%>
-
 <g:hiddenField id="condominio" name="condominio.id" required="" value="${apartamentoInstance?.condominio?.id}" />
 
 <div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'convites', 'error')} ">
@@ -34,14 +26,27 @@
 		
 	</label>
 	
-<ul class="one-to-many">
-<g:each in="${apartamentoInstance?.convites?}" var="c">
-    <li><g:link controller="convite" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="convite" action="create" params="['apartamento.id': apartamentoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'convite.label', default: 'Convite')])}</g:link>
-</li>
-</ul>
+	<ul class="one-to-many">
+		<g:each in="${apartamentoInstance?.convites?}" var="c">
+		    <li>
+		    	<div class="fieldcontain-list-item">
+		    		<span>
+		    			<g:link controller="convite" action="show" id="${c.id}"><span class="marker">► </span>${c?.encodeAsHTML()}</g:link>
+		    		</span>	
+		    	</div>	
+		    </li>
+		</g:each>
+		
+		<li class="add">
+			<g:if test="${apartamentoInstance?.id}">
+				<g:link class="adicionar-button" controller="convite" action="create" params="['apartamento.id': apartamentoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'convite.label', default: 'Convite')])}</g:link>	
+			</g:if>
+			<g:else>
+				<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'convite.label', default: 'Convite')])}</div>				
+			</g:else>			
+		</li>
+			
+	</ul>
 
 </div>
 

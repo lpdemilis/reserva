@@ -38,4 +38,9 @@ class Recurso {
 	String toString(){
 		nome
 	}
+	
+	String listaReservas(){
+		RecursoController recursoController = new RecursoController()
+		recursoController.listaReservas(this.id)
+	}
 }
