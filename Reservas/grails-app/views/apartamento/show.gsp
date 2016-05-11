@@ -23,9 +23,18 @@
 			</g:if>
 			<ol class="property-list apartamento">
 			
+				<g:if test="${apartamentoInstance?.condominio}">
+				<li class="fieldcontain">
+					<span id="condominio-label" class="property-label"><g:message code="apartamento.condominio.label" default="Nome do condomínio" /></span>
+					
+						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${apartamentoInstance?.condominio?.id}">${apartamentoInstance?.condominio?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${apartamentoInstance?.numero}">
 				<li class="fieldcontain">
-					<span id="numero-label" class="property-label"><g:message code="apartamento.numero.label" default="Numero" /></span>
+					<span id="numero-label" class="property-label"><g:message code="apartamento.numero.label" default="Número do apartamento" /></span>
 					
 						<span class="property-value" aria-labelledby="numero-label"><g:fieldValue bean="${apartamentoInstance}" field="numero"/></span>
 					
@@ -40,16 +49,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${apartamentoInstance?.condominio}">
-				<li class="fieldcontain">
-					<span id="condominio-label" class="property-label"><g:message code="apartamento.condominio.label" default="Condominio" /></span>
-					
-						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${apartamentoInstance?.condominio?.id}">${apartamentoInstance?.condominio?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
+									
 				<g:if test="${apartamentoInstance?.convites}">
 				<li class="fieldcontain">
 					<span id="convites-label" class="property-label"><g:message code="apartamento.convites.label" default="Convites" /></span>

@@ -8,6 +8,8 @@ class ConviteController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -17,6 +19,7 @@ class ConviteController {
         [conviteInstanceList: Convite.list(params), conviteInstanceTotal: Convite.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		if (!params.apartamento?.id) {
 			if(flash.message == null){
@@ -27,20 +30,57 @@ class ConviteController {
 			redirect(controller:"apartamento", action: "create")
 			return
 		}
-        [conviteInstance: new Convite(params)]
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		def apartamentoInstance = Apartamento.get(params.apartamento.id)
+		
+		if(!apartamentoInstance.condominio.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
+		
+        [conviteInstance: new Convite(params), condominioInstance: apartamentoInstance.condominio]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
-        def conviteInstance = new Convite(params)
-        if (!conviteInstance.save(flush: true)) {
-            render(view: "create", model: [conviteInstance: conviteInstance])
-            return
-        }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'convite.label', default: 'Convite'), conviteInstance.id])
-        redirect(action: "show", id: conviteInstance.id)
+		if (!params.dataConvite) {
+			def data = new Date()
+			params.dataConvite = data
+		}
+		
+		def conviteCriteria = Convite.createCriteria()
+		def conviteInstanceList = conviteCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			and {
+				eq('email', params.email)
+				eq ('apartamento.id', Long.valueOf(params.apartamento.id))
+			}
+		}
+		
+		if (conviteInstanceList.size() > 0){
+			flash.message = message(code: 'default.created.message', args: [message(code: 'convite.label', default: 'Convite'), conviteInstanceList.get(0).id])
+			redirect(action: "show", id: conviteInstanceList.get(0).id)
+		}else{
+			Usuario usuarioInstance = Usuario.findByEmail(params.email)
+			
+			if(usuarioInstance){
+				params.usuario = usuarioInstance
+			}
+		
+			def conviteInstance = new Convite(params)
+			
+			if (!conviteInstance.save(flush: true)) {
+				render(view: "create", model: [conviteInstance: conviteInstance])
+				return
+			}
+			
+			flash.message = message(code: 'default.created.message', args: [message(code: 'convite.label', default: 'Convite'), conviteInstance.id])
+			redirect(action: "show", id: conviteInstance.id)	
+		}
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def conviteInstance = Convite.get(id)
         if (!conviteInstance) {
@@ -52,6 +92,7 @@ class ConviteController {
         [conviteInstance: conviteInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
         def conviteInstance = Convite.get(id)
         if (!conviteInstance) {

@@ -41,15 +41,26 @@
 	</label>
 	
 	<ul class="one-to-many">
-		<g:each in="${condominioInstance?.apartamentos?.sort { it.id }}" var="a">
-		    <li>
-		    	<div class="fieldcontain-list-item">
-		    		<span>
-		    			<g:link controller="apartamento" action="show" id="${a.id}"><span class="marker">► </span>${a?.toHTML()}</g:link>
-		    		</span>
-		    	</div>		
-		    </li>
-		</g:each>
+	
+		<g:if test="${condominioInstance.apartamentos.size() > 5}">
+			<li>
+				<div class="fieldcontain-list-item">
+					<span><g:link controller="apartamento" action="list" params="['condominio':condominioInstance.id]"><span class="marker">► </span>${condominioInstance.apartamentos.size()}<g:message code="condominio.apartamentos.label" default=" apartamentos" /></g:link></span>
+				</div>
+			</li>	
+		</g:if>
+		<g:else>
+			<g:each in="${condominioInstance?.apartamentos?.sort { it.id }}" var="a">
+			    <li>
+			    	<div class="fieldcontain-list-item">
+			    		<span>
+			    			<g:link controller="apartamento" action="show" id="${a.id}"><span class="marker">► </span>${a?.toHTML()}</g:link>
+			    		</span>
+			    	</div>		
+			    </li>
+			</g:each>
+		</g:else>
+				
 		<li class="add">
 			<g:if test="${condominioInstance?.id}">
 				<g:link class="adicionar-button" controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>	

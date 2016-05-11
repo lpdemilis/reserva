@@ -25,34 +25,16 @@
 			
 				<g:if test="${conviteInstance?.usuario}">
 				<li class="fieldcontain">
-					<span id="usuario-label" class="property-label"><g:message code="convite.usuario.label" default="Usuario" /></span>
+					<span id="usuario-label" class="property-label"><g:message code="convite.usuario.label" default="Usuário" /></span>
 					
 						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${conviteInstance?.usuario?.id}">${conviteInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${conviteInstance?.dataConvite}">
-				<li class="fieldcontain">
-					<span id="dataConvite-label" class="property-label"><g:message code="convite.dataConvite.label" default="Data Convite" /></span>
-					
-						<span class="property-value" aria-labelledby="dataConvite-label"><g:formatDate date="${conviteInstance?.dataConvite}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${conviteInstance?.dataAceite}">
-				<li class="fieldcontain">
-					<span id="dataAceite-label" class="property-label"><g:message code="convite.dataAceite.label" default="Data Aceite" /></span>
-					
-						<span class="property-value" aria-labelledby="dataAceite-label"><g:formatDate date="${conviteInstance?.dataAceite}" /></span>
-					
-				</li>
-				</g:if>
-			
+										
 				<g:if test="${conviteInstance?.email}">
 				<li class="fieldcontain">
-					<span id="email-label" class="property-label"><g:message code="convite.email.label" default="Email" /></span>
+					<span id="email-label" class="property-label"><g:message code="convite.email.label" default="E-mail" /></span>
 					
 						<span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${conviteInstance}" field="email"/></span>
 					
@@ -64,6 +46,24 @@
 					<span id="apartamento-label" class="property-label"><g:message code="convite.apartamento.label" default="Apartamento" /></span>
 					
 						<span class="property-value" aria-labelledby="apartamento-label"><g:link controller="apartamento" action="show" id="${conviteInstance?.apartamento?.id}">${conviteInstance?.apartamento?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${conviteInstance?.dataConvite}">
+				<li class="fieldcontain">
+					<span id="dataConvite-label" class="property-label"><g:message code="convite.dataConvite.label" default="Data do convite" /></span>
+					
+						<span class="property-value" aria-labelledby="dataConvite-label"><g:formatDate date="${conviteInstance?.dataConvite}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${conviteInstance?.dataAceite}">
+				<li class="fieldcontain">
+					<span id="dataAceite-label" class="property-label"><g:message code="convite.dataAceite.label" default="Data do aceite" /></span>
+					
+						<span class="property-value" aria-labelledby="dataAceite-label"><g:formatDate date="${conviteInstance?.dataAceite}" /></span>
 					
 				</li>
 				</g:if>

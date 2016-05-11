@@ -1,10 +1,20 @@
 <%@ page import="br.com.reservas.Apartamento" %>
 
+<g:if test="${apartamentoInstance?.condominio}">
+	<div class="fieldcontain">
+		<label for="condominio">
+			<g:message code="apartamento.condominio.label" default="Nome do condomínio" />			
+		</label>
+		
+		<g:link controller="condominio" action="show" id="${apartamentoInstance?.condominio?.id}">${apartamentoInstance?.condominio?.encodeAsHTML()}</g:link>
+					
+	</div>
+</g:if>
 
 
 <div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'numero', 'error')} required">
 	<label for="numero">
-		<g:message code="apartamento.numero.label" default="Numero" />
+		<g:message code="apartamento.numero.label" default="Número do apartamento" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="numero" type="text" value="${apartamentoInstance.numero}" required=""/>
