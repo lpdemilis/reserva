@@ -24,13 +24,15 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="convite.usuario.label" default="Usuario" /></th>
+						<th><g:message code="convite.usuario.label" default="Usuário" /></th>
 					
-						<g:sortableColumn property="dataConvite" title="${message(code: 'convite.dataConvite.label', default: 'Data Convite')}" />
+						<g:sortableColumn property="dataConvite" title="${message(code: 'convite.dataConvite.label', default: 'Data do convite')}" />
 					
-						<g:sortableColumn property="dataAceite" title="${message(code: 'convite.dataAceite.label', default: 'Data Aceite')}" />
+						<g:sortableColumn property="dataAceite" title="${message(code: 'convite.dataAceite.label', default: 'Data do aceite')}" />
 					
-						<g:sortableColumn property="email" title="${message(code: 'convite.email.label', default: 'Email')}" />
+						<g:sortableColumn property="email" title="${message(code: 'convite.email.label', default: 'E-mail')}" />
+						
+						<g:sortableColumn property="condominio" title="${message(code: 'convite.condominio.label', default: 'Condomínio')}" />
 					
 						<th><g:message code="convite.apartamento.label" default="Apartamento" /></th>
 					
@@ -42,13 +44,22 @@
 					
 						<td><g:link action="show" id="${conviteInstance.id}">${fieldValue(bean: conviteInstance, field: "usuario")}</g:link></td>
 					
-						<td><g:formatDate date="${conviteInstance.dataConvite}" /></td>
+						<td><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${conviteInstance.dataConvite}" /></td>
 					
-						<td><g:formatDate date="${conviteInstance.dataAceite}" /></td>
+						<td>
+							<g:if test="${conviteInstance.dataAceite}">
+								<g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${conviteInstance.dataAceite}" />
+							</g:if>
+							<g:else>
+								<g:link class="adicionar-button" controller="convite" action="create" params="['apartamento.id': apartamentoInstance?.id]">${message(code: 'aceitar.label', default: 'Aceitar')}</g:link>
+							</g:else>								
+						</td>
 					
 						<td>${fieldValue(bean: conviteInstance, field: "email")}</td>
+						
+						<td><g:link controller="condominio" action="show" id="${conviteInstance.apartamento.condominio.id}">${fieldValue(bean: conviteInstance, field: "apartamento.condominio")}</g:link></td>
 					
-						<td>${fieldValue(bean: conviteInstance, field: "apartamento")}</td>
+						<td><g:link controller="apartamento" action="show" id="${conviteInstance.apartamento.id}">${fieldValue(bean: conviteInstance, field: "apartamento")}</g:link></td>
 					
 					</tr>
 				</g:each>

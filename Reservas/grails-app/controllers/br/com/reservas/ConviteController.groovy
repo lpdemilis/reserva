@@ -10,13 +10,20 @@ class ConviteController {
 	
 	def springSecurityService
 	
+	@Secured(['ROLE_USER'])
     def index() {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['ROLE_USER'])
     def list(Integer max) {
+		Usuario usuario = springSecurityService.currentUser
+		
         params.max = Math.min(max ?: 10, 100)
-        [conviteInstanceList: Convite.list(params), conviteInstanceTotal: Convite.count()]
+		
+		def conviteInstanceList = Convite.findAllByUsuario(usuario)
+		
+        [conviteInstanceList: conviteInstanceList, conviteInstanceTotal: conviteInstanceList.count]
     }
 
 	@Secured(['ROLE_USER'])
