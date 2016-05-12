@@ -1,5 +1,7 @@
 package br.com.reservas
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -111,6 +113,7 @@ class ConviteController {
         [conviteInstance: conviteInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def update(Long id, Long version) {
         def conviteInstance = Convite.get(id)
         if (!conviteInstance) {
@@ -158,4 +161,19 @@ class ConviteController {
             redirect(action: "show", id: id)
         }
     }
+	
+	@Secured(['ROLE_USER'])
+	def confirmarConvite() {
+		if(params.convite){
+			def conviteInstance = Convite.get(params.convite)
+			
+			if(conviteInstance){
+				conviteInstance.dataAceite = new Date()
+				if(conviteInstance.save(flush: true)){
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+					render(sdf.format(conviteInstance.dataAceite))
+				}				
+			}			
+		}
+	}
 }

@@ -51,7 +51,9 @@
 								<g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${conviteInstance.dataAceite}" />
 							</g:if>
 							<g:else>
-								<g:link class="adicionar-button" controller="convite" action="create" params="['apartamento.id': apartamentoInstance?.id]">${message(code: 'aceitar.label', default: 'Aceitar')}</g:link>
+								<div id="aceite_${conviteInstance.id}">
+									<div class="adicionar-button" onclick="${remoteFunction(controller: 'convite', action: 'confirmarConvite', params: '\'convite=\' + ' + conviteInstance.id, update:'aceite_' + conviteInstance.id)}" />${message(code: 'aceitar.label', default: 'Aceitar')}</div>
+								</div>	
 							</g:else>								
 						</td>
 					
