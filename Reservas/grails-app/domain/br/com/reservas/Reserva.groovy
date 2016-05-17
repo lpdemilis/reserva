@@ -21,10 +21,14 @@ class Reserva {
 		aprovada nullable:false 
 		cancelada nullable:false
 		valor scale: 2
+		dataAprovacao nullable:true 
+		dataCancelamento nullable:true 
     }
 	
 	static mapping = {
 		aprovada defaultValue: false
 		cancelada defaultValue: false
+		dataAprovacao defaultValue:null
+		dataCancelamento defaultValue:null
 	}
 }

@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataSolicitacao', 'error')} required">
 	<label for="dataSolicitacao">
-		<g:message code="reserva.dataSolicitacao.label" default="Data Solicitacao" />
+		<g:message code="reserva.dataSolicitacao.label" default="Data da solicitação" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="dataSolicitacao" precision="day"  value="${reservaInstance?.dataSolicitacao}"  />
@@ -12,7 +12,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataEvento', 'error')} required">
 	<label for="dataEvento">
-		<g:message code="reserva.dataEvento.label" default="Data Evento" />
+		<g:message code="reserva.dataEvento.label" default="Data do evento" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="dataEvento" precision="day"  value="${reservaInstance?.dataEvento}"  />
@@ -36,7 +36,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'valor', 'error')} required">
 	<label for="valor">
-		<g:message code="reserva.valor.label" default="Valor" />
+		<g:message code="reserva.valor.label" default="Valor (R\$)" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="valor" value="${fieldValue(bean: reservaInstance, field: 'valor')}" required=""/>
@@ -52,7 +52,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'comentario', 'error')} ">
 	<label for="comentario">
-		<g:message code="reserva.comentario.label" default="Comentario" />
+		<g:message code="reserva.comentario.label" default="Comentário" />
 		
 	</label>
 	<g:textField name="comentario" value="${reservaInstance?.comentario}"/>
@@ -75,18 +75,16 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataAprovacao', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataAprovacao', 'error')}">
 	<label for="dataAprovacao">
-		<g:message code="reserva.dataAprovacao.label" default="Data Aprovacao" />
-		<span class="required-indicator">*</span>
+		<g:message code="reserva.dataAprovacao.label" default="Data da aprovação" />
 	</label>
 	<g:datePicker name="dataAprovacao" precision="day"  value="${reservaInstance?.dataAprovacao}"  />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataCancelamento', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataCancelamento', 'error')}">
 	<label for="dataCancelamento">
-		<g:message code="reserva.dataCancelamento.label" default="Data Cancelamento" />
-		<span class="required-indicator">*</span>
+		<g:message code="reserva.dataCancelamento.label" default="Data do cancelamento" />
 	</label>
 	<g:datePicker name="dataCancelamento" precision="day"  value="${reservaInstance?.dataCancelamento}"  />
 </div>
@@ -101,7 +99,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'usuario', 'error')} required">
 	<label for="usuario">
-		<g:message code="reserva.usuario.label" default="Usuario" />
+		<g:message code="reserva.usuario.label" default="Usuário" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="usuario" name="usuario.id" from="${br.com.reservas.Usuario.list()}" optionKey="id" required="" value="${reservaInstance?.usuario?.id}" class="many-to-one"/>
