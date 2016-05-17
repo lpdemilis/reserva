@@ -11,7 +11,8 @@ class ApartamentoController {
 	
 	def springSecurityService
 
-    def index() {
+	@Secured(['ROLE_USER'])
+	def index() {
         redirect(action: "list", params: params)
     }
 

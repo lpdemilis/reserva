@@ -17,6 +17,7 @@ class IndisponibilidadeController {
         [indisponibilidadeInstanceList: Indisponibilidade.list(params), indisponibilidadeInstanceTotal: Indisponibilidade.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		if (!params.recurso?.id) {
 			if(flash.message == null){
@@ -30,6 +31,7 @@ class IndisponibilidadeController {
         [indisponibilidadeInstance: new Indisponibilidade(params)]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
         def indisponibilidadeInstance = new Indisponibilidade(params)
         if (!indisponibilidadeInstance.save(flush: true)) {
@@ -41,6 +43,7 @@ class IndisponibilidadeController {
         redirect(action: "show", id: indisponibilidadeInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def indisponibilidadeInstance = Indisponibilidade.get(id)
         if (!indisponibilidadeInstance) {
@@ -52,6 +55,7 @@ class IndisponibilidadeController {
         [indisponibilidadeInstance: indisponibilidadeInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
         def indisponibilidadeInstance = Indisponibilidade.get(id)
         if (!indisponibilidadeInstance) {
@@ -63,6 +67,7 @@ class IndisponibilidadeController {
         [indisponibilidadeInstance: indisponibilidadeInstance]
     }
 
+	@Secured(['ROLE_USER'])
     def update(Long id, Long version) {
         def indisponibilidadeInstance = Indisponibilidade.get(id)
         if (!indisponibilidadeInstance) {

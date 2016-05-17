@@ -147,6 +147,32 @@ class RecursoController {
         }
     }
 	
+	def listaIndisponibilidades(id){
+		
+		def recursoInstance = Recurso.get(id)
+		
+		StringBuilder indisponibilidadesSB = new StringBuilder()
+		
+		if(recursoInstance){
+			for (indisponibilidade in recursoInstance.indisponibilidades) {
+				indisponibilidadesSB.append("{")
+				indisponibilidadesSB.append("title: '")
+				indisponibilidadesSB.append(recursoInstance.nome)
+				indisponibilidadesSB.append("',")
+				indisponibilidadesSB.append("start: '")
+				indisponibilidadesSB.append(indisponibilidade.dataInicio)
+				indisponibilidadesSB.append("'")
+				indisponibilidadesSB.append(",")
+				indisponibilidadesSB.append("end: '")
+				indisponibilidadesSB.append(indisponibilidade.dataFim)
+				indisponibilidadesSB.append("'")
+				indisponibilidadesSB.append("},")
+			}
+		}
+		
+		indisponibilidadesSB.toString()
+	}
+	
 	def listaReservas(id){
 		
 		def recursoInstance = Recurso.get(id)

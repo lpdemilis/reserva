@@ -39,6 +39,11 @@ class Recurso {
 		nome
 	}
 	
+	String listaIndisponibilidades(){
+		RecursoController recursoController = new RecursoController()
+		recursoController.listaIndisponibilidades(this.id)
+	}
+	
 	String listaReservas(){
 		RecursoController recursoController = new RecursoController()
 		recursoController.listaReservas(this.id)

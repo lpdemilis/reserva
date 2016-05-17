@@ -8,6 +8,8 @@ class ReservaController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
+	def springSecurityService
+	
     def index() {
         redirect(action: "list", params: params)
     }
@@ -20,8 +22,28 @@ class ReservaController {
 	@Secured(['ROLE_USER'])
     def create() {
 		def recursoInstance = Recurso.get(params.recurso?.id)
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		if((!recursoInstance.condominio.usuarios.contains(usuario)) && (!recursoInstance.condominio.administradores.contains(usuario))){
+			redirect(controller: "login", action: "denied")
+			return
+		} 
+		
+		def conviteCriteria = Convite.createCriteria()
+		def conviteInstanceList = conviteCriteria.list(){
+			and{ 
+				eq('usuario.id', usuario.id)
 				
-		if (!params.apartamento?.id) {
+				apartamento{
+					condominio{
+						eq('id', recursoInstance.condominio.id)
+					}
+				}
+			}
+		}
+								
+		if (conviteInstanceList.size() == 0) {
 			if(flash.message == null){
 				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
 			}else{

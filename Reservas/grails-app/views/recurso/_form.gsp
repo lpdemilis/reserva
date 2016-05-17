@@ -105,9 +105,9 @@
 	</label>
 	
 	<ul class="one-to-many">
-		<g:each in="${recursoInstance?.indisponibilidades?}" var="i">
-		    <li><g:link controller="indisponibilidade" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>
-		</g:each>
+<%--		<g:each in="${recursoInstance?.indisponibilidades?}" var="i">--%>
+<%--		    <li><g:link controller="indisponibilidade" action="show" id="${i.id}">${i?.encodeAsHTML()}</g:link></li>--%>
+<%--		</g:each>--%>
 		<li class="add">
 			<g:if test="${recursoInstance?.id}">
 				<g:link class="adicionar-button" controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
@@ -127,9 +127,9 @@
 	</label>
 	
 	<ul class="one-to-many">
-		<g:each in="${recursoInstance?.reserva?}" var="r">
-	    	<li><g:link controller="reserva" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-		</g:each>
+<%--		<g:each in="${recursoInstance?.reserva?}" var="r">--%>
+<%--	    	<li><g:link controller="reserva" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>--%>
+<%--		</g:each>--%>
 		<li class="add">
 			<g:if test="${recursoInstance?.id}">
 				<g:link class="adicionar-button" controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	

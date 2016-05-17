@@ -727,6 +727,11 @@ a.skip {
 	text-decoration: none;
 }
 
+.add {
+	display: inline-block;
+	padding-bottom: 5px;
+}
+
 .tipoPlano-box-adicionar input[type="submit"]:hover, .adicionar-button:hover {
 	border: 1px solid #CCCCCC;	
 }

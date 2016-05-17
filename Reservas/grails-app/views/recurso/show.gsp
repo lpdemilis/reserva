@@ -26,6 +26,7 @@
 				    editable: true,
 				    eventLimit: true, // allow "more" link when too many events
 				    events: [
+							  ${recursoInstance.listaIndisponibilidades()}
 							  ${recursoInstance.listaReservas()}
 				    ]
 				});
@@ -144,31 +145,36 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${recursoInstance?.indisponibilidades}">
 				<li class="fieldcontain">
 					<span id="indisponibilidades-label" class="property-label"><g:message code="recurso.indisponibilidades.label" default="Indisponibilidades" /></span>
 					
-						<g:each in="${recursoInstance.indisponibilidades.sort { it.dataInicio }}" var="i">
-							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="indisponibilidades-label"><g:link controller="indisponibilidade" action="show" id="${i.id}"><span class="marker">► </span>${i?.encodeAsHTML()}</g:link></span>
-							</div>	
-						</g:each>
-					
+					<div class="property-value" aria-labelledby="indisponibilidades-label">
+						<div class="add">
+							<g:if test="${recursoInstance?.id}">
+								<g:link class="adicionar-button" controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
+							</g:if>
+							<g:else>
+								<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</div>				
+							</g:else>	
+						</div>
+					</div>
 				</li>
-				</g:if>
-			
-				<g:if test="${recursoInstance?.reserva}">
+				
 				<li class="fieldcontain">
-					<span id="reserva-label" class="property-label"><g:message code="recurso.reserva.label" default="Reserva" /></span>
+					<span id="reservas-label" class="property-label"><g:message code="recurso.reserva.label" default="Reservas" /></span>
 					
-						<g:each in="${recursoInstance.reserva}" var="r">
-							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="reserva-label"><g:link controller="reserva" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link></span>
-							</div>	
-						</g:each>
-					
+					<div class="property-value" aria-labelledby="reservas-label">
+						<div class="add">
+							<g:if test="${recursoInstance?.id}">
+								<g:link class="adicionar-button" controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	
+							</g:if>
+							<g:else>
+								<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</div>				
+							</g:else>	
+						</div>
+					</div>
+
 				</li>
-				</g:if>
 			
 				<g:if test="${recursoInstance?.tipoReserva}">
 				<li class="fieldcontain">
