@@ -42,8 +42,10 @@
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<sec:ifAnyGranted roles="ROLE_ADMIN">
 					<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				</sec:ifAnyGranted>	
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				</sec:ifAnyGranted>
+				<g:if test="${ehAdministrador}">	
+					<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				</g:if>
 			</ul>
 		</div>
 		<div id="show-recurso" class="content scaffold-show" role="main">
@@ -52,12 +54,21 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list recurso">
+				
+				<g:if test="${recursoInstance?.condominio}">
+				<li class="fieldcontain">
+					<span id="condominio-label" class="property-label"><g:message code="recurso.condominio.label" default="Nome do condomínio" /></span>
+					
+						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${recursoInstance?.condominio?.id}">${recursoInstance?.condominio?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
 			
 				<g:if test="${recursoInstance?.nome}">
 				<li class="fieldcontain">
 					<span id="nome-label" class="property-label"><g:message code="recurso.nome.label" default="Nome do recurso" /></span>
 					
-						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${recursoInstance}" field="nome"/></span>
+						<span class="property-value" aria-labelledby="nome-label"><b><g:fieldValue bean="${recursoInstance}" field="nome"/></b></span>
 					
 				</li>
 				</g:if>
@@ -75,7 +86,7 @@
 				<li class="fieldcontain">
 					<span id="numeroMaxReservas-label" class="property-label"><g:message code="recurso.numeroMaxReservas.label" default="Nº máximo de reservas" /></span>
 					
-						<span class="property-value" aria-labelledby="numeroMaxReservas-label"><g:fieldValue bean="${recursoInstance}" field="numeroMaxReservas"/></span>
+						<span class="property-value" aria-labelledby="numeroMaxReservas-label"><g:fieldValue bean="${recursoInstance}" field="numeroMaxReservas"/><g:message code="recurso.reservas.simultaneas.label" default=" reserva(s) simultânea(s)" /></span>
 					
 				</li>
 				</g:if>
@@ -91,40 +102,31 @@
 			
 				<g:if test="${recursoInstance?.tempoReserva}">
 				<li class="fieldcontain">
-					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo da reserva ( ${recursoInstance?.unidadeTempoReserva} )" /></span>
+					<span id="tempoReserva-label" class="property-label"><g:message code="recurso.tempoReserva.label" default="Tempo da reserva" /></span>
 					
-						<span class="property-value" aria-labelledby="tempoReserva-label"><g:fieldValue bean="${recursoInstance}" field="tempoReserva"/></span>
+						<span class="property-value" aria-labelledby="tempoReserva-label"><g:fieldValue bean="${recursoInstance}" field="tempoReserva"/> ${recursoInstance?.unidadeTempoReserva}</span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${recursoInstance?.valor}">
 				<li class="fieldcontain">
-					<span id="valor-label" class="property-label"><g:message code="recurso.valor.label" default="Valor (R\$)" /></span>
+					<span id="valor-label" class="property-label"><g:message code="recurso.valor.label" default="Valor" /></span>
 					
-						<span class="property-value" aria-labelledby="valor-label"><g:fieldValue bean="${recursoInstance}" field="valor"/></span>
+						<span class="property-value" aria-labelledby="valor-label"><g:formatNumber number="${recursoInstance?.valor}" type="currency" currencyCode="BRL" /></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${recursoInstance?.capacidade}">
 				<li class="fieldcontain">
-					<span id="capacidade-label" class="property-label"><g:message code="recurso.capacidade.label" default="Capacidade (pessoas)" /></span>
+					<span id="capacidade-label" class="property-label"><g:message code="recurso.capacidade.label" default="Capacidade" /></span>
 					
-						<span class="property-value" aria-labelledby="capacidade-label"><g:fieldValue bean="${recursoInstance}" field="capacidade"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${recursoInstance?.condominio}">
-				<li class="fieldcontain">
-					<span id="condominio-label" class="property-label"><g:message code="recurso.condominio.label" default="Nome do condomínio" /></span>
-					
-						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${recursoInstance?.condominio?.id}">${recursoInstance?.condominio?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="capacidade-label"><g:fieldValue bean="${recursoInstance}" field="capacidade"/> pessoas</span>
 					
 				</li>
 				</g:if>
-			
+										
 				<g:if test="${recursoInstance?.descricao}">
 				<li class="fieldcontain">
 					<span id="descricao-label" class="property-label"><g:message code="recurso.descricao.label" default="Descrição" /></span>
@@ -145,20 +147,22 @@
 				</li>
 				</g:if>
 			
-				<li class="fieldcontain">
-					<span id="indisponibilidades-label" class="property-label"><g:message code="recurso.indisponibilidades.label" default="Indisponibilidades" /></span>
-					
-					<div class="property-value" aria-labelledby="indisponibilidades-label">
-						<div class="add">
-							<g:if test="${recursoInstance?.id}">
-								<g:link class="adicionar-button" controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
-							</g:if>
-							<g:else>
-								<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</div>				
-							</g:else>	
+				<g:if test="${ehAdministrador}">
+					<li class="fieldcontain">
+						<span id="indisponibilidades-label" class="property-label"><g:message code="recurso.indisponibilidades.label" default="Indisponibilidades" /></span>
+						
+						<div class="property-value" aria-labelledby="indisponibilidades-label">
+							<div class="add">
+								<g:if test="${recursoInstance?.id}">
+									<g:link class="adicionar-button" controller="indisponibilidade" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</g:link>
+								</g:if>
+								<g:else>
+									<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'indisponibilidade.label', default: 'Indisponibilidade')])}</div>				
+								</g:else>	
+							</div>
 						</div>
-					</div>
-				</li>
+					</li>
+				</g:if>
 				
 				<li class="fieldcontain">
 					<span id="reservas-label" class="property-label"><g:message code="recurso.reserva.label" default="Reservas" /></span>
@@ -182,7 +186,11 @@
 					
 						<g:each in="${recursoInstance.tipoReserva.sort { it.nome }}" var="t">
 							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="tipoReserva-label"><g:link controller="tipoReserva" action="show" id="${t.id}"><span class="marker">► </span>${t?.encodeAsHTML()}</g:link></span>
+								<span class="property-value" aria-labelledby="tipoReserva-label">
+<%--									<g:link controller="tipoReserva" action="show" id="${t.id}">--%>
+										<span class="marker">► </span>${t?.encodeAsHTML()}
+<%--									</g:link>--%>
+								</span>
 							</div>	
 						</g:each>
 					
@@ -192,14 +200,15 @@
 			</ol>
 			
 			<div id='calendar'></div>
-			
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${recursoInstance?.id}" />
-					<g:link class="edit" action="edit" id="${recursoInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+			<g:if test="${ehAdministrador}">
+				<g:form>
+					<fieldset class="buttons">
+						<g:hiddenField name="id" value="${recursoInstance?.id}" />
+						<g:link class="edit" action="edit" id="${recursoInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+						<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</fieldset>
+				</g:form>
+			</g:if>	
 		</div>
 	</body>
 </html>

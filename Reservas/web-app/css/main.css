@@ -53,6 +53,7 @@ body {
 
 .siteImg {
 	height: 100px;
+	opacity: 0;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */

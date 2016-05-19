@@ -87,8 +87,10 @@ class CondominioController {
         }
 		
 		def verificarCriacaoCondominio = verificarCriacaoCondominio()
-
-        [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio]
+		
+		Usuario usuario = springSecurityService.currentUser
+				
+        [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio, ehAdministrador:usuario.ehAdministrador(condominioInstance)]
     }
 
 	@Secured(['ROLE_USER'])

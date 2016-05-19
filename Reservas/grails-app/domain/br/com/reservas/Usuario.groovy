@@ -50,4 +50,14 @@ class Usuario {
 	public String toString(){
 		nome
 	}
+	
+	public Boolean ehAdministrador(Condominio condominioInstance){
+		UsuarioController usuarioController = new UsuarioController()
+		usuarioController.ehAdministrador(condominioInstance, this)
+	}
+	
+	public Boolean ehAdministradorSite(Condominio condominioInstance){
+		UsuarioController usuarioController = new UsuarioController()
+		usuarioController.ehAdministradorSite(condominioInstance, this)
+	}
 }

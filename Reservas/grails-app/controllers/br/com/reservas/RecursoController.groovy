@@ -1,5 +1,6 @@
 package br.com.reservas
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -63,8 +64,10 @@ class RecursoController {
             redirect(action: "list")
             return
         }
-
-        [recursoInstance: recursoInstance]
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+        [recursoInstance: recursoInstance, ehAdministrador:usuario.ehAdministrador(recursoInstance.condominio)]
     }
 
 	@Secured(['ROLE_USER'])
@@ -95,6 +98,13 @@ class RecursoController {
             redirect(action: "list")
             return
         }
+		
+		Usuario usuario = springSecurityService.currentUser
+						
+		if(!recursoInstance.condominio.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
 
         if (version != null) {
             if (recursoInstance.version > version) {

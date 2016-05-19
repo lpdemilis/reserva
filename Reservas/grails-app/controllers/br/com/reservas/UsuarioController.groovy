@@ -1,7 +1,6 @@
 package br.com.reservas
 
-import java.util.Date;
-
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -44,8 +43,10 @@ class UsuarioController {
             redirect(action: "list")
             return
         }
+		
+		Usuario usuario = springSecurityService.currentUser
 
-        [usuarioInstance: usuarioInstance]
+        [usuarioInstance: usuarioInstance, ehUsuarioLogado: (usuario.id == usuarioInstance.id) ]
     }
 
     def edit(Long id) {
@@ -105,5 +106,29 @@ class UsuarioController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'usuario.label', default: 'Usuario'), id])
             redirect(action: "show", id: id)
         }
-    }		
+    }
+	
+	def ehAdministrador(Condominio condominioInstance, Usuario usuarioInstance){
+		if (!usuarioInstance){
+			usuarioInstance = springSecurityService.currentUser			
+		}
+								
+		if (condominioInstance.administradores.contains(usuarioInstance)) {
+			return true
+		}
+		
+		return false
+	}
+	
+	def ehAdministradorSite(Condominio condominioInstance, Usuario usuarioInstance){
+		if (!usuarioInstance){
+			usuarioInstance = springSecurityService.currentUser
+		}
+						
+		if (SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
+			return true
+		}
+		
+		return false
+	}
 }

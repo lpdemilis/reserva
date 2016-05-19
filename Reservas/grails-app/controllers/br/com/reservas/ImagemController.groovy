@@ -64,8 +64,10 @@ class ImagemController {
             redirect(action: "list")
             return
         }
+		
+		Usuario usuario = springSecurityService.currentUser
 
-        [imagemInstance: imagemInstance]
+        [imagemInstance: imagemInstance, ehAdministrador:usuario.ehAdministrador(imagemInstance.recurso.condominio)]
     }
 
     def edit(Long id) {

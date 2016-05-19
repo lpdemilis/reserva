@@ -12,8 +12,8 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+<%--				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>--%>
+<%--				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>--%>
 			</ul>
 		</div>
 		<div id="show-reserva" class="content scaffold-show" role="main">
@@ -23,47 +23,65 @@
 			</g:if>
 			<ol class="property-list reserva">
 			
+				<g:if test="${reservaInstance?.recurso?.condominio}">
+				<li class="fieldcontain">
+					<span id="condominio-label" class="property-label"><g:message code="reserva.condominio.label" default="Nome do condomínio" /></span>
+					
+						<span class="property-value" aria-labelledby="condominio-label"><g:link controller="condominio" action="show" id="${reservaInstance?.recurso?.condominio?.id}">${reservaInstance?.recurso?.condominio?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${reservaInstance?.recurso}">
+				<li class="fieldcontain">
+					<span id="recurso-label" class="property-label"><g:message code="reserva.recurso.label" default="Recurso" /></span>
+					
+						<span class="property-value" aria-labelledby="recurso-label"><g:link controller="recurso" action="show" id="${reservaInstance?.recurso?.id}">${reservaInstance?.recurso?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${reservaInstance?.dataSolicitacao}">
 				<li class="fieldcontain">
-					<span id="dataSolicitacao-label" class="property-label"><g:message code="reserva.dataSolicitacao.label" default="Data Solicitacao" /></span>
+					<span id="dataSolicitacao-label" class="property-label"><g:message code="reserva.dataSolicitacao.label" default="Data da Solicitação" /></span>
 					
-						<span class="property-value" aria-labelledby="dataSolicitacao-label"><g:formatDate date="${reservaInstance?.dataSolicitacao}" /></span>
+						<span class="property-value" aria-labelledby="dataSolicitacao-label"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${reservaInstance?.dataSolicitacao}" /></span>
 					
 				</li>
 				</g:if>
 			
 				<g:if test="${reservaInstance?.dataEvento}">
 				<li class="fieldcontain">
-					<span id="dataEvento-label" class="property-label"><g:message code="reserva.dataEvento.label" default="Data Evento" /></span>
+					<span id="dataEvento-label" class="property-label"><g:message code="reserva.dataEvento.label" default="Data do evento" /></span>
 					
-						<span class="property-value" aria-labelledby="dataEvento-label"><g:formatDate date="${reservaInstance?.dataEvento}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${reservaInstance?.aprovada}">
-				<li class="fieldcontain">
-					<span id="aprovada-label" class="property-label"><g:message code="reserva.aprovada.label" default="Aprovada" /></span>
-					
-						<span class="property-value" aria-labelledby="aprovada-label"><g:formatBoolean boolean="${reservaInstance?.aprovada}" /></span>
+						<span class="property-value" aria-labelledby="dataEvento-label"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${reservaInstance?.dataEvento}" /></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${reservaInstance?.cancelada}">
-				<li class="fieldcontain">
-					<span id="cancelada-label" class="property-label"><g:message code="reserva.cancelada.label" default="Cancelada" /></span>
-					
-						<span class="property-value" aria-labelledby="cancelada-label"><g:formatBoolean boolean="${reservaInstance?.cancelada}" /></span>
-					
-				</li>
-				</g:if>
+<%--				<g:if test="${reservaInstance?.aprovada}">--%>
+<%--				<li class="fieldcontain">--%>
+<%--					<span id="aprovada-label" class="property-label"><g:message code="reserva.aprovada.label" default="Aprovada" /></span>--%>
+<%--					--%>
+<%--						<span class="property-value" aria-labelledby="aprovada-label"><g:formatBoolean boolean="${reservaInstance?.aprovada}" /></span>--%>
+<%--					--%>
+<%--				</li>--%>
+<%--				</g:if>--%>
+<%--			--%>
+<%--				<g:if test="${reservaInstance?.cancelada}">--%>
+<%--				<li class="fieldcontain">--%>
+<%--					<span id="cancelada-label" class="property-label"><g:message code="reserva.cancelada.label" default="Cancelada" /></span>--%>
+<%--					--%>
+<%--						<span class="property-value" aria-labelledby="cancelada-label"><g:formatBoolean boolean="${reservaInstance?.cancelada}" /></span>--%>
+<%--					--%>
+<%--				</li>--%>
+<%--				</g:if>--%>
 			
 				<g:if test="${reservaInstance?.valor}">
 				<li class="fieldcontain">
 					<span id="valor-label" class="property-label"><g:message code="reserva.valor.label" default="Valor" /></span>
 					
-						<span class="property-value" aria-labelledby="valor-label"><g:fieldValue bean="${reservaInstance}" field="valor"/></span>
+						<span class="property-value" aria-labelledby="valor-label"><g:formatNumber number="${reservaInstance?.valor}" type="currency" currencyCode="BRL" /></span>
 					
 				</li>
 				</g:if>
@@ -79,7 +97,7 @@
 			
 				<g:if test="${reservaInstance?.comentario}">
 				<li class="fieldcontain">
-					<span id="comentario-label" class="property-label"><g:message code="reserva.comentario.label" default="Comentario" /></span>
+					<span id="comentario-label" class="property-label"><g:message code="reserva.comentario.label" default="Comentário" /></span>
 					
 						<span class="property-value" aria-labelledby="comentario-label"><g:fieldValue bean="${reservaInstance}" field="comentario"/></span>
 					
@@ -97,36 +115,43 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${reservaInstance?.dataAprovacao}">
-				<li class="fieldcontain">
-					<span id="dataAprovacao-label" class="property-label"><g:message code="reserva.dataAprovacao.label" default="Data Aprovacao" /></span>
-					
-						<span class="property-value" aria-labelledby="dataAprovacao-label"><g:formatDate date="${reservaInstance?.dataAprovacao}" /></span>
-					
-				</li>
+				<g:if test="${reservaInstance?.aprovada}">
+					<li class="fieldcontain">
+						<span id="dataAprovacao-label" class="property-label"><g:message code="reserva.dataAprovacao.label" default="Data da aprovação" /></span>
+						
+							<span class="property-value" aria-labelledby="dataAprovacao-label"><g:formatDate date="${reservaInstance?.dataAprovacao}" /></span>
+						
+					</li>
 				</g:if>
+				<g:else>
+					<li class="fieldcontain">
+						<span id="aprovada-label" class="property-label"><g:message code="reserva.aprovada.label" default="Aprovada" /></span>
+						
+							<span class="property-value" aria-labelledby="aprovada-label"><g:message code="reserva.aprovada.label" default="Não" /></span>
+						
+					</li>
+				</g:else>
 			
-				<g:if test="${reservaInstance?.dataCancelamento}">
-				<li class="fieldcontain">
-					<span id="dataCancelamento-label" class="property-label"><g:message code="reserva.dataCancelamento.label" default="Data Cancelamento" /></span>
-					
-						<span class="property-value" aria-labelledby="dataCancelamento-label"><g:formatDate date="${reservaInstance?.dataCancelamento}" /></span>
-					
-				</li>
+				<g:if test="${reservaInstance?.cancelada}">
+					<li class="fieldcontain">
+						<span id="dataCancelamento-label" class="property-label"><g:message code="reserva.dataCancelamento.label" default="Data do cancelamento" /></span>
+						
+							<span class="property-value" aria-labelledby="dataCancelamento-label"><g:formatDate date="${reservaInstance?.dataCancelamento}" /></span>
+						
+					</li>
 				</g:if>
-			
-				<g:if test="${reservaInstance?.recurso}">
-				<li class="fieldcontain">
-					<span id="recurso-label" class="property-label"><g:message code="reserva.recurso.label" default="Recurso" /></span>
-					
-						<span class="property-value" aria-labelledby="recurso-label"><g:link controller="recurso" action="show" id="${reservaInstance?.recurso?.id}">${reservaInstance?.recurso?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
+				<g:else>
+					<li class="fieldcontain">
+						<span id="cancelada-label" class="property-label"><g:message code="reserva.cancelada.label" default="Cancelada" /></span>
+						
+							<span class="property-value" aria-labelledby="cancelada-label"><g:message code="reserva.cancelada.label" default="Não" /></span>
+						
+					</li>
+				</g:else>
+										
 				<g:if test="${reservaInstance?.usuario}">
 				<li class="fieldcontain">
-					<span id="usuario-label" class="property-label"><g:message code="reserva.usuario.label" default="Usuario" /></span>
+					<span id="usuario-label" class="property-label"><g:message code="reserva.usuario.label" default="Usuário" /></span>
 					
 						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${reservaInstance?.usuario?.id}">${reservaInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					

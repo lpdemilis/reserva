@@ -29,7 +29,7 @@
 				<li class="fieldcontain">
 					<span id="nome-label" class="property-label"><g:message code="condominio.nome.label" default="Nome do Condomínio" /></span>
 					
-						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${condominioInstance}" field="nome"/></span>
+						<span class="property-value" aria-labelledby="nome-label"><b><g:fieldValue bean="${condominioInstance}" field="nome"/></b></span>
 					
 				</li>
 				</g:if>
@@ -39,6 +39,44 @@
 					<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="Endereço" /></span>
 					
 						<span class="property-value" aria-labelledby="endereco-label">${condominioInstance?.endereco?.toHTML()}</span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${condominioInstance?.apartamentos}">
+				<li class="fieldcontain">
+					<span id="apartamentos-label" class="property-label"><g:message code="condominio.apartamentos.label" default="Apartamentos" /></span>
+					
+						<g:if test="${condominioInstance.apartamentos.size() > 5}">
+							<div class="fieldcontain-list">
+								<span class="property-value" aria-labelledby="apartamentos-label">
+									<g:if test="${ehAdministrador}">
+										<g:link controller="apartamento" action="list" params="['condominio':condominioInstance.id]">
+											<span class="marker">► </span>${condominioInstance.apartamentos.size()}<g:message code="condominio.apartamentos.label" default=" apartamentos" />
+										</g:link>
+									</g:if>
+									<g:else>
+											<span class="marker">► </span>${condominioInstance.apartamentos.size()}<g:message code="condominio.apartamentos.label" default=" apartamentos" />
+									</g:else>	
+								</span>
+							</div>
+						</g:if>
+						<g:else>
+							<g:each in="${condominioInstance.apartamentos.sort { it.id }}" var="a">
+								<div class="fieldcontain-list">
+									<span class="property-value" aria-labelledby="apartamentos-label">
+										<g:if test="${ehAdministrador}">
+											<g:link controller="apartamento" action="show" id="${a.id}">
+												<span class="marker">► </span>${a?.toHTML()}
+											</g:link>
+										</g:if>
+										<g:else>
+											<span class="marker">► </span>${a?.toHTML()}
+										</g:else>	
+									</span>
+								</div>
+							</g:each>
+						</g:else>
 					
 				</li>
 				</g:if>
@@ -55,27 +93,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${condominioInstance?.apartamentos}">
-				<li class="fieldcontain">
-					<span id="apartamentos-label" class="property-label"><g:message code="condominio.apartamentos.label" default="Apartamentos" /></span>
-					
-						<g:if test="${condominioInstance.apartamentos.size() > 5}">
-							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="list" params="['condominio':condominioInstance.id]"><span class="marker">► </span>${condominioInstance.apartamentos.size()}<g:message code="condominio.apartamentos.label" default=" apartamentos" /></g:link></span>
-							</div>
-						</g:if>
-						<g:else>
-							<g:each in="${condominioInstance.apartamentos.sort { it.id }}" var="a">
-								<div class="fieldcontain-list">
-									<span class="property-value" aria-labelledby="apartamentos-label"><g:link controller="apartamento" action="show" id="${a.id}"><span class="marker">► </span>${a?.toHTML()}</g:link></span>
-								</div>
-							</g:each>
-						</g:else>
-					
-				</li>
-				</g:if>
-			
+										
 				<g:if test="${condominioInstance?.recursos}">
 				<li class="fieldcontain">
 					<span id="recursos-label" class="property-label"><g:message code="condominio.recursos.label" default="Recursos" /></span>

@@ -22,4 +22,8 @@ class Plano {
 	static mapping = {
 		ativo defaultValue:true
 	}
+	
+	String toString(){
+		tipoPlano
+	}
 }

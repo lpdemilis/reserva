@@ -68,11 +68,28 @@ class ReservaController {
 			return
 		}
 		
-        [reservaInstance: new Reserva(params)]
+		List<Apartamento> apartamentoInstanceList = new ArrayList<Apartamento>()
+		
+		for (conviteInstance in conviteInstanceList) {
+			apartamentoInstanceList.add(conviteInstance.apartamento)
+		} 
+		
+        [reservaInstance: new Reserva(params), recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
         def reservaInstance = new Reserva(params)
+						
+		if(!params.usuario.id){
+			Usuario usuario = springSecurityService.currentUser
+			reservaInstance.usuario = usuario
+		}
+		
+		if(reservaInstance.dataSolicitacao == null){
+			reservaInstance.dataSolicitacao = new Date()
+		}
+		
         if (!reservaInstance.save(flush: true)) {
             render(view: "create", model: [reservaInstance: reservaInstance])
             return
@@ -82,6 +99,7 @@ class ReservaController {
         redirect(action: "show", id: reservaInstance.id)
     }
 
+	@Secured(['ROLE_USER'])
     def show(Long id) {
         def reservaInstance = Reserva.get(id)
         if (!reservaInstance) {
