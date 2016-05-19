@@ -1,6 +1,7 @@
 package br.com.reservas
 
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import java.text.SimpleDateFormat
+
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -162,7 +163,8 @@ class RecursoController {
 		def recursoInstance = Recurso.get(id)
 		
 		StringBuilder indisponibilidadesSB = new StringBuilder()
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd")
+				
 		if(recursoInstance){
 			for (indisponibilidade in recursoInstance.indisponibilidades) {
 				indisponibilidadesSB.append("{")
@@ -170,12 +172,16 @@ class RecursoController {
 				indisponibilidadesSB.append(recursoInstance.nome)
 				indisponibilidadesSB.append("',")
 				indisponibilidadesSB.append("start: '")
-				indisponibilidadesSB.append(indisponibilidade.dataInicio)
+				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataInicio))
 				indisponibilidadesSB.append("'")
 				indisponibilidadesSB.append(",")
 				indisponibilidadesSB.append("end: '")
-				indisponibilidadesSB.append(indisponibilidade.dataFim)
+				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataFim))
 				indisponibilidadesSB.append("'")
+				indisponibilidadesSB.append(",")
+				indisponibilidadesSB.append("overlap: false,")
+				indisponibilidadesSB.append("rendering: 'background',")
+				indisponibilidadesSB.append("color: '#ff9f89'")
 				indisponibilidadesSB.append("},")
 			}
 		}
