@@ -42,11 +42,26 @@
 <%--</div>--%>
 
 <div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataEvento', 'error')} required">
-	<label for="dataEvento">
-		<g:message code="reserva.dataEvento.label" default="Data do evento" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:datePicker name="dataEvento" precision="minute"  value="${reservaInstance?.dataEvento}"  />
+	<g:if test="${reservaInstance?.id}">
+		<label for="dataEvento">
+			<g:message code="reserva.dataEvento.label" default="Data do evento" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:datePicker name="dataEvento" precision="${precision}"  value="${reservaInstance?.dataEvento}"  />
+	</g:if>
+	<g:else>
+		<label for="dataEvento">
+			<g:message code="reserva.dataEvento.label" default="Data do evento" />
+		</label>
+		<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy"/> 
+		<g:hiddenField name="dataEvento" value="${reservaInstance?.dataEvento}"  />
+		<g:hiddenField name="dataEvento_day" value="${diaEvento}"  />
+		<g:hiddenField name="dataEvento_year" value="${anoEvento}"  />
+		<g:hiddenField name="dataEvento_month" value="${mesEvento}"  />
+		<g:hiddenField name="dataEvento_hour" value="${horaEvento}"  />
+		<g:hiddenField name="dataEvento_minute" value="${minutoEvento}"  />
+		<g:hiddenField name="dataEvento_second" value="${segundoEvento}"  />
+	</g:else>
 </div>
 
 <g:if test="${action != 'create'}">

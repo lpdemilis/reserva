@@ -21,6 +21,16 @@ class ReservaController {
 
 	@Secured(['ROLE_USER'])
     def create() {
+		Calendar c = Calendar.getInstance()
+		c.set(Calendar.YEAR, Integer.valueOf(params.anoEvento)) 
+		c.set(Calendar.MONTH, Integer.valueOf(params.mesEvento) - 1)
+		c.set(Calendar.DAY_OF_MONTH, Integer.valueOf(params.diaEvento))
+		c.set(Calendar.HOUR, Integer.valueOf(params.horaEvento))
+		c.set(Calendar.MINUTE, Integer.valueOf(params.minutoEvento))
+		c.set(Calendar.SECOND, Integer.valueOf(params.segundoEvento))
+		
+		Date dataEvento = c.getTime()
+				
 		def recursoInstance = Recurso.get(params.recurso?.id)
 		
 		Usuario usuario = springSecurityService.currentUser
@@ -72,9 +82,21 @@ class ReservaController {
 		
 		for (conviteInstance in conviteInstanceList) {
 			apartamentoInstanceList.add(conviteInstance.apartamento)
-		} 
+		}
 		
-        [reservaInstance: new Reserva(params), recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList]
+		def precision 
+		
+		if(recursoInstance.unidadeTempoReserva?.id == 3){
+			precision = "day"
+		}else{
+			precision = "minute"
+		}
+		
+		def reservaInstance = new Reserva(params) 
+		
+		reservaInstance.dataEvento = dataEvento 
+		
+        [reservaInstance: reservaInstance, recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList, precision:precision, anoEvento: params.anoEvento, mesEvento: Integer.valueOf(params.mesEvento) - 1, diaEvento: params.diaEvento, horaEvento: params.horaEvento, minutoEvento: params.minutoEvento, segundoEvento: params.segundoEvento]
     }
 
 	@Secured(['ROLE_USER'])

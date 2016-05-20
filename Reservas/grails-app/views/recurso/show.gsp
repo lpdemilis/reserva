@@ -12,6 +12,8 @@
 		<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 		<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 		<script src='http://fullcalendar.io/js/fullcalendar-2.7.1/fullcalendar.js'></script>
+		<script src='http://fullcalendar.io/js/fullcalendar-2.7.1/lang/pt-br.js'></script>
+<%--		<script src="${resource(dir: 'fullcalendar-2.7.1/lang', file: 'pt-br.js')}" type="text/javascript"></script>--%>
 		
 		<script type="text/javascript">
 			$(function() { // document ready
@@ -20,15 +22,36 @@
 					header: {
 								left: 'prev,next today',
 								center: 'title',
-								right: 'month,agendaWeek,agendaDay'
+								right: 'prev,next today'
+								//right: 'month,agendaWeek,agendaDay'
 				    },
 	//			    defaultDate: '2014-11-12',
-				    editable: true,
+				    editable: false,
 				    eventLimit: true, // allow "more" link when too many events
+				    defaultView: '${tipoCalendario}',
+				    lang: 'pt-br',
 				    events: [
 							  ${recursoInstance.listaIndisponibilidades()}
 							  ${recursoInstance.listaReservas()}
 				    ]
+
+				    ,dayClick: function(date, jsEvent, view) {
+					    //Fri May 13 00:00:00 BRT 2016					    
+					    //var data = new Date(date.format("YYYY-MM-DD HH:mm:ss Y y"));					    
+						//alert('Clicked on: ' + date.format());
+						//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+						//alert('Current view: ' + view.name);
+				        // change the day's background color just for fun
+						//$(this).css('background-color', 'red');
+						//$( "#dataEvento" ).val(date.format("ddd MMM DD HH:mm:ss BRT YYYY"));
+						$( "#diaEvento" ).val(date.format("DD"));
+						$( "#mesEvento" ).val(date.format("MM"));
+						$( "#anoEvento" ).val(date.format("YYYY"));
+						$( "#horaEvento" ).val(date.format("HH"));
+						$( "#minutoEvento" ).val(date.format("mm"));
+						$( "#segundoEvento" ).val(date.format("ss"));						
+				    	$( "#reserva_form" ).submit();
+				    }
 				});
 			  
 			});
@@ -36,6 +59,15 @@
 				
 	</head>
 	<body>
+		<g:form id="reserva_form" name="reserva_form" method="post" url="../../reserva/create">
+			<g:hiddenField name="recurso.id" value="${recursoInstance?.id}"/>
+			<g:hiddenField name="diaEvento" value=""/>
+			<g:hiddenField name="mesEvento" value=""/>
+			<g:hiddenField name="anoEvento" value=""/>
+			<g:hiddenField name="horaEvento" value=""/>
+			<g:hiddenField name="minutoEvento" value=""/>
+			<g:hiddenField name="segundoEvento" value=""/>
+		</g:form>
 		<a href="#show-recurso" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
@@ -193,6 +225,17 @@
 								</span>
 							</div>	
 						</g:each>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${recursoInstance?.cor}">
+				<li class="fieldcontain">
+					<span id="cor-label" class="property-label"><g:message code="recurso.cor.label" default="Cor" /></span>
+					
+						<span class="property-value" aria-labelledby="cor-label">
+							<div class="cor${recursoInstance?.cor.id}">&nbsp;</div>
+						</span>
 					
 				</li>
 				</g:if>

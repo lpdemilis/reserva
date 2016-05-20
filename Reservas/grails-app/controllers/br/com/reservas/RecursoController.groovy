@@ -68,7 +68,9 @@ class RecursoController {
 		
 		Usuario usuario = springSecurityService.currentUser
 		
-        [recursoInstance: recursoInstance, ehAdministrador:usuario.ehAdministrador(recursoInstance.condominio)]
+		
+		
+        [recursoInstance: recursoInstance, ehAdministrador:usuario.ehAdministrador(recursoInstance.condominio), tipoCalendario:tipoCalendario(recursoInstance)]
     }
 
 	@Secured(['ROLE_USER'])
@@ -206,10 +208,35 @@ class RecursoController {
 				reservasSB.append("'")
 		//		reservasSB.append(",")
 		//		reservasSB.append("end: '2016-05-11T16:00:00'")
+				reservasSB.append(",")
+				reservasSB.append("color: '")
+				reservasSB.append(recursoInstance.cor)
+				reservasSB.append("'")
 				reservasSB.append("},")
 			}
 		}
 		
 		reservasSB.toString() 
+	}
+	
+	def tipoCalendario(Recurso recursoInstance){
+		def result
+		
+		switch(recursoInstance?.unidadeTempoReserva?.id){
+			case 1: //minuto
+				result = 'agendaWeek'
+				break
+			case 2: //hora
+				result = 'agendaWeek'
+				break
+			case 3: //dia
+				result = 'month'
+				break
+			default:
+				result = 'month'
+				break
+		}   
+		
+		result
 	}
 }

@@ -150,3 +150,11 @@
 	<g:select name="tipoReserva" from="${br.com.reservas.TipoReserva.list()}" multiple="multiple" optionKey="id" size="5" value="${recursoInstance?.tipoReserva*.id}" class="many-to-many"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'cor', 'error')} required">
+	<label for="cor">
+		<g:message code="recurso.cor.label" default="Cor" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="cor" name="cor.id" from="${br.com.reservas.Cor.list()}" optionKey="id" required="" value="${recursoInstance?.cor?.id}" class="many-to-one" noSelection="['':'Selecione uma cor...']" />
+</div>
+

@@ -11,6 +11,7 @@ class Recurso {
 	Integer capacidade
 	Integer tempoReserva
 	UnidadeTempoReserva unidadeTempoReserva
+	Cor cor
 		
 	static hasMany = [reserva:Reserva, indisponibilidades:Indisponibilidade, tipoReserva:TipoReserva, imagens:Imagem]
 	
@@ -24,7 +25,7 @@ class Recurso {
 		tempoReserva nullable: false
 		unidadeTempoReserva nullable: false
 		valor nullable:true, scale: 2
-		capacidade nullable:true		  
+		capacidade nullable:true
     }
 	
 	static mapping = {

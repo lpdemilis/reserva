@@ -790,3 +790,28 @@ a.skip {
 .fieldcontain-list span a, .fieldcontain-list-item span a {
 	text-decoration: none;		
 }
+
+.cor1 {
+	background-color: #FF0000;
+	width: 50px;
+}
+
+.cor2 {
+	background-color: #00FF00;
+	width: 50px;
+}
+
+.cor3 {
+	background-color: #0000FF;
+	width: 50px;
+}
+
+.cor4 {
+	background-color: #FFFF00;
+	width: 50px;
+}
+
+.cor5 {
+	background-color: #FF00FF;
+	width: 50px;
+}

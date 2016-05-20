@@ -1,6 +1,7 @@
 import grails.plugins.springsecurity.SpringSecurityService
 import br.com.reservas.Cidade
 import br.com.reservas.Condominio
+import br.com.reservas.Cor;
 import br.com.reservas.Endereco
 import br.com.reservas.Papel
 import br.com.reservas.Plano
@@ -138,6 +139,51 @@ class BootStrap {
 			tipoPlanoInstance3.save(flush: true);
 		}
 		/** Planos **/
+		
+		/** Cor **/
+		Cor corInstance = Cor.get(1);
+		if (corInstance == null) {
+			corInstance = new Cor();
+			corInstance.cor = "#FF0000";
+			
+			corInstance.save(flush: true);
+		}
+		
+		/** Cor **/
+		corInstance = Cor.get(2);
+		if (corInstance == null) {
+			corInstance = new Cor();
+			corInstance.cor = "#00FF00";
+			
+			corInstance.save(flush: true);
+		}
+		
+		/** Cor **/
+		corInstance = Cor.get(3);
+		if (corInstance == null) {
+			corInstance = new Cor();
+			corInstance.cor = "#0000FF";
+			
+			corInstance.save(flush: true);
+		}
+		
+		/** Cor **/
+		corInstance = Cor.get(4);
+		if (corInstance == null) {
+			corInstance = new Cor();
+			corInstance.cor = "#FFFF00";
+			
+			corInstance.save(flush: true);
+		}
+		
+		/** Cor **/
+		corInstance = Cor.get(5);
+		if (corInstance == null) {
+			corInstance = new Cor();
+			corInstance.cor = "#FF00FF";
+			
+			corInstance.save(flush: true);
+		}
 				
 //		/** Condominios **/
 //		Condominio condominioInstance = Condominio.findByNome("Achilles Ceccato");
