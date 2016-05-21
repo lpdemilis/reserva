@@ -30,8 +30,7 @@ class ReservaController {
 		c.set(Calendar.SECOND, Integer.valueOf(params.segundoEvento))
 		
 		Date dataInicioEvento = c.getTime()
-		Date dataFimEvento = c.getTime()
-				
+						
 		def recursoInstance = Recurso.get(params.recurso?.id)
 		
 		Usuario usuario = springSecurityService.currentUser
@@ -87,11 +86,25 @@ class ReservaController {
 		
 		def precision 
 		
-		if(recursoInstance.unidadeTempoReserva?.id == 3){
+		if(recursoInstance.unidadeTempoReserva?.id == 3){ //dia
 			precision = "day"
+			c.add(Calendar.DAY_OF_YEAR, recursoInstance.tempoReserva - 1)
+			c.add(Calendar.HOUR_OF_DAY, 23)
+			c.add(Calendar.MINUTE, 59)
+			c.add(Calendar.SECOND, 59)
 		}else{
 			precision = "minute"
+			
+			if(recursoInstance.unidadeTempoReserva?.id == 1){ //minuto
+				c.add(Calendar.MINUTE, recursoInstance.tempoReserva)
+			}
+			
+			if(recursoInstance.unidadeTempoReserva?.id == 2){ //hora
+				c.add(Calendar.HOUR_OF_DAY, recursoInstance.tempoReserva)
+			}
 		}
+		
+		Date dataFimEvento = c.getTime()
 		
 		def reservaInstance = new Reserva(params) 
 		
@@ -104,6 +117,28 @@ class ReservaController {
 	@Secured(['ROLE_USER'])
     def save() {
         def reservaInstance = new Reserva(params)
+		
+		Calendar c = Calendar.getInstance()
+		c.setTime(reservaInstance.dataInicioEvento)
+		
+		if(reservaInstance?.recurso?.unidadeTempoReserva?.id == 3){ //dia
+			c.add(Calendar.DAY_OF_YEAR, reservaInstance.recurso.tempoReserva - 1)
+			c.add(Calendar.HOUR_OF_DAY, 23)
+			c.add(Calendar.MINUTE, 59)
+			c.add(Calendar.SECOND, 59)
+		}else{
+			if(reservaInstance?.recurso?.unidadeTempoReserva?.id == 1){ //minuto
+				c.add(Calendar.MINUTE, reservaInstance?.recurso?.tempoReserva)
+			}
+			
+			if(reservaInstance?.recurso?.unidadeTempoReserva?.id == 2){ //hora
+				c.add(Calendar.HOUR_OF_DAY, reservaInstance?.recurso?.tempoReserva)
+			}
+		}
+		
+		Date dataFimEvento = c.getTime()
+		
+		reservaInstance.dataFimEvento = dataFimEvento
 						
 		if(!params.usuario.id){
 			Usuario usuario = springSecurityService.currentUser
