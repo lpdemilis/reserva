@@ -201,7 +201,7 @@ class RecursoController {
 			for (reserva in recursoInstance.reserva) {
 				reservasSB.append("{")
 				reservasSB.append("title: '")
-				reservasSB.append(recursoInstance.nome)
+				reservasSB.append(reserva.apartamento)
 				reservasSB.append("',")
 				reservasSB.append("start: '")
 				reservasSB.append(reserva.dataInicioEvento)
