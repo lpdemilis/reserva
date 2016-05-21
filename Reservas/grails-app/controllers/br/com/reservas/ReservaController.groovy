@@ -21,7 +21,6 @@ class ReservaController {
 
 	@Secured(['ROLE_USER'])
     def create() {
-		println params
 		Calendar c = Calendar.getInstance()
 		c.set(Calendar.YEAR, Integer.valueOf(params.anoEvento)) 
 		c.set(Calendar.MONTH, Integer.valueOf(params.mesEvento) - 1)
@@ -30,7 +29,8 @@ class ReservaController {
 		c.set(Calendar.MINUTE, Integer.valueOf(params.minutoEvento))
 		c.set(Calendar.SECOND, Integer.valueOf(params.segundoEvento))
 		
-		Date dataEvento = c.getTime()
+		Date dataInicioEvento = c.getTime()
+		Date dataFimEvento = c.getTime()
 				
 		def recursoInstance = Recurso.get(params.recurso?.id)
 		
@@ -95,7 +95,8 @@ class ReservaController {
 		
 		def reservaInstance = new Reserva(params) 
 		
-		reservaInstance.dataEvento = dataEvento 
+		reservaInstance.dataInicioEvento = dataInicioEvento 
+		reservaInstance.dataFimEvento = dataFimEvento
 		
         [reservaInstance: reservaInstance, recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList, precision:precision, anoEvento: params.anoEvento, mesEvento: params.mesEvento, diaEvento: params.diaEvento, horaEvento: params.horaEvento, minutoEvento: params.minutoEvento, segundoEvento: params.segundoEvento]
     }

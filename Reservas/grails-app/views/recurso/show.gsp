@@ -43,7 +43,6 @@
 						//alert('Current view: ' + view.name);
 				        // change the day's background color just for fun
 						//$(this).css('background-color', 'red');
-						//$( "#dataEvento" ).val(date.format("ddd MMM DD HH:mm:ss BRT YYYY"));
 						$( "#diaEvento" ).val(date.format("DD"));
 						$( "#mesEvento" ).val(date.format("MM"));
 						$( "#anoEvento" ).val(date.format("YYYY"));

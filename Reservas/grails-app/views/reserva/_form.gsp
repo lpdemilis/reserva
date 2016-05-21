@@ -41,31 +41,59 @@
 		<g:hiddenField name="dataSolicitacao" value="${reservaInstance?.dataSolicitacao}"  />
 <%--</div>--%>
 
-<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataEvento', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataInicioEvento', 'error')} required">
 	<g:if test="${reservaInstance?.id}">
-		<label for="dataEvento">
-			<g:message code="reserva.dataEvento.label" default="Data do evento" />
+		<label for="dataInicioEvento">
+			<g:message code="reserva.dataInicioEvento.label" default="Início do evento" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:datePicker name="dataEvento" precision="${precision}"  value="${reservaInstance?.dataEvento}"  />
+		<g:datePicker name="dataInicioEvento" precision="${precision}"  value="${reservaInstance?.dataInicioEvento}"  />
 	</g:if>
 	<g:else>
-		<label for="dataEvento">
-			<g:message code="reserva.dataEvento.label" default="Data do evento" />
+		<label for="dataInicioEvento">
+			<g:message code="reserva.dataInicioEvento.label" default="Início do evento" />
 		</label>
 		<g:if test="${recursoInstance?.unidadeTempoReserva?.id == 3}">
-			<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy"/>
+			<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy"/>
 		</g:if>
 		<g:else>
-			<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+			<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy HH:mm:ss"/>
 		</g:else>		 
-		<g:hiddenField name="dataEvento" value="${reservaInstance?.dataEvento}"  />
-		<g:hiddenField name="dataEvento_day" value="${diaEvento}"  />
-		<g:hiddenField name="dataEvento_year" value="${anoEvento}"  />
-		<g:hiddenField name="dataEvento_month" value="${mesEvento}"  />
-		<g:hiddenField name="dataEvento_hour" value="${horaEvento}"  />
-		<g:hiddenField name="dataEvento_minute" value="${minutoEvento}"  />
-		<g:hiddenField name="dataEvento_second" value="${segundoEvento}"  />
+		<g:hiddenField name="dataInicioEvento" value="${reservaInstance?.dataInicioEvento}"  />
+		<g:hiddenField name="dataInicioEvento_day" value="${diaEvento}"  />
+		<g:hiddenField name="dataInicioEvento_year" value="${anoEvento}"  />
+		<g:hiddenField name="dataInicioEvento_month" value="${mesEvento}"  />
+		<g:hiddenField name="dataInicioEvento_hour" value="${horaEvento}"  />
+		<g:hiddenField name="dataInicioEvento_minute" value="${minutoEvento}"  />
+		<g:hiddenField name="dataInicioEvento_second" value="${segundoEvento}"  />
+	</g:else>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: reservaInstance, field: 'dataFimEvento', 'error')} required">
+	<g:if test="${reservaInstance?.id}">
+		<label for="dataFimEvento">
+			<g:message code="reserva.dataFimEvento.label" default="Fim do evento" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:datePicker name="dataFimEvento" precision="${precision}"  value="${reservaInstance?.dataFimEvento}"  />
+	</g:if>
+	<g:else>
+		<label for="dataFimEvento">
+			<g:message code="reserva.dataFimEvento.label" default="Fim do evento" />
+		</label>
+		<g:if test="${recursoInstance?.unidadeTempoReserva?.id == 3}">
+			<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy"/>
+		</g:if>
+		<g:else>
+			<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+		</g:else>		 
+		<g:hiddenField name="dataFimEvento" value="${reservaInstance?.dataFimEvento}"  />
+		<g:hiddenField name="dataFimEvento_day" value="${diaEvento}"  />
+		<g:hiddenField name="dataFimEvento_year" value="${anoEvento}"  />
+		<g:hiddenField name="dataFimEvento_month" value="${mesEvento}"  />
+		<g:hiddenField name="dataFimEvento_hour" value="${horaEvento}"  />
+		<g:hiddenField name="dataFimEvento_minute" value="${minutoEvento}"  />
+		<g:hiddenField name="dataFimEvento_second" value="${segundoEvento}"  />
 	</g:else>
 </div>
 

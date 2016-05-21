@@ -3,7 +3,8 @@ package br.com.reservas
 class Reserva {
 	
 	Date dataSolicitacao
-	Date dataEvento
+	Date dataInicioEvento
+	Date dataFimEvento
 	Boolean aprovada
 	Boolean cancelada
 	Date dataAprovacao
@@ -17,7 +18,8 @@ class Reserva {
 
     static constraints = {
 		dataSolicitacao nullable:false 
-		dataEvento nullable:false 
+		dataInicioEvento nullable:false 
+		dataFimEvento nullable:false
 		aprovada nullable:false 
 		cancelada nullable:false
 		valor scale: 2

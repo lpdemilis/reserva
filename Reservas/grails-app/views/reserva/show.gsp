@@ -41,15 +41,29 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${reservaInstance?.dataEvento}">
+				<g:if test="${reservaInstance?.dataInicioEvento}">
 				<li class="fieldcontain">
-					<span id="dataEvento-label" class="property-label"><g:message code="reserva.dataEvento.label" default="Data do evento" /></span>
+					<span id="dataInicioEvento-label" class="property-label"><g:message code="reserva.dataInicioEvento.label" default="Início do evento" /></span>
 					
 						<g:if test="${reservaInstance?.recurso.unidadeTempoReserva.id == 3}">
-							<span class="property-value" aria-labelledby="dataEvento-label"><g:formatDate format="dd/MM/yyyy" date="${reservaInstance?.dataEvento}" /></span>
+							<span class="property-value" aria-labelledby="dataInicioEvento-label"><g:formatDate format="dd/MM/yyyy" date="${reservaInstance?.dataInicioEvento}" /></span>
 						</g:if>
 						<g:else>
-							<span class="property-value" aria-labelledby="dataEvento-label"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${reservaInstance?.dataEvento}" /></span>
+							<span class="property-value" aria-labelledby="dataInicioEvento-label"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${reservaInstance?.dataInicioEvento}" /></span>
+						</g:else>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${reservaInstance?.dataFimEvento}">
+				<li class="fieldcontain">
+					<span id="dataFimEvento-label" class="property-label"><g:message code="reserva.dataFimEvento.label" default="Fim do evento" /></span>
+					
+						<g:if test="${reservaInstance?.recurso.unidadeTempoReserva.id == 3}">
+							<span class="property-value" aria-labelledby="dataFimEvento-label"><g:formatDate format="dd/MM/yyyy" date="${reservaInstance?.dataFimEvento}" /></span>
+						</g:if>
+						<g:else>
+							<span class="property-value" aria-labelledby="dataFimEvento-label"><g:formatDate format="dd/MM/yyyy HH:mm:ss" date="${reservaInstance?.dataFimEvento}" /></span>
 						</g:else>
 					
 				</li>

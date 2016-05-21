@@ -24,9 +24,11 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="dataSolicitacao" title="${message(code: 'reserva.dataSolicitacao.label', default: 'Data Solicitacao')}" />
+						<g:sortableColumn property="dataSolicitacao" title="${message(code: 'reserva.dataSolicitacao.label', default: 'Data da Solicitação')}" />
 					
-						<g:sortableColumn property="dataEvento" title="${message(code: 'reserva.dataEvento.label', default: 'Data Evento')}" />
+						<g:sortableColumn property="dataInicioEvento" title="${message(code: 'reserva.dataInicioEvento.label', default: 'Início do evento')}" />
+						
+						<g:sortableColumn property="dataFimEvento" title="${message(code: 'reserva.dataFimEvento.label', default: 'Fim do evento')}" />
 					
 						<g:sortableColumn property="aprovada" title="${message(code: 'reserva.aprovada.label', default: 'Aprovada')}" />
 					
@@ -44,7 +46,9 @@
 					
 						<td><g:link action="show" id="${reservaInstance.id}">${fieldValue(bean: reservaInstance, field: "dataSolicitacao")}</g:link></td>
 					
-						<td><g:formatDate date="${reservaInstance.dataEvento}" /></td>
+						<td><g:formatDate date="${reservaInstance.dataInicioEvento}" /></td>
+						
+						<td><g:formatDate date="${reservaInstance.dataFimEvento}" /></td>
 					
 						<td><g:formatBoolean boolean="${reservaInstance.aprovada}" /></td>
 					
