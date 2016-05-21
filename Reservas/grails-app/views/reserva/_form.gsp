@@ -53,7 +53,12 @@
 		<label for="dataEvento">
 			<g:message code="reserva.dataEvento.label" default="Data do evento" />
 		</label>
-		<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy"/> 
+		<g:if test="${recursoInstance?.unidadeTempoReserva?.id == 3}">
+			<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy"/>
+		</g:if>
+		<g:else>
+			<g:formatDate date="${reservaInstance?.dataEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+		</g:else>		 
 		<g:hiddenField name="dataEvento" value="${reservaInstance?.dataEvento}"  />
 		<g:hiddenField name="dataEvento_day" value="${diaEvento}"  />
 		<g:hiddenField name="dataEvento_year" value="${anoEvento}"  />
