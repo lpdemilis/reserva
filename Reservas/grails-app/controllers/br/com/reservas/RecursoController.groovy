@@ -196,6 +196,7 @@ class RecursoController {
 		def recursoInstance = Recurso.get(id)
 		
 		StringBuilder reservasSB = new StringBuilder()
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd")
 		
 		if(recursoInstance){
 			for (reserva in recursoInstance.reserva) {
@@ -204,11 +205,19 @@ class RecursoController {
 				reservasSB.append(reserva.apartamento)
 				reservasSB.append("',")
 				reservasSB.append("start: '")
-				reservasSB.append(reserva.dataInicioEvento)
+				if (recursoInstance.unidadeTempoReserva.id == 3) {
+					reservasSB.append(sdf.format(reserva.dataInicioEvento))
+				}else{
+					reservasSB.append(reserva.dataInicioEvento)
+				}
 				reservasSB.append("'")
 				reservasSB.append(",")
 				reservasSB.append("end: '")
-				reservasSB.append(reserva.dataFimEvento)
+				if (recursoInstance.unidadeTempoReserva.id == 3) {
+					reservasSB.append(sdf.format(reserva.dataFimEvento))
+				}else{
+					reservasSB.append(reserva.dataFimEvento)
+				}
 				reservasSB.append("'")
 				reservasSB.append(",")
 				reservasSB.append("color: '")

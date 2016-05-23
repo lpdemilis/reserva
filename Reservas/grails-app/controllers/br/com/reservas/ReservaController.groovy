@@ -22,12 +22,14 @@ class ReservaController {
 	@Secured(['ROLE_USER'])
     def create() {
 		Calendar c = Calendar.getInstance()
-		c.set(Calendar.YEAR, Integer.valueOf(params.anoEvento)) 
-		c.set(Calendar.MONTH, Integer.valueOf(params.mesEvento) - 1)
-		c.set(Calendar.DAY_OF_MONTH, Integer.valueOf(params.diaEvento))
-		c.set(Calendar.HOUR_OF_DAY, Integer.valueOf(params.horaEvento))
-		c.set(Calendar.MINUTE, Integer.valueOf(params.minutoEvento))
-		c.set(Calendar.SECOND, Integer.valueOf(params.segundoEvento))
+		if(params.anoEvento){
+			c.set(Calendar.YEAR, Integer.valueOf(params.anoEvento)) 
+			c.set(Calendar.MONTH, Integer.valueOf(params.mesEvento) - 1)
+			c.set(Calendar.DAY_OF_MONTH, Integer.valueOf(params.diaEvento))
+			c.set(Calendar.HOUR_OF_DAY, Integer.valueOf(params.horaEvento))
+			c.set(Calendar.MINUTE, Integer.valueOf(params.minutoEvento))
+			c.set(Calendar.SECOND, Integer.valueOf(params.segundoEvento))
+		}
 		
 		Date dataInicioEvento = c.getTime()
 						

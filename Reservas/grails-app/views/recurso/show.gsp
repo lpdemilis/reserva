@@ -195,21 +195,21 @@
 					</li>
 				</g:if>
 				
-				<li class="fieldcontain">
-					<span id="reservas-label" class="property-label"><g:message code="recurso.reserva.label" default="Reservas" /></span>
-					
-					<div class="property-value" aria-labelledby="reservas-label">
-						<div class="add">
-							<g:if test="${recursoInstance?.id}">
-								<g:link class="adicionar-button" controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	
-							</g:if>
-							<g:else>
-								<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</div>				
-							</g:else>	
-						</div>
-					</div>
-
-				</li>
+<%--				<li class="fieldcontain">--%>
+<%--					<span id="reservas-label" class="property-label"><g:message code="recurso.reserva.label" default="Reservas" /></span>--%>
+<%--					--%>
+<%--					<div class="property-value" aria-labelledby="reservas-label">--%>
+<%--						<div class="add">--%>
+<%--							<g:if test="${recursoInstance?.id}">--%>
+<%--								<g:link class="adicionar-button" controller="reserva" action="create" params="['recurso.id': recursoInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</g:link>	--%>
+<%--							</g:if>--%>
+<%--							<g:else>--%>
+<%--								<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'reserva.label', default: 'Reserva')])}</div>				--%>
+<%--							</g:else>	--%>
+<%--						</div>--%>
+<%--					</div>--%>
+<%----%>
+<%--				</li>--%>
 			
 				<g:if test="${recursoInstance?.tipoReserva}">
 				<li class="fieldcontain">
