@@ -113,11 +113,16 @@ class ReservaController {
 		reservaInstance.dataInicioEvento = dataInicioEvento 
 		reservaInstance.dataFimEvento = dataFimEvento
 		
-        [reservaInstance: reservaInstance, recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList, precision:precision, anoEvento: params.anoEvento, mesEvento: params.mesEvento, diaEvento: params.diaEvento, horaEvento: params.horaEvento, minutoEvento: params.minutoEvento, segundoEvento: params.segundoEvento]
+		def recursoController = new RecursoController()
+		
+        [reservaInstance: reservaInstance, recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList, precision:precision, anoEvento: params.anoEvento, mesEvento: params.mesEvento, diaEvento: params.diaEvento, horaEvento: params.horaEvento, minutoEvento: params.minutoEvento, segundoEvento: params.segundoEvento, tipoCalendario: recursoController.tipoCalendario(recursoInstance)]
     }
 
 	@Secured(['ROLE_USER'])
     def save() {
+		println params
+		return
+		
         def reservaInstance = new Reserva(params)
 		
 		Calendar c = Calendar.getInstance()

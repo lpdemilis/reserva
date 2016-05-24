@@ -201,6 +201,9 @@ class RecursoController {
 		if(recursoInstance){
 			for (reserva in recursoInstance.reserva) {
 				reservasSB.append("{")
+				reservasSB.append("id: '")
+				reservasSB.append(reserva.id)
+				reservasSB.append("',")
 				reservasSB.append("title: '")
 				reservasSB.append(reserva.apartamento)
 				reservasSB.append("',")

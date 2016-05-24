@@ -54,10 +54,14 @@
 			<g:message code="reserva.dataInicioEvento.label" default="Início do evento" />
 		</label>
 		<g:if test="${recursoInstance?.unidadeTempoReserva?.id == 3}">
-			<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy"/>
+			<span id="dataInicioEvento_span">
+				<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy"/>
+			</span>	
 		</g:if>
 		<g:else>
-			<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+			<span id="dataInicioEvento_span">
+				<g:formatDate date="${reservaInstance?.dataInicioEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+			</span>
 		</g:else>		 
 		<g:hiddenField name="dataInicioEvento" value="${reservaInstance?.dataInicioEvento}"  />
 		<g:hiddenField name="dataInicioEvento_day" value="${diaEvento}"  />
@@ -82,10 +86,14 @@
 			<g:message code="reserva.dataFimEvento.label" default="Fim do evento" />
 		</label>
 		<g:if test="${recursoInstance?.unidadeTempoReserva?.id == 3}">
-			<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy"/>
+			<span id="dataFimEvento_span">
+				<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy"/>
+			</span>	
 		</g:if>
 		<g:else>
-			<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+			<span id="dataFimEvento_span">
+				<g:formatDate date="${reservaInstance?.dataFimEvento}" format="dd/MM/yyyy HH:mm:ss"/>
+			</span>	
 		</g:else>		 
 		<g:hiddenField name="dataFimEvento" value="${reservaInstance?.dataFimEvento}"  />
 		<g:hiddenField name="dataFimEvento_day" value="${diaEvento}"  />
@@ -181,3 +189,5 @@
 <%--</div>--%>
 
 <g:hiddenField  id="usuario" name="usuario.id" value="${reservaInstance?.usuario?.id}" />
+
+<g:render template="/recurso/calendar"/>
