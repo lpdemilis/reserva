@@ -173,7 +173,7 @@ class ReservaController {
 		
 		def recursoController = new RecursoController()
 
-        [reservaInstance: reservaInstance, tipoCalendario:recursoController.tipoCalendario(reservaInstance.recurso)]
+        [reservaInstance: reservaInstance, recursoInstance: reservaInstance.recurso, tipoCalendario:recursoController.tipoCalendario(reservaInstance.recurso)]
     }
 
     def edit(Long id) {
