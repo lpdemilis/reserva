@@ -176,6 +176,8 @@
 					
 				</li>
 				</g:if>
+				
+				<g:render template="/recurso/calendar"/>
 			
 			</ol>
 			<g:form>

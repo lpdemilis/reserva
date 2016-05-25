@@ -8,7 +8,12 @@
 		
 	<script type="text/javascript">
 		$(function() { // document ready
-		  
+			var today = new Date();
+			today.setHours(0);
+			today.setMilliseconds(0);
+			today.setMinutes(0);
+			today.setSeconds(0);
+								  
 		  	$('#calendar').fullCalendar({
 				header: {
 							left: 'prev,next today',
@@ -21,10 +26,19 @@
 			    eventLimit: true, // allow "more" link when too many events
 			    defaultView: '${tipoCalendario}',
 			    lang: 'pt-br',
-			    events: [
-						  ${recursoInstance.listaIndisponibilidades()}
+			    events: [						  
 						  ${recursoInstance.listaReservas()}
 			    ]
+
+			    ,dayRender: function(date, cell){
+			    	var data = new Date(date.format("YYYY-MM-DD HH:mm:ss"));
+			    				    	
+			    	if (data < today){
+			            $(cell).addClass('disabled-day');
+			        }
+			        			        
+				    ${recursoInstance.listaIndisponibilidades()}			        
+			    }
 			    
 				,dayClick: function(date, jsEvent, view) {
 				    //Fri May 13 00:00:00 BRT 2016					    

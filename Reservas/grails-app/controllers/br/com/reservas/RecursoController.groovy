@@ -68,8 +68,6 @@ class RecursoController {
 		
 		Usuario usuario = springSecurityService.currentUser
 		
-		
-		
         [recursoInstance: recursoInstance, ehAdministrador:usuario.ehAdministrador(recursoInstance.condominio), tipoCalendario:tipoCalendario(recursoInstance)]
     }
 
@@ -169,22 +167,32 @@ class RecursoController {
 				
 		if(recursoInstance){
 			for (indisponibilidade in recursoInstance.indisponibilidades) {
-				indisponibilidadesSB.append("{")
-				indisponibilidadesSB.append("title: '")
-				indisponibilidadesSB.append(recursoInstance.nome)
-				indisponibilidadesSB.append("',")
-				indisponibilidadesSB.append("start: '")
-				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataInicio))
-				indisponibilidadesSB.append("'")
-				indisponibilidadesSB.append(",")
-				indisponibilidadesSB.append("end: '")
-				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataFim))
-				indisponibilidadesSB.append("'")
-				indisponibilidadesSB.append(",")
-				indisponibilidadesSB.append("overlap: false,")
-				indisponibilidadesSB.append("rendering: 'background',")
-				indisponibilidadesSB.append("color: '#ff9f89'")
-				indisponibilidadesSB.append("},")
+				indisponibilidadesSB.append("var dataInicio = new Date('")
+				indisponibilidadesSB.append(indisponibilidade.dataInicio)
+				indisponibilidadesSB.append("');")
+				indisponibilidadesSB.append("var dataFim = new Date('")
+				indisponibilidadesSB.append(indisponibilidade.dataFim)
+				indisponibilidadesSB.append("');")
+				indisponibilidadesSB.append("if ((data >= dataInicio) && (data <= dataFim)){")
+//				indisponibilidadesSB.append("\$(cell).css('background-color', 'blue');")
+				indisponibilidadesSB.append("\$(cell).addClass('disabled-day-indisponivel');")
+				indisponibilidadesSB.append("}")
+//				indisponibilidadesSB.append("{")
+//				indisponibilidadesSB.append("title: '")
+//				indisponibilidadesSB.append(recursoInstance.nome)
+//				indisponibilidadesSB.append("',")
+//				indisponibilidadesSB.append("start: '")
+//				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataInicio))
+//				indisponibilidadesSB.append("'")
+//				indisponibilidadesSB.append(",")
+//				indisponibilidadesSB.append("end: '")
+//				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataFim))
+//				indisponibilidadesSB.append("'")
+//				indisponibilidadesSB.append(",")
+//				indisponibilidadesSB.append("overlap: false,")
+//				indisponibilidadesSB.append("rendering: 'background',")
+//				indisponibilidadesSB.append("color: '#ff9f89'")
+//				indisponibilidadesSB.append("},")
 			}
 		}
 		

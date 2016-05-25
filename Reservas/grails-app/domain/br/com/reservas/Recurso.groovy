@@ -48,5 +48,5 @@ class Recurso {
 	String listaReservas(){
 		RecursoController recursoController = new RecursoController()
 		recursoController.listaReservas(this.id)
-	}
+	}	
 }

@@ -120,9 +120,6 @@ class ReservaController {
 
 	@Secured(['ROLE_USER'])
     def save() {
-		println params
-		return
-		
         def reservaInstance = new Reserva(params)
 		
 		Calendar c = Calendar.getInstance()
@@ -173,8 +170,10 @@ class ReservaController {
             redirect(action: "list")
             return
         }
+		
+		def recursoController = new RecursoController()
 
-        [reservaInstance: reservaInstance]
+        [reservaInstance: reservaInstance, tipoCalendario:recursoController.tipoCalendario(reservaInstance.recurso)]
     }
 
     def edit(Long id) {

@@ -481,9 +481,9 @@ th.desc a {
 	background: #ffffff;
 }
 
-th:hover, tr:hover {
-	background: #f2faff;	
-}
+/* th:hover, tr:hover { */
+/* 	background: #f2faff;	 */
+/* } */
 
 /* PAGINATION */
 
@@ -630,6 +630,20 @@ a.skip {
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.37) !important;
 	cursor: no-drop !important;
 	border: 1px solid #EEEEEE !important;
+}
+
+.disabled-day, .disabled-day :hover {
+	font-style: italic;
+	color: #BBB !important;
+	background-color: #EEE !important;
+ 	cursor: no-drop !important;
+	border: 1px solid #DDD !important;	
+}
+
+.disabled-day-indisponivel, .disabled-day-indisponivel :hover{
+	font-style: italic;
+	background-color: #ff9f89 !important;
+	cursor: no-drop !important;
 }
 
 .tipoPlano{
