@@ -50,74 +50,75 @@
 					//$(this).css('background-color', 'red');
 					
 					//alert($('#calendar').fullCalendar('getView').type);
-											
-					$( "#diaEvento" ).val(date.format("DD"));
-					$( "#mesEvento" ).val(date.format("MM"));
-					$( "#anoEvento" ).val(date.format("YYYY"));
-					$( "#horaEvento" ).val(date.format("HH"));
-					$( "#minutoEvento" ).val(date.format("mm"));
-					$( "#segundoEvento" ).val(date.format("ss"));						
-			    	$( "#reserva_create_form" ).submit();
-
-			    	if ("${recursoInstance.unidadeTempoReserva.id}" == "1") { //minuto
-			    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
-						$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
-						$( "#dataInicioEvento_month" ).val(date.format("MM"));
-						$( "#dataInicioEvento_hour" ).val(date.format("HH"));
-						$( "#dataInicioEvento_minute" ).val(date.format("mm"));
-						$( "#dataInicioEvento_second" ).val(date.format("ss"));
-						date.add('${recursoInstance.tempoReserva}','minutes').calendar();
-			    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataFimEvento_day" ).val(date.format("DD"));
-						$( "#dataFimEvento_year" ).val(date.format("YYYY"));
-						$( "#dataFimEvento_month" ).val(date.format("MM"));
-						$( "#dataFimEvento_hour" ).val(date.format("HH"));
-						$( "#dataFimEvento_minute" ).val(date.format("mm"));
-						$( "#dataFimEvento_second" ).val(date.format("ss"));
-			    	}
-
-			    	if ("${recursoInstance.unidadeTempoReserva.id}" == "2") { //hora
-			    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
-						$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
-						$( "#dataInicioEvento_month" ).val(date.format("MM"));
-						$( "#dataInicioEvento_hour" ).val(date.format("HH"));
-						$( "#dataInicioEvento_minute" ).val(date.format("mm"));
-						$( "#dataInicioEvento_second" ).val(date.format("ss"));
-						date.add('${recursoInstance.tempoReserva}','hours').calendar();
-			    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
-			    		$( "#dataFimEvento_day" ).val(date.format("DD"));
-						$( "#dataFimEvento_year" ).val(date.format("YYYY"));
-						$( "#dataFimEvento_month" ).val(date.format("MM"));
-						$( "#dataFimEvento_hour" ).val(date.format("HH"));
-						$( "#dataFimEvento_minute" ).val(date.format("mm"));
-						$( "#dataFimEvento_second" ).val(date.format("ss"));
-			    	}
-
-			    	if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
-			    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY"));
-			    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY"));
-			    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
-						$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
-						$( "#dataInicioEvento_month" ).val(date.format("MM"));
-						$( "#dataInicioEvento_hour" ).val(date.format("HH"));
-						$( "#dataInicioEvento_minute" ).val(date.format("mm"));
-						$( "#dataInicioEvento_second" ).val(date.format("ss"));
-			    		date.add('${recursoInstance.tempoReserva}','days').calendar();
-			    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY"));
-			    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY"));
-			    		$( "#dataFimEvento_day" ).val(date.format("DD"));
-						$( "#dataFimEvento_year" ).val(date.format("YYYY"));
-						$( "#dataFimEvento_month" ).val(date.format("MM"));
-						$( "#dataFimEvento_hour" ).val(date.format("HH"));
-						$( "#dataFimEvento_minute" ).val(date.format("mm"));
-						$( "#dataFimEvento_second" ).val(date.format("ss"));
-			    	}														
+					if (!this.hasClass( "disabled-day" )){
+						$( "#diaEvento" ).val(date.format("DD"));
+						$( "#mesEvento" ).val(date.format("MM"));
+						$( "#anoEvento" ).val(date.format("YYYY"));
+						$( "#horaEvento" ).val(date.format("HH"));
+						$( "#minutoEvento" ).val(date.format("mm"));
+						$( "#segundoEvento" ).val(date.format("ss"));						
+				    	$( "#reserva_create_form" ).submit();
+	
+				    	if ("${recursoInstance.unidadeTempoReserva.id}" == "1") { //minuto
+				    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
+							$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
+							$( "#dataInicioEvento_month" ).val(date.format("MM"));
+							$( "#dataInicioEvento_hour" ).val(date.format("HH"));
+							$( "#dataInicioEvento_minute" ).val(date.format("mm"));
+							$( "#dataInicioEvento_second" ).val(date.format("ss"));
+							date.add('${recursoInstance.tempoReserva}','minutes').calendar();
+				    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataFimEvento_day" ).val(date.format("DD"));
+							$( "#dataFimEvento_year" ).val(date.format("YYYY"));
+							$( "#dataFimEvento_month" ).val(date.format("MM"));
+							$( "#dataFimEvento_hour" ).val(date.format("HH"));
+							$( "#dataFimEvento_minute" ).val(date.format("mm"));
+							$( "#dataFimEvento_second" ).val(date.format("ss"));
+				    	}
+	
+				    	if ("${recursoInstance.unidadeTempoReserva.id}" == "2") { //hora
+				    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
+							$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
+							$( "#dataInicioEvento_month" ).val(date.format("MM"));
+							$( "#dataInicioEvento_hour" ).val(date.format("HH"));
+							$( "#dataInicioEvento_minute" ).val(date.format("mm"));
+							$( "#dataInicioEvento_second" ).val(date.format("ss"));
+							date.add('${recursoInstance.tempoReserva}','hours').calendar();
+				    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY HH:mm:ss"));
+				    		$( "#dataFimEvento_day" ).val(date.format("DD"));
+							$( "#dataFimEvento_year" ).val(date.format("YYYY"));
+							$( "#dataFimEvento_month" ).val(date.format("MM"));
+							$( "#dataFimEvento_hour" ).val(date.format("HH"));
+							$( "#dataFimEvento_minute" ).val(date.format("mm"));
+							$( "#dataFimEvento_second" ).val(date.format("ss"));
+				    	}
+	
+				    	if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
+				    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY"));
+				    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY"));
+				    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
+							$( "#dataInicioEvento_year" ).val(date.format("YYYY"));
+							$( "#dataInicioEvento_month" ).val(date.format("MM"));
+							$( "#dataInicioEvento_hour" ).val(date.format("HH"));
+							$( "#dataInicioEvento_minute" ).val(date.format("mm"));
+							$( "#dataInicioEvento_second" ).val(date.format("ss"));
+				    		date.add('${recursoInstance.tempoReserva}','days').calendar();
+				    		$( "#dataFimEvento" ).val(date.format("DD/MM/YYYY"));
+				    		$( "#dataFimEvento_span" ).text(date.format("DD/MM/YYYY"));
+				    		$( "#dataFimEvento_day" ).val(date.format("DD"));
+							$( "#dataFimEvento_year" ).val(date.format("YYYY"));
+							$( "#dataFimEvento_month" ).val(date.format("MM"));
+							$( "#dataFimEvento_hour" ).val(date.format("HH"));
+							$( "#dataFimEvento_minute" ).val(date.format("mm"));
+							$( "#dataFimEvento_second" ).val(date.format("ss"));
+				    	}														
+					}
 			    }
 
 				,eventClick: function(calEvent, jsEvent, view) {

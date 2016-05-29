@@ -175,6 +175,7 @@ class RecursoController {
 				indisponibilidadesSB.append("');")
 				indisponibilidadesSB.append("if ((data >= dataInicio) && (data <= dataFim)){")
 //				indisponibilidadesSB.append("\$(cell).css('background-color', 'blue');")
+				indisponibilidadesSB.append("\$(cell).addClass('disabled-day');")
 				indisponibilidadesSB.append("\$(cell).addClass('disabled-day-indisponivel');")
 				indisponibilidadesSB.append("}")
 //				indisponibilidadesSB.append("{")
