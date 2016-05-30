@@ -636,14 +636,14 @@ a.skip {
 	font-style: italic;
 	color: #BBB !important;
 	background-color: #EEE !important;
- 	cursor: no-drop !important;
+/*  	cursor: no-drop !important; */
 	border: 1px solid #DDD !important;	
 }
 
 .disabled-day-indisponivel, .disabled-day-indisponivel :hover{
 	font-style: italic;
 	background-color: #ff9f89 !important;
-	cursor: no-drop !important;
+/* 	cursor: no-drop !important; */
 }
 
 .tipoPlano{
@@ -829,3 +829,19 @@ a.skip {
 	background-color: #FF00FF;
 	width: 50px;
 }
+
+/** calendar **/
+
+#calendar table {
+	margin-bottom: 0;
+}
+
+#calendar tr>td:first-child, #calendar tr>th:first-child {
+	padding-left: 0;
+}
+
+#calendar tr>td:last-child, #calendar tr>th:last-child {
+	padding-right: 0;
+}
+
+/** calendar **/

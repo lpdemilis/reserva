@@ -26,8 +26,16 @@
 			    eventLimit: true, // allow "more" link when too many events
 			    defaultView: '${tipoCalendario}',
 			    lang: 'pt-br',
+
 			    events: [						  
 						  ${recursoInstance.listaReservas()}
+
+					{
+						start: '1900-01-01T00:00:00',
+						end: new Date(),
+						rendering: 'background',
+						className: 'disabled'						
+				    }
 			    ]
 
 			    ,dayRender: function(date, cell){
@@ -41,16 +49,7 @@
 			    }
 			    
 				,dayClick: function(date, jsEvent, view) {
-				    //Fri May 13 00:00:00 BRT 2016					    
-				    //var data = new Date(date.format("YYYY-MM-DD HH:mm:ss Y y"));					    
-					//alert('Clicked on: ' + date.format());
-					//alert('Coordinates: ' + jsEvent);
-					//alert('Current view: ' + view);
-			        // change the day's background color just for fun
-					//$(this).css('background-color', 'red');
-					
-					//alert($('#calendar').fullCalendar('getView').type);
-					if (!this.hasClass( "disabled-day" )){
+				    if (!this.hasClass( "disabled-day" )){
 						$( "#diaEvento" ).val(date.format("DD"));
 						$( "#mesEvento" ).val(date.format("MM"));
 						$( "#anoEvento" ).val(date.format("YYYY"));
@@ -122,13 +121,7 @@
 			    }
 
 				,eventClick: function(calEvent, jsEvent, view) {
-					//alert('Event: ' + calEvent.id);
-		            //alert('Event: ' + calEvent.title);
-		            //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		            //alert('View: ' + view.name);
-			            // change the border color just for fun
-		            //$(this).css('border-color', 'red');
-		            window.location = "../../reserva/show/" + calEvent.id;
+					window.location = "../../reserva/show/" + calEvent.id;
 		        }
 			});
 		  
