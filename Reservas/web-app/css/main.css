@@ -632,19 +632,19 @@ a.skip {
 	border: 1px solid #EEEEEE !important;
 }
 
-.disabled-day, .disabled-day :hover {
-	font-style: italic;
-	color: #BBB !important;
-	background-color: #EEE !important;
-/*  	cursor: no-drop !important; */
-	border: 1px solid #DDD !important;	
-}
+/* .disabled-day, .disabled-day :hover { */
+/* 	font-style: italic; */
+/* 	color: #BBB !important; */
+/* 	background-color: #EEE !important; */
+/* /*  	cursor: no-drop !important; */ */
+/* 	border: 1px solid #DDD !important;	 */
+/* } */
 
-.disabled-day-indisponivel, .disabled-day-indisponivel :hover{
-	font-style: italic;
-	background-color: #ff9f89 !important;
-/* 	cursor: no-drop !important; */
-}
+/* .disabled-day-indisponivel, .disabled-day-indisponivel :hover{ */
+/* 	font-style: italic; */
+/* 	background-color: #ff9f89 !important; */
+/* /* 	cursor: no-drop !important; */ */
+/* } */
 
 .tipoPlano{
 	width: 100%;	
@@ -831,6 +831,19 @@ a.skip {
 }
 
 /** calendar **/
+
+.fc-past {
+	background-color: #EEE;
+ 	cursor: no-drop;
+ 	font-style: italic;
+	color: #BBB;
+	border: 1px solid #DDD;	
+ 	
+}
+
+.fc-row .fc-content-skeleton {
+    padding-bottom: 0 !important;
+}
 
 #calendar table {
 	margin-bottom: 0;

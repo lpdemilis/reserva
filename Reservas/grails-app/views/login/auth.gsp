@@ -103,6 +103,11 @@
 				<label for='password'><g:message code="springSecurity.login.password.label"/>:</label>
 				<input type='password' class='text_' name='j_password' id='password' value="123456"/>
 			</p>
+			
+			<p>
+				<label for='registre'></label>
+				<g:link controller="usuario" action="create">Registre-se</g:link>
+			</p>
 
 			<p id="remember_me_holder">
 				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>

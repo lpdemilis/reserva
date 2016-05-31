@@ -20,11 +20,17 @@ class UsuarioController {
         [usuarioInstanceList: Usuario.list(params), usuarioInstanceTotal: Usuario.count()]
     }
 
-    def create() {
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+	def create() {
         [usuarioInstance: new Usuario(params)]
     }
 
+	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def save() {
+		if((params.email) && (!params.username)){
+			params.username = params.email
+		}
+		
         def usuarioInstance = new Usuario(params)
         if (!usuarioInstance.save(flush: true)) {
             render(view: "create", model: [usuarioInstance: usuarioInstance])

@@ -19,9 +19,7 @@
 							left: 'prev,next today',
 							center: 'title',
 							right: 'prev,next today'
-							//right: 'month,agendaWeek,agendaDay'
 			    },
-//			    defaultDate: '2014-11-12',
 			    editable: false,
 			    eventLimit: true, // allow "more" link when too many events
 			    defaultView: '${tipoCalendario}',
@@ -29,27 +27,14 @@
 
 			    events: [						  
 						  ${recursoInstance.listaReservas()}
-
-					{
-						start: '1900-01-01T00:00:00',
-						end: new Date(),
-						rendering: 'background',
-						className: 'disabled'						
-				    }
 			    ]
 
 			    ,dayRender: function(date, cell){
-			    	var data = new Date(date.format("YYYY-MM-DD HH:mm:ss"));
-			    				    	
-			    	if (data < today){
-			            $(cell).addClass('disabled-day');
-			        }
-			        			        
 				    ${recursoInstance.listaIndisponibilidades()}			        
 			    }
-			    
+			    			    
 				,dayClick: function(date, jsEvent, view) {
-				    if (!this.hasClass( "disabled-day" )){
+				    if (!this.hasClass( "fc-past" )) {
 						$( "#diaEvento" ).val(date.format("DD"));
 						$( "#mesEvento" ).val(date.format("MM"));
 						$( "#anoEvento" ).val(date.format("YYYY"));
