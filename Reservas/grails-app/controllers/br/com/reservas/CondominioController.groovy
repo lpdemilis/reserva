@@ -1,8 +1,8 @@
 package br.com.reservas
 
+import org.hibernate.Criteria
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
-import org.compass.core.engine.SearchEngineQueryParseException
 
 //@Secured(['ROLE_ADMIN'])
 class CondominioController {
@@ -24,14 +24,12 @@ class CondominioController {
 		
 		def condominioCriteria = Condominio.createCriteria()
 		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			createAlias('usuarios', 'usuarios', Criteria.LEFT_JOIN)
+			createAlias("administradores", "administradores", Criteria.LEFT_JOIN)
+						
 			or {
-				administradores{
-					eq('id', usuario.id)
-				}
-				
-				usuarios{
-					eq('id', usuario.id)
-				}
+				eq('administradores.id', usuario.id)
+				eq('usuarios.id', usuario.id)
 			}
 		}
 				
