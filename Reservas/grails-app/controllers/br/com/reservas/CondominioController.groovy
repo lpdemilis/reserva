@@ -209,14 +209,16 @@ class CondominioController {
 	 * Index page with search form and results
 	 */
 	def search = {
+		println params
 		def condominioCriteria = Condominio.createCriteria()
 		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			endereco {
 				cidade {
-					eq('id', Long.parseLong(params.cidade.id))
+					eq("id", Long.parseLong(params.cidade.id))
 				}
 			}
-			//eq('estado.id', condominioInstance.endereco.cidade.estado.id)
+			
+			like("nome", '%' + params.nome + '%')
 		}
 				
 		render(template: 'list', model:  [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()])

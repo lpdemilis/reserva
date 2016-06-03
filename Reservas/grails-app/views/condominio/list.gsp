@@ -80,7 +80,7 @@
 					<g:message code="condominio.nome.label" default="Nome" />
 					<span class="required-indicator">*</span>
 				</label>
-				<g:textField name="q" value="${params.q}" required="true"/>
+				<g:textField name="nome" value="${params.nome}" required="true"/>
 				
 				<label for="estado">
 					<g:message code="condominio.estado.label" default="Estado" />
