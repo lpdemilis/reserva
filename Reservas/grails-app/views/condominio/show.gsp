@@ -106,6 +106,10 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${!condominioInstance.verificarAdministrador()}">
+					<div class="message" role="status"><g:message code="condominio.nao.usuario.label" default="Você não possui permissão para este condomínio." /></div>
+				</g:if>
 			
 			</ol>
 			<g:if test="${condominioInstance.verificarAdministrador()}">

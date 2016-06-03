@@ -200,6 +200,19 @@ class CondominioController {
 		return false
 	}
 	
+	def verificarUsuario(Long id) {
+		Usuario usuario = springSecurityService.currentUser
+		
+		def condominioInstance = Condominio.get(id)
+		
+		
+		if(condominioInstance?.usuarios.contains(usuario)){
+			return true
+		}
+		
+		return false
+	}
+	
 	static String WILDCARD = "*"
 	def searchableService
 	

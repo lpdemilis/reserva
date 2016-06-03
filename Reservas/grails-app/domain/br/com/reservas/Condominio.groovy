@@ -24,4 +24,9 @@ class Condominio {
 		CondominioController condominioController = new CondominioController()
 		condominioController.verificarAdministrador(this.id)		
 	}
+	
+	Boolean verificarUsuario() {
+		CondominioController condominioController = new CondominioController()
+		condominioController.verificarUsuario(this.id)
+	}
 }
