@@ -2,6 +2,8 @@ package br.com.reservas
 
 class Condominio {
 	
+	static searchable = true
+	
 	String nome
 	Endereco endereco
 	

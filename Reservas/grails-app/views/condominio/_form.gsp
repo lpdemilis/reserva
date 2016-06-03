@@ -1,7 +1,5 @@
 <%@ page import="br.com.reservas.Condominio" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'nome', 'error')} required">
 	<label for="nome">
 		<g:message code="condominio.nome.label" default="Nome do Condomínio" />
@@ -25,15 +23,6 @@
 	<g:hiddenField name="administradores" value="${usuarioInstance?.id}" />
 </g:else>
 
-<%--<div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'plano', 'error')} required">--%>
-<%--	<label for="plano">--%>
-<%--		<g:message code="condominio.plano.label" default="Plano" />--%>
-<%--		<span class="required-indicator">*</span>--%>
-<%--	</label>--%>
-<%--	<g:select id="plano" name="plano.id" from="${meusPlanosInstanceList}" optionKey="id" required="" value="${condominioInstance?.plano?.id}" class="many-to-one" noSelection="['':'Selecione um Plano...']"/>--%>
-<%--		--%>
-<%--</div>--%>
-
 <div class="fieldcontain ${hasErrors(bean: condominioInstance, field: 'apartamentos', 'error')} ">
 	<label for="apartamentos">
 		<g:message code="condominio.apartamentos.label" default="Apartamentos" />
@@ -42,7 +31,7 @@
 	
 	<ul class="one-to-many">
 	
-		<g:if test="${condominioInstance.apartamentos.size() > 5}">
+		<g:if test="${condominioInstance?.apartamentos?.size() > 5}">
 			<li>
 				<div class="fieldcontain-list-item">
 					<span><g:link controller="apartamento" action="list" params="['condominio':condominioInstance.id]"><span class="marker">► </span>${condominioInstance.apartamentos.size()}<g:message code="condominio.apartamentos.label" default=" apartamentos" /></g:link></span>

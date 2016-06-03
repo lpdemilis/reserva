@@ -72,5 +72,7 @@ grails.project.dependency.resolution = {
 		//runtime ":twitter-bootstrap:3.3.4"
 		
 		compile ":full-calendar:1.5.1.0"
+		
+		compile ":searchable:0.6.9"
     }
 }

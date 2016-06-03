@@ -39,23 +39,6 @@
 	<g:checkBox name="ativo" value="${planoInstance?.ativo}" checked="true"/>
 </div>
 
-
-
-<%--<div class="fieldcontain ${hasErrors(bean: planoInstance, field: 'condominio', 'error')} ">--%>
-<%--	<label for="condominio">--%>
-<%--		<g:message code="plano.condominio.label" default="Condominio" />--%>
-<%--		--%>
-<%--	</label>--%>
-<%--	<g:select id="condominio" name="condominio.id" from="${br.com.reservas.Condominio.list()}" optionKey="id" value="${planoInstance?.condominio?.id}" class="many-to-one" noSelection="['null': '']"/>--%>
-<%--</div>--%>
-
-<%--<div class="fieldcontain ${hasErrors(bean: planoInstance, field: 'usuario', 'error')} required">--%>
-<%--	<label for="usuario">--%>
-<%--		<g:message code="plano.usuario.label" default="Usuario" />--%>
-<%--		<span class="required-indicator">*</span>--%>
-<%--	</label>--%>
-<%--	<g:select id="usuario" name="usuario.id" from="${br.com.reservas.Usuario.list()}" optionKey="id" required="" value="${planoInstance?.usuario?.id}" class="many-to-one"/>--%>
-<%--</div>--%>
 <g:hiddenField id="usuario" name="usuario.id" value="${usuarioInstance?.id}" />
 
 <h1><g:message code="default.create.label" args="['um Condomínio']" /></h1>

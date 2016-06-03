@@ -2,8 +2,9 @@ package br.com.reservas
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
+import org.compass.core.engine.SearchEngineQueryParseException
 
-@Secured(['ROLE_ADMIN'])
+//@Secured(['ROLE_ADMIN'])
 class CondominioController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -138,6 +139,8 @@ class CondominioController {
         }
 
         condominioInstance.properties = params
+		
+		condominioInstance.endereco.properties = params
 
         if (!condominioInstance.save(flush: true)) {
             render(view: "edit", model: [condominioInstance: condominioInstance])
@@ -197,5 +200,63 @@ class CondominioController {
 		}
 		
 		return false
+	}
+	
+	static String WILDCARD = "*"
+	def searchableService
+	
+	/**
+	 * Index page with search form and results
+	 */
+	def search = {
+		def condominioCriteria = Condominio.createCriteria()
+		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			endereco {
+				cidade {
+					eq('id', Long.parseLong(params.cidade.id))
+				}
+			}
+			//eq('estado.id', condominioInstance.endereco.cidade.estado.id)
+		}
+				
+		render(template: 'list', model:  [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()])
+		
+//		if (!params.q?.trim()) {
+//			return [:]
+//		}
+//		try {
+//			String searchTerm = WILDCARD + params.q + WILDCARD
+//			
+//			def searchResult = Condominio.search(searchTerm, params)
+//												
+//			List<Condominio> condominioInstanceList = new ArrayList<Condominio>()
+//						
+//			for (result in searchResult.results) {
+//				def condominioInstance = Condominio.get(result.id)
+//				condominioInstanceList.add(condominioInstance) 
+//			}
+//						
+//			render(template: 'list', model:  [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()])
+//		} catch (SearchEngineQueryParseException ex) {
+//			return [parseException: true]
+//		}
+	}
+
+	/**
+	 * Perform a bulk index of every searchable object in the database
+	 */
+	def indexAll = {
+		Thread.start {
+			searchableService.index()
+		}
+		render("bulk index started in a background thread")
+	}
+
+	/**
+	 * Perform a bulk index of every searchable object in the database
+	 */
+	def unindexAll = {
+		searchableService.unindex()
+		render("unindexAll done")
 	}
 }
