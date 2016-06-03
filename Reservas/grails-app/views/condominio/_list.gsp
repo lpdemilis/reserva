@@ -12,9 +12,9 @@
 					
 						<th><g:message code="condominio.endereco.label" default="Endereço" /></th>
 						
-						<th><g:message code="condominio.recurso.label" default="Recursos" /></th>
+<%--						<th><g:message code="condominio.recurso.label" default="Recursos" /></th>--%>
 						
-						<th><g:message code="condominio.administradores.label" default="Administradores" /></th>
+<%--						<th><g:message code="condominio.administradores.label" default="Administradores" /></th>--%>
 					
 					</tr>
 				</thead>
@@ -26,17 +26,17 @@
 					
 						<td>${condominioInstance.endereco.toHTML()}</td>
 						
-						<td>
-							<g:each in="${condominioInstance.recursos.sort { it.nome }}" status="k" var="recursoInstance">
-								<div class="tab-value"><g:link controller="recurso" action="show" id="${recursoInstance.id}"><span class="marker">► </span>${recursoInstance}</g:link></div>
-							</g:each>
-						</td>
+<%--						<td>--%>
+<%--							<g:each in="${condominioInstance.recursos.sort { it.nome }}" status="k" var="recursoInstance">--%>
+<%--								<div class="tab-value"><g:link controller="recurso" action="show" id="${recursoInstance.id}"><span class="marker">► </span>${recursoInstance}</g:link></div>--%>
+<%--							</g:each>--%>
+<%--						</td>--%>
 
-						<td>
-							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">
-								<div class="tab-value"><g:link controller="usuario" action="show" id="${administradorInstance.id}"><span class="marker">► </span>${fieldValue(bean: administradorInstance, field: "nome")}</g:link></div>
-							</g:each> 
-						</td>
+<%--						<td>--%>
+<%--							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">--%>
+<%--								<div class="tab-value"><g:link controller="usuario" action="show" id="${administradorInstance.id}"><span class="marker">► </span>${fieldValue(bean: administradorInstance, field: "nome")}</g:link></div>--%>
+<%--							</g:each> --%>
+<%--						</td>--%>
 					
 					</tr>
 				</g:each>

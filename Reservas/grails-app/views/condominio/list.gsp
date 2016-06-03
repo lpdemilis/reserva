@@ -68,41 +68,45 @@
 				</g:each>
 				</tbody>
 			</table>
+			
 			<div class="pagination">
 				<g:paginate total="${condominioInstanceTotal}" />
 			</div>
+			
 		</div>
 		
-		<div class="nav">
-<%--			<g:form action="search" method="get">--%>
-			<g:formRemote name="search" url="[action:'search']" update="searchResult">	
-				<label for="nome">
-					<g:message code="condominio.nome.label" default="Nome" />
-					<span class="required-indicator">*</span>
-				</label>
-				<g:textField name="nome" value="${params.nome}" required="true"/>
-				
-				<label for="estado">
-					<g:message code="condominio.estado.label" default="Estado" />
-					<span class="required-indicator">*</span>
-				</label>
-				<g:select id="estado" name="estado.id" from="${br.com.reservas.Estado.list()}" optionKey="id" required="" value="" class="many-to-one" noSelection="['':'Selecione um Estado...']" onchange="${remoteFunction(controller: 'cidade', action: 'buscaCidades', params: '\'estado=\' + this.value', update:'cidadeSelect')}" />
-				
-				<label for="cidade">
-					<g:message code="condominio.cidade.label" default="Cidade" />
-					<span class="required-indicator">*</span>
-				</label>
-				<div id="cidadeSelect" style="display: inline;">
-					<g:render template="/cidade/cidade" model="[cidades: cidades]" ></g:render>
-				</div>
-								
-		        <g:submitButton name="search" value="Buscar"/>
-		        
-    		</g:formRemote>
-<%--		    </g:form>--%>
-		</div>
-		
-		<div id="searchResult"></div>
+		<div id="list-condominio" class="content scaffold-list" role="main">
+			<h1><g:message code="condominio.buscar.label" default="Buscar Condomínios" /></h1>
+
+			<div class="nav">
+				<g:formRemote name="search" url="[action:'search']" update="searchResult">	
+					<label for="nome">
+						<g:message code="condominio.nome.label" default="Nome" />
+						<span class="required-indicator">*</span>
+					</label>
+					<g:textField name="nome" value="${params.nome}" required="true"/>
+					
+					<label for="estado">
+						<g:message code="condominio.estado.label" default="Estado" />
+						<span class="required-indicator">*</span>
+					</label>
+					<g:select id="estado" name="estado.id" from="${br.com.reservas.Estado.list()}" optionKey="id" required="" value="" class="many-to-one" noSelection="['':'Selecione um Estado...']" onchange="${remoteFunction(controller: 'cidade', action: 'buscaCidades', params: '\'estado=\' + this.value', update:'cidadeSelect')}" />
+					
+					<label for="cidade">
+						<g:message code="condominio.cidade.label" default="Cidade" />
+						<span class="required-indicator">*</span>
+					</label>
+					<div id="cidadeSelect" style="display: inline;">
+						<g:render template="/cidade/cidade" model="[cidades: cidades]" ></g:render>
+					</div>
+									
+			        <g:submitButton name="search" value="Buscar"/>
+			        
+	    		</g:formRemote>
+			</div>
+			
+			<div id="searchResult"></div>
+		</div>	
 			
 	</body>
 </html>
