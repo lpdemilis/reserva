@@ -40,14 +40,14 @@ class ConviteController {
 			return
 		}
 		
-		Usuario usuario = springSecurityService.currentUser
-		
-		def apartamentoInstance = Apartamento.get(params.apartamento.id)
-		
-		if(!apartamentoInstance.condominio.administradores.contains(usuario)){
-			redirect(controller: "login", action: "denied")
-			return
-		}
+//		Usuario usuario = springSecurityService.currentUser
+//		
+//		def apartamentoInstance = Apartamento.get(params.apartamento.id)
+//		
+//		if(!apartamentoInstance.condominio.administradores.contains(usuario)){
+//			redirect(controller: "login", action: "denied")
+//			return
+//		}
 		
         [conviteInstance: new Convite(params), condominioInstance: apartamentoInstance.condominio]
     }

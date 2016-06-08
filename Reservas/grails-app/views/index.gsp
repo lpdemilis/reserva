@@ -15,7 +15,11 @@
 				<p>Reserve online seus eventos de forma fácil e rápida. Escolha datas disponíveis. Veja fotos e descrições dos recursos. Tudo isso <strong>grátis</strong> para os usuários.</p>
 				
 				<p>
-					<h1><g:link controller="condominio" action="list">Entre agora e começe a preparar seu evento</g:link></h1>
+					<g:link controller="condominio" action="list">
+						<div class="acesso">
+							<h1>Entre agora e começe a preparar seu evento</h1>
+						</div>
+					</g:link>						
 				</p>
 				
 			</div>

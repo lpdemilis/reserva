@@ -55,7 +55,7 @@ body {
 
 .siteImg {
 	height: 100px;
-	opacity: 0;
+/* 	opacity: 0; */
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -84,6 +84,10 @@ h1 {
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
+}
+
+#main-content h1 a {
+	background-image: url(../images/calendar_icon_small.png);	
 }
 
 ul {
@@ -887,7 +891,20 @@ a.skip {
 	font-size: 24px;	
 }
 
-#main-content h1 a {
+.acesso {
+	background-image: url(../images/calendar_icon_small.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	padding-left: 50px;
+	background-position-x: 190px; 
+}
+
+.acesso a {
+	text-decoration: none;
+}
+
+.acesso a h1 {
+	padding-top: 10px;
 	text-decoration: none;
 	color: #FFF;
 	font-weight: bold;
