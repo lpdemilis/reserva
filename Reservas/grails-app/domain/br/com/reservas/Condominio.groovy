@@ -16,6 +16,10 @@ class Condominio {
 		endereco nullable:false, blank:false
     }
 	
+	static mapping = {
+		convites cascade:'all-delete-orphan'
+	}
+	
 	String toString() {
 		nome
 	}
@@ -28,5 +32,10 @@ class Condominio {
 	Boolean verificarUsuario() {
 		CondominioController condominioController = new CondominioController()
 		condominioController.verificarUsuario(this.id)
+	}
+	
+	Boolean verificarConvite() {
+		CondominioController condominioController = new CondominioController()
+		condominioController.verificarConvite(this.id)
 	}
 }

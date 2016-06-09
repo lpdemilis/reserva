@@ -98,39 +98,30 @@
 				<li class="fieldcontain">
 					<span id="recursos-label" class="property-label"><g:message code="condominio.recursos.label" default="Recursos" /></span>
 					
-						<g:each in="${condominioInstance.recursos.sort { it.nome }}" var="r">
-							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="recursos-label"><g:link controller="recurso" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link></span>
-							</div>	
-						</g:each>
+						<g:if test="${!condominioInstance.verificarUsuario() && !condominioInstance.verificarAdministrador()}">
+							<g:each in="${condominioInstance.recursos.sort { it.nome }}" var="r">
+								<div class="fieldcontain-list">
+									<span class="property-value" aria-labelledby="recursos-label">
+										<span class="marker">► </span>${r?.encodeAsHTML()}
+									</span>
+								</div>	
+							</g:each>
+						</g:if>
+						<g:else>
+							<g:each in="${condominioInstance.recursos.sort { it.nome }}" var="r">
+								<div class="fieldcontain-list">
+									<span class="property-value" aria-labelledby="recursos-label"><g:link controller="recurso" action="show" id="${r.id}"><span class="marker">► </span>${r?.encodeAsHTML()}</g:link></span>
+								</div>	
+							</g:each>
+						</g:else>	
 					
 				</li>
 				</g:if>
 				
 				<g:if test="${!condominioInstance.verificarUsuario() && !condominioInstance.verificarAdministrador()}">
-					<div class="message" role="status"><g:message code="condominio.nao.usuario.label" default="Você não possui permissão para este condomínio." /></div>
-					
-					<g:form controller="convite" action="create">
-						<div class="fieldcontain ${hasErrors(bean: enderecoInstance, field: 'apartamento', 'error')} required">
-							<label for="apartamento">
-								<g:message code="condominio.apartamento.label" default="Apartamento" />
-								<span class="required-indicator">*</span>
-							</label>
-							<g:select id="apartamento" name="apartamento.id" from="${condominioInstance?.apartamentos.sort { it.numero }}" optionKey="id" required="" value="" class="many-to-one" noSelection="['':'Selecione um Apartamento...']" />
-						</div>
-						
-						<li class="fieldcontain">
-							<span id="permissao-label" class="property-label"></span>
-							
-							<div class="fieldcontain-list">
-								<span class="property-value" aria-labelledby="permissao-label">
-									<g:actionSubmit class="adicionar-button" value="Solicitar permissão"/>
-								</span>
-							</div>	
-							
-						</li>
-						
-					</g:form>					
+					<div id="permissao">
+						<g:render template="permissao"></g:render>
+					</div>						
 									
 				</g:if>
 			

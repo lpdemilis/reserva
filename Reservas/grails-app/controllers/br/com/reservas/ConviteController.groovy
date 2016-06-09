@@ -1,6 +1,7 @@
 package br.com.reservas
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
@@ -40,14 +41,14 @@ class ConviteController {
 			return
 		}
 		
-//		Usuario usuario = springSecurityService.currentUser
-//		
-//		def apartamentoInstance = Apartamento.get(params.apartamento.id)
-//		
-//		if(!apartamentoInstance.condominio.administradores.contains(usuario)){
-//			redirect(controller: "login", action: "denied")
-//			return
-//		}
+		Usuario usuario = springSecurityService.currentUser
+		
+		def apartamentoInstance = Apartamento.get(params.apartamento.id)
+		
+		if(!apartamentoInstance.condominio.administradores.contains(usuario)){
+			redirect(controller: "login", action: "denied")
+			return
+		}
 		
         [conviteInstance: new Convite(params), condominioInstance: apartamentoInstance.condominio]
     }
@@ -175,5 +176,26 @@ class ConviteController {
 				}				
 			}			
 		}
+	}
+	
+	@Secured(['ROLE_USER'])
+	def criarConvite() {
+		def condominioInstance = Condominio.get(params.condominioInstanceId)
+		
+		def conviteInstance = new Convite()
+		def apartamentoInstance = Apartamento.get(params.apartamento.id)
+		conviteInstance.apartamento = apartamentoInstance
+		Usuario usuario = springSecurityService.currentUser
+		conviteInstance.usuario = usuario
+		conviteInstance.dataConvite = new Date()
+		conviteInstance.email = usuario.email
+		conviteInstance.usuarioSolicitou = true
+		
+		if(conviteInstance.save()){
+			condominioInstance.convites.add(conviteInstance)
+			condominioInstance.save()
+		}
+						
+		render(template: '/condominio/permissao', model:  [condominioInstance: condominioInstance])
 	}
 }

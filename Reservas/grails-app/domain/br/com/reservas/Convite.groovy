@@ -6,6 +6,8 @@ class Convite {
 	Date dataConvite
 	Date dataAceite
 	String email
+	Boolean usuarioSolicitou
+	Boolean aprovado
 	
 	static belongsTo = [apartamento:Apartamento]
 	
@@ -14,5 +16,12 @@ class Convite {
 		dataConvite nullable:false 
 		dataAceite nullable:true 
 		email blank:false, nullable: false
+		usuarioSolicitou nullable: false
+		aprovado nullable: true
     }
+	
+	static mapping = {
+		usuarioSolicitou defaultValue:false
+		aprovado defaultValue:null
+	}
 }
