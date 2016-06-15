@@ -195,7 +195,29 @@ class ConviteController {
 			condominioInstance.convites.add(conviteInstance)
 			condominioInstance.save()
 		}
+		
+		def condominioController = new CondominioController()
 						
-		render(template: '/condominio/permissao', model:  [condominioInstance: condominioInstance])
+		render(template: '/condominio/permissao', model:  [condominioInstance: condominioInstance, convitesPendentesList: condominioController.buscaConvitesPendentes(condominioInstance.id, params)])
 	}
+	
+	@Secured(['ROLE_USER'])
+	def atualizarConvite() {
+		
+		def condominioInstance = Condominio.get(params.condominioInstanceId)
+		
+		def conviteInstance = Convite.get(params.id)
+		conviteInstance.aprovado = Boolean.valueOf(params.aprovado)
+		conviteInstance.dataAceite = new Date()
+		conviteInstance.save(flush: true)
+		
+		condominioInstance.usuarios.add(conviteInstance.usuario)
+		condominioInstance.save(flush: true)
+		
+		def condominioController = new CondominioController()
+				
+		render(template: '/condominio/permissao', model:  [condominioInstance: condominioInstance, convitesPendentesList: condominioController.buscaConvitesPendentes(condominioInstance.id, params)])
+	}
+	
+	
 }

@@ -49,3 +49,11 @@
 	</label>
 	<g:field name="nuMaxApartamentos" type="number" value="${tipoPlanoInstance.nuMaxApartamentos}" required=""/>
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: recursoInstance, field: 'descricao', 'error')} ">
+	<label for="descricao">
+		<g:message code="recurso.descricao.label" default="Descrição" />
+		
+	</label>
+	<g:textArea name="descricao" value="${recursoInstance?.descricao}"/>
+</div>

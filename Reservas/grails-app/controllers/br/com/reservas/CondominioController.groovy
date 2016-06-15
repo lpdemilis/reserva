@@ -88,9 +88,27 @@ class CondominioController {
 		def verificarCriacaoCondominio = verificarCriacaoCondominio()
 		
 		Usuario usuario = springSecurityService.currentUser
-				
-        [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio, ehAdministrador:usuario.ehAdministrador(condominioInstance)]
+						
+        [condominioInstance: condominioInstance, verificarCriacaoCondominio: verificarCriacaoCondominio, ehAdministrador:usuario.ehAdministrador(condominioInstance), convitesPendentesList: buscaConvitesPendentes(condominioInstance.id, params)]
     }
+	
+	def buscaConvitesPendentes(condominioId, params){
+		def conviteCriteria = Convite.createCriteria()
+		def convitesPendentesList = conviteCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			and {
+				apartamento{
+					condominio{
+						
+						eq('id', condominioId)
+					}
+				}
+				
+				isNull('aprovado')
+			}
+		}
+		
+		return convitesPendentesList
+	}
 
 	@Secured(['ROLE_USER'])
     def edit(Long id) {

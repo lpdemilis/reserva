@@ -118,7 +118,7 @@
 				</li>
 				</g:if>
 				
-				<g:if test="${!condominioInstance.verificarUsuario() && !condominioInstance.verificarAdministrador()}">
+				<g:if test="${!condominioInstance.verificarUsuario()}">
 					<div id="permissao">
 						<g:render template="permissao"></g:render>
 					</div>						

@@ -29,6 +29,16 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
+			
+			<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+			<form action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
+			<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+			<input type="hidden" name="code" value="A2BA489E63636FA9940BAFAB383C888A" />
+			<input type="hidden" name="iot" value="button" />
+			<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/209x48-contratar-cinza-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+			</form>
+			<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+						
 			<g:form action="save" >
 				<fieldset class="form">
 					<g:render template="form"/>

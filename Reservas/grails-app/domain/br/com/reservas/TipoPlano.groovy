@@ -8,6 +8,7 @@ class TipoPlano {
 	Boolean ativo
 	Integer nuMaxRecursos
 	Integer nuMaxApartamentos
+	String descricao
 	
 	static constraints = {
 		dataCriacao nullable:false
@@ -16,10 +17,12 @@ class TipoPlano {
 		ativo nullable:false
 		nuMaxRecursos nullable:false
 		nuMaxApartamentos nullable:false
+		descricao nullable:false
 	}
 	
 	static mapping = {
 		ativo defaultValue:false
+		descricao defaltValue: "", type: 'text'
 	}
 	
 	String toString(){

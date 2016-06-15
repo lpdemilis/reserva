@@ -738,7 +738,16 @@ a.skip {
 	cursor: pointer;
 	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
 	text-decoration: none;
-	display: block;
+	display: inline-block;
+	min-width: 55px;
+}
+
+.inline-buttons {
+	display: inline-flex;
+}
+
+.inline-buttons .adicionar-button {
+	margin: 5px;	
 }
 
 .add a {
@@ -861,6 +870,14 @@ a.skip {
 
 #calendar tr>td:last-child, #calendar tr>th:last-child {
 	padding-right: 0;
+}
+
+.fc-day-number {
+	padding-right: 5px !important;
+}
+
+.fc-event {
+	cursor: pointer;
 }
 
 /** calendar **/
