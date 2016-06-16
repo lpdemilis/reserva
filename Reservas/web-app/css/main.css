@@ -908,7 +908,7 @@ a.skip {
 	font-size: 24px;	
 }
 
-.acesso {
+.acesso1 {
 	background-image: url(../images/calendar_icon_small.png);
 	background-repeat: no-repeat;
 	height: 50px;
@@ -916,11 +916,19 @@ a.skip {
 	background-position-x: 190px; 
 }
 
-.acesso a {
+.acesso2 {
+	background-image: url(../images/manager.png);
+	background-repeat: no-repeat;
+	height: 50px;
+	padding-left: 60px;
+	background-position-x: 190px; 
+}
+
+.acesso1 a, .acesso2 a {
 	text-decoration: none;
 }
 
-.acesso a h1 {
+.acesso1 a h1, .acesso2 a h1  {
 	padding-top: 10px;
 	text-decoration: none;
 	color: #FFF;

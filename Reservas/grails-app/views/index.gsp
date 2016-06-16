@@ -16,7 +16,7 @@
 				
 				<p>
 					<g:link controller="condominio" action="list">
-						<div class="acesso">
+						<div class="acesso1">
 							<h1>Entre agora e começe a preparar seu evento</h1>
 						</div>
 					</g:link>						
@@ -27,6 +27,16 @@
 			<div id="condominio-div">
 				<h2>Para seu condomínio</h2>
 				<p>Gerencie de forma fácil e organizada as reservas dos recursos do seu condomínio. Permita que os recursos sejam reservados de forma online. Defina regras para as reservas. Gerencie os horários de disponibilidade. Disponibilize fotos e descriçoes dos recursos. Obtenha relatórios das reservas. Tudo isso através de planos mensais, de acordo com a sua necessidade.  </p>
+				
+				<p>
+					<g:link controller="condominio" action="list">
+						<div class="acesso2">
+							<h1>Entre gerencie os recursos do seu condomínio</h1>
+						</div>
+					</g:link>						
+				</p>
+				
+				<br>
 				
 				<g:render template="/tipoPlano/list" model="['tipoPlanoInstanceList':TipoPlano.list()]"/>
 
