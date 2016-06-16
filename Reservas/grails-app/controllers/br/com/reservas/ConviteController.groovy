@@ -1,7 +1,6 @@
 package br.com.reservas
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.SimpleDateFormat
 
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
@@ -207,12 +206,14 @@ class ConviteController {
 		def condominioInstance = Condominio.get(params.condominioInstanceId)
 		
 		def conviteInstance = Convite.get(params.id)
-		conviteInstance.aprovado = Boolean.valueOf(params.aprovado)
+		conviteInstance.aprovado = Integer.parseInt(params.aprovado)
 		conviteInstance.dataAceite = new Date()
 		conviteInstance.save(flush: true)
 		
-		condominioInstance.usuarios.add(conviteInstance.usuario)
-		condominioInstance.save(flush: true)
+		if (Boolean.valueOf(params.aprovado)) {
+			condominioInstance.usuarios.add(conviteInstance.usuario)
+			condominioInstance.save(flush: true)
+		}
 		
 		def condominioController = new CondominioController()
 				

@@ -80,6 +80,24 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${ehAdministrador}">
+					<li class="fieldcontain">
+						<span id="apartamento-label" class="property-label"><g:message code="condominio.apartamento.label" default="" /></span>
+						
+							<span class="property-value" aria-labelledby="apartamento-label">
+								<span class="add">
+									<g:if test="${condominioInstance?.id}">
+										<g:link class="adicionar-button" controller="apartamento" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</g:link>	
+									</g:if>
+									<g:else>
+										<div class="disabled">${message(code: 'default.add.label', args: [message(code: 'apartamento.label', default: 'Apartamento')])}</div>				
+									</g:else>			
+								</span>
+							</span>
+						
+					</li>
+				</g:if>
 			
 				<g:if test="${condominioInstance?.administradores}">
 				<li class="fieldcontain">
@@ -116,6 +134,24 @@
 						</g:else>	
 					
 				</li>
+				</g:if>
+				
+				<g:if test="${ehAdministrador}">
+					<li class="fieldcontain">
+						<span id="endereco-label" class="property-label"><g:message code="condominio.endereco.label" default="" /></span>
+						
+							<span class="property-value" aria-labelledby="endereco-label">
+								<span class="add">
+									<g:if test="${condominioInstance?.id}">
+										<g:link class="adicionar-button" controller="recurso" action="create" params="['condominio.id': condominioInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</g:link>	
+									</g:if>
+									<g:else>
+										<div class="disabled">${message(code: 'default.add.label', args: [message(code: 'recurso.label', default: 'Recurso')])}</div>				
+									</g:else>			
+								</span>
+							</span>
+						
+					</li>
 				</g:if>
 				
 				<g:if test="${!condominioInstance.verificarUsuario()}">

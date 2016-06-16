@@ -1101,3 +1101,10 @@ p {
 		margin-top: 0;
 	}
 }
+
+.pendente {
+	padding-left: 5px;
+    font-style: italic;
+    font-size: 0.8em;
+    color: #999;
+}

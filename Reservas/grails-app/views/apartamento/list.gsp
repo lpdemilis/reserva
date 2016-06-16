@@ -1,4 +1,5 @@
 
+<%@page import="java.lang.Boolean"%>
 <%@ page import="br.com.reservas.Apartamento" %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,8 @@
 						<g:sortableColumn property="bloco" title="${message(code: 'apartamento.bloco.label', default: 'Bloco')}" />
 					
 						<th><g:message code="apartamento.condominio.label" default="Condominio" /></th>
+						
+						<th><g:message code="apartamento.usuario.label" default="Usuário" /></th>
 					
 					</tr>
 				</thead>
@@ -41,6 +44,26 @@
 						<td>${fieldValue(bean: apartamentoInstance, field: "bloco")}</td>
 					
 						<td>${fieldValue(bean: apartamentoInstance, field: "condominio")}</td>
+						
+						<td>
+							<g:each in="${apartamentoInstance.convites}" status="k" var="conviteInstance">
+								<g:if test="${conviteInstance.usuario && conviteInstance.aprovado}">
+									<g:link controller="usuario" action="show" id="${conviteInstance.usuario.id}">
+										${conviteInstance.usuario}
+									</g:link>									
+								</g:if>
+								<g:elseif test="${conviteInstance.aprovado == null || conviteInstance.aprovado}">
+									<g:link controller="convite" action="show" id="${conviteInstance.id}">
+										${conviteInstance.email}
+									</g:link>
+									
+									<span class="pendente"><g:message code="apartamento.pendente.label" default="(Pendente)" /></span>
+								</g:elseif>
+								
+								<br>
+								 
+							</g:each>
+						</td>
 					
 					</tr>
 				</g:each>

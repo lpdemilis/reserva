@@ -29,6 +29,15 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
+												
+			<g:form action="save" >
+				<fieldset class="form">
+					<g:render template="form"/>
+				</fieldset>
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				</fieldset>
+			</g:form>
 			
 			<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
 			<form action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
@@ -38,15 +47,6 @@
 			<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/209x48-contratar-cinza-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 			</form>
 			<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
-						
-			<g:form action="save" >
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
-			</g:form>
 		</div>
 	</body>
 </html>
