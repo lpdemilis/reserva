@@ -52,10 +52,12 @@ class ReservaController {
 						eq('id', recursoInstance.condominio.id)
 					}
 				}
+				
+				eq('aprovado', true)
 			}
 		}
 								
-		if (conviteInstanceList.size() == 0) {
+		if ((!recursoInstance.condominio.verificarAdministrador()) && (!recursoInstance.condominio.verificarUsuario())) {
 			if(flash.message == null){
 				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'apartamento.label', default: 'apartamento'), message(code: 'reserva.label', default: 'a reserva')])
 			}else{
@@ -82,8 +84,12 @@ class ReservaController {
 		
 		List<Apartamento> apartamentoInstanceList = new ArrayList<Apartamento>()
 		
-		for (conviteInstance in conviteInstanceList) {
-			apartamentoInstanceList.add(conviteInstance.apartamento)
+		if(recursoInstance.condominio.verificarAdministrador()){
+			apartamentoInstanceList = Apartamento.findAllByCondominio(recursoInstance.condominio)
+		}else{
+			for (conviteInstance in conviteInstanceList) {
+				apartamentoInstanceList.add(conviteInstance.apartamento)
+			}
 		}
 		
 		def precision 
