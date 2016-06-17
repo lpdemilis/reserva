@@ -35,6 +35,7 @@
 			    			    
 				,dayClick: function(date, jsEvent, view) {
 				    if (!this.hasClass( "fc-past" )) {
+				    	
 						$( "#diaEvento" ).val(date.format("DD"));
 						$( "#mesEvento" ).val(date.format("MM"));
 						$( "#anoEvento" ).val(date.format("YYYY"));
@@ -84,6 +85,12 @@
 				    	}
 	
 				    	if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
+
+				    		$( ".fc-day.fc-future" ).css('background', '#ffffff');
+					    	$( ".fc-day.fc-today" ).css('background', '#fcf8e3');				    	
+					    	$(this).css('background', '#d8f0ff');
+					    		
+					    	
 				    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY"));
 				    		$( "#dataInicioEvento_span" ).text(date.format("DD/MM/YYYY"));
 				    		$( "#dataInicioEvento_day" ).val(date.format("DD"));
@@ -106,7 +113,7 @@
 			    }
 
 				,eventClick: function(calEvent, jsEvent, view) {
-					window.location = "../../reserva/show/" + calEvent.id;
+					window.location = "/${grails.util.Metadata.current.'app.name'}/reserva/show/" + calEvent.id;
 		        }
 			});
 		  

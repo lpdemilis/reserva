@@ -232,9 +232,17 @@ class RecursoController {
 				}
 				reservasSB.append("'")
 				reservasSB.append(",")
-				reservasSB.append("color: '")
+				reservasSB.append("backgroundColor: '")
 				reservasSB.append(recursoInstance.cor)
 				reservasSB.append("'")
+				
+				def dataInicio = sdf.format(reserva.dataInicioEvento)
+				def dataAtual = sdf.format(new Date())
+				
+				if (dataInicio < dataAtual){
+					reservasSB.append(",className: 'fc-past-event'")
+				}
+								
 				reservasSB.append("},")
 			}
 		}

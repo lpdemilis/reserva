@@ -21,6 +21,16 @@ class ReservaController {
 
 	@Secured(['ROLE_USER'])
     def create() {
+		if (!params.recurso?.id) {
+			if(flash.message == null){
+				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
+			}else{
+				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
+			}
+			redirect(controller:"recurso", action: "create")
+			return
+		}
+		
 		Calendar c = Calendar.getInstance()
 		if(params.anoEvento){
 			c.set(Calendar.YEAR, Integer.valueOf(params.anoEvento)) 
@@ -71,17 +81,7 @@ class ReservaController {
 			}
 			return
 		}
-		
-		if (!params.recurso?.id) {
-			if(flash.message == null){
-				flash.message = message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
-			}else{
-				flash.message += '</div><div class="message" role="status">' + message(code: 'my.default.not.found.message', args: [message(code: 'recurso.label', default: 'recurso'), message(code: 'reservas.label', default: 'as reservas')])
-			}
-			redirect(controller:"recurso", action: "create")
-			return
-		}
-		
+				
 		List<Apartamento> apartamentoInstanceList = new ArrayList<Apartamento>()
 		
 		if(recursoInstance.condominio.verificarAdministrador()){
