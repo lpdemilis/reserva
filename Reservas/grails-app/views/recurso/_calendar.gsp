@@ -30,7 +30,15 @@
 			    ]
 
 			    ,dayRender: function(date, cell){
-				    ${recursoInstance.listaIndisponibilidades()}			        
+				    ${recursoInstance.listaIndisponibilidades()}
+
+				    if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
+
+				    	if("${dataInicioEvento}" == date.format("DD/MM/YYYY")){
+					    	cell.css('background', '#d8f0ff');
+						}
+				    }
+				    			        
 			    }
 			    			    
 				,dayClick: function(date, jsEvent, view) {

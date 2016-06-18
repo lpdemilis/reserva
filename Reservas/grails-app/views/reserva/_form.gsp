@@ -190,4 +190,4 @@
 
 <g:hiddenField  id="usuario" name="usuario.id" value="${reservaInstance?.usuario?.id}" />
 
-<g:render template="/recurso/calendar"/>
+<g:render template="/recurso/calendar" model="['dataInicioEvento':reservaInstance?.formatarData(reservaInstance?.dataInicioEvento)]" />

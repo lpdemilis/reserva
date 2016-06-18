@@ -1,5 +1,7 @@
 package br.com.reservas
 
+import java.text.SimpleDateFormat;
+
 class Reserva {
 	
 	Date dataSolicitacao
@@ -32,5 +34,10 @@ class Reserva {
 		cancelada defaultValue: false
 		dataAprovacao defaultValue:null
 		dataCancelamento defaultValue:null
+	}
+	
+	String formatarData(Date data){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy")
+		return sdf.format(data).toString()
 	}
 }
