@@ -649,7 +649,11 @@ a.skip {
 /* .disabled-day-indisponivel, .disabled-day-indisponivel :hover{ */
 /* 	font-style: italic; */
 /* 	background-color: #ff9f89 !important; */
-/* /* 	cursor: no-drop !important; */ */
+/* /* 	background-color: #EEE; */ */
+/*  	cursor: no-drop; */
+/*  	font-style: italic; */
+/* 	color: #BBB; */
+/* 	border: 1px solid #DDD;	 */
 /* } */
 
 .tipoPlano{
@@ -847,9 +851,22 @@ a.skip {
 
 /** calendar **/
 
-.fc-past {
+.fc-indisponivel {
+	background-color: #FFE4E1;
+ 	cursor: no-drop !important;
+ 	font-style: italic !important;
+	color: #BBB !important;
+	border: 1px solid #DDD;	
+ 	
+}
+
+.fc-selected {
+	background-color: #d8f0ff !important;	
+}
+
+.fc-past, .fc-widget-content .fc-past {
 	background-color: #EEE;
- 	cursor: no-drop;
+ 	cursor: no-drop !important;
  	font-style: italic;
 	color: #BBB;
 	border: 1px solid #DDD;	

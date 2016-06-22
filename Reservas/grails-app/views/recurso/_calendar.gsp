@@ -30,19 +30,37 @@
 			    ]
 
 			    ,dayRender: function(date, cell){
-				    ${recursoInstance.listaIndisponibilidades()}
+				    var indisponibilidades_str = "${recursoInstance.listaIndisponibilidades()}";
+				    var indisponibilidades_arr = indisponibilidades_str.split("#"); 
 
 				    if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
 
 				    	if("${dataInicioEvento}" == date.format("DD/MM/YYYY")){
-					    	cell.css('background', '#d8f0ff');
+					    	cell.addClass( "fc-selected" );
 						}
+
+				    	for (var i = 0; i < indisponibilidades_arr.length; i++) {							
+							if(indisponibilidades_arr[i] == date.format("DD/MM/YYYY")){
+						    	$('.fc-day[data-date="' + date.format("YYYY-MM-DD") + '"]').addClass( "fc-indisponivel" );
+						    	$('.fc-day-number[data-date="' + date.format("YYYY-MM-DD") + '"]').addClass( "fc-indisponivel" );
+							}							
+				    	}
+						
 				    }
 				    			        
 			    }
 			    			    
 				,dayClick: function(date, jsEvent, view) {
-				    if (!this.hasClass( "fc-past" )) {
+					var dataAtual = new Date();
+					var dataClick = new Date(date.format("YYYY"), (date.format("MM") - 1), date.format("DD"), date.format("HH"), date.format("mm"), date.format("ss"), 0);
+					
+					var futuro = false;
+
+					if(dataAtual.getTime() < dataClick.getTime()){
+						futuro = true;
+					}
+										
+				    if ((!this.hasClass( "fc-past" )) && (!this.hasClass( "fc-indisponivel" )) && (futuro)) {
 				    	
 						$( "#diaEvento" ).val(date.format("DD"));
 						$( "#mesEvento" ).val(date.format("MM"));
@@ -94,9 +112,9 @@
 	
 				    	if ("${recursoInstance.unidadeTempoReserva.id}" == "3") { //dia
 
-				    		$( ".fc-day.fc-future" ).css('background', '#ffffff');
-					    	$( ".fc-day.fc-today" ).css('background', '#fcf8e3');				    	
-					    	$(this).css('background', '#d8f0ff');
+				    		$( ".fc-selected" ).removeClass( "fc-selected" );
+					    	$(this).addClass( "fc-selected" );
+					    	
 					    		
 					    	
 				    		$( "#dataInicioEvento" ).val(date.format("DD/MM/YYYY"));

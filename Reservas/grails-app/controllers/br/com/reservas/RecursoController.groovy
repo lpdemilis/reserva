@@ -159,14 +159,41 @@ class RecursoController {
     }
 	
 	def listaIndisponibilidades(id){
-		
 		def recursoInstance = Recurso.get(id)
 		
 		StringBuilder indisponibilidadesSB = new StringBuilder()
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd")
-				
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy")
+		SimpleDateFormat sdf_day = new SimpleDateFormat("D")
+		
 		if(recursoInstance){
 			for (indisponibilidade in recursoInstance.indisponibilidades) {
+				def dias = Integer.valueOf(sdf_day.format(indisponibilidade.dataFim)) - Integer.valueOf(sdf_day.format(indisponibilidade.dataInicio))
+				
+				Calendar c = Calendar.getInstance()
+				c.setTime(indisponibilidade.dataInicio)
+				
+				indisponibilidadesSB.append(sdf.format(indisponibilidade.dataInicio))
+				indisponibilidadesSB.append("#")
+				
+				for (int i = 0; i < dias; i++) {
+					c.add(Calendar.DAY_OF_YEAR, 1)
+					indisponibilidadesSB.append(sdf.format(c.getTime()))
+					indisponibilidadesSB.append("#")
+				}				
+												
+				
+			}
+		}
+		
+		indisponibilidadesSB.toString()
+		
+//		def recursoInstance = Recurso.get(id)
+//		
+//		StringBuilder indisponibilidadesSB = new StringBuilder()
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd")
+//				
+//		if(recursoInstance){
+//			for (indisponibilidade in recursoInstance.indisponibilidades) {
 				//indisponibilidadesSB.append("var dataInicio = new Date('")
 				//indisponibilidadesSB.append(indisponibilidade.dataInicio)
 				//indisponibilidadesSB.append("');")
@@ -192,12 +219,12 @@ class RecursoController {
 //				indisponibilidadesSB.append(",")
 //				indisponibilidadesSB.append("overlap: false,")
 //				indisponibilidadesSB.append("rendering: 'background',")
-//				indisponibilidadesSB.append("color: '#ff9f89'")
+//				indisponibilidadesSB.append("className: 'disabled-day-indisponivel'")
 //				indisponibilidadesSB.append("},")
-			}
-		}
-		
-		indisponibilidadesSB.toString()
+//			}
+//		}
+//		
+//		indisponibilidadesSB.toString()
 	}
 	
 	def listaReservas(id){
