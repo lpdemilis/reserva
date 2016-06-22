@@ -17,7 +17,9 @@
 		<g:message code="apartamento.numero.label" default="Número do apartamento" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="numero" type="text" value="${apartamentoInstance.numero}" required=""/>
+	<g:field name="numero" type="text" value="${apartamentoInstance.numero}" required=""/>	
+	<span class="info-form"><g:message code="apartamento.numero.info.label" default="" /></span>
+	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: apartamentoInstance, field: 'bloco', 'error')} ">
@@ -26,6 +28,7 @@
 		
 	</label>
 	<g:textField name="bloco" value="${apartamentoInstance?.bloco}"/>
+	<span class="info-form"><g:message code="apartamento.bloco.info.label" default="" /></span>
 </div>
 
 <g:hiddenField id="condominio" name="condominio.id" required="" value="${apartamentoInstance?.condominio?.id}" />

@@ -1164,6 +1164,14 @@ p {
 	padding-bottom: 20px;
 }
 
+.info-form {
+	display: block;
+	color: #BBB;
+	padding-left: 222px;
+	font-size: 14px;
+	padding-top: 10px;
+}
+
 .contato {
 	background-image: url(../images/contato.png);
 	background-repeat: no-repeat;

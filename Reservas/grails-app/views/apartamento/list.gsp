@@ -25,11 +25,11 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="numero" title="${message(code: 'apartamento.numero.label', default: 'Numero')}" />
+						<g:sortableColumn property="numero" title="${message(code: 'apartamento.numero.label', default: 'Número')}" />
 					
 						<g:sortableColumn property="bloco" title="${message(code: 'apartamento.bloco.label', default: 'Bloco')}" />
 					
-						<th><g:message code="apartamento.condominio.label" default="Condominio" /></th>
+						<th><g:message code="apartamento.condominio.label" default="Condomínio" /></th>
 						
 						<th><g:message code="apartamento.usuario.label" default="Usuário" /></th>
 					

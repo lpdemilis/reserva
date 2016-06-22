@@ -10,13 +10,24 @@ class ReservaController {
 	
 	def springSecurityService
 	
-    def index() {
+	@Secured(['ROLE_USER'])
+	def index() {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['ROLE_USER'])
     def list(Integer max) {
+		
+		Usuario usuario = springSecurityService.currentUser
+		
         params.max = Math.min(max ?: 10, 100)
-        [reservaInstanceList: Reserva.list(params), reservaInstanceTotal: Reserva.count()]
+		
+		def reservaCriteria = Reserva.createCriteria()
+		def reservaInstanceList = reservaCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			eq('usuario.id', usuario.id)
+		}
+		
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()]
     }
 
 	@Secured(['ROLE_USER'])
