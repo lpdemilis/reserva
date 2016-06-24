@@ -33,11 +33,11 @@
 						<td><g:link controller="reserva" action="show" id="${reservaInstance.id}"><g:formatDate date="${reservaInstance.dataFimEvento}" format="dd/MM/yyyy HH:mm:ss" /></g:link></td>
 					
 						<td>
-							<g:if test="${reservaInstance.aprovada}">
+							<g:if test="${reservaInstance.aprovada && reservaInstance.dataAprovacao}">
 								<g:message code="reserva.aprovada.label" default="Aprovada" />
 							</g:if>
 							<g:else>
-								<g:if test="${reservaInstance.cancelada}">
+								<g:if test="${reservaInstance.cancelada && reservaInstance.dataCancelamento}">
 									<g:message code="reserva.cancelada.label" default="Cancelada" />
 								</g:if>
 								<g:else>

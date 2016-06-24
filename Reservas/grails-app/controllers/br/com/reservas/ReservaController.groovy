@@ -64,8 +64,11 @@ class ReservaController {
 		recursoInstance.id = 0
 		recursoInstance.nome = message(code: 'todos.recursos.label', default: 'Todos os recursos')
 		recursoInstanceList.add(0, recursoInstance)
+		
+		Calendar c = Calendar.getInstance()
+		c.add(Calendar.DAY_OF_MONTH, 90)
 						
-        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList]
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime()]
     }
 
 	@Secured(['ROLE_USER'])
@@ -295,10 +298,28 @@ class ReservaController {
 		Usuario usuario = springSecurityService.currentUser
 		
 		params.max = Math.min(max ?: 10, 100)
-		
+				
 		def reservaCriteria = Reserva.createCriteria()
 		def reservaInstanceList = reservaCriteria.list(max: params.max?:10, offset: params.offset?:0){
-			eq('usuario.id', usuario.id)
+			and{
+				if (params.recurso.id != "0"){
+					eq("recurso.id", Long.valueOf(params.recurso.id))				
+				}
+				
+				if(params.reserva == "0"){
+					eq('usuario.id', usuario.id)
+				}
+				
+				if(params.status_reserva == "1"){
+					eq('aprovada', true)
+				}else if(params.status_reserva == "2"){
+					eq('cancelada', true)
+				}else if(params.status_reserva == "3"){
+					isNull('dataAprovacao')
+				}
+				
+				between("dataInicioEvento", params.dataInicio, params.dataFim)
+			}					
 		}
 		
 		render(template: 'list', model:  [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()])		

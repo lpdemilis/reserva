@@ -35,6 +35,27 @@
 					<div id="recursoSelect" style="display: inline;">
 						<g:render template="/recurso/recurso" model="[recursoInstanceList: recursoInstanceList]" ></g:render>
 					</div>
+					
+					<label for="reserva">
+						<g:message code="condominio.reserva.label" default="Reserva" />
+						<span class="required-indicator">*</span>
+					</label>
+					<g:select id="reserva" name="reserva" from="${[message(code: 'minhas.reservas.label', default: 'Minhas reservas'), message(code: 'todas.reservas.label', default: 'Todas as reservas')]}" keys="${[0, 1]}" required="" value="0" class="many-to-one"/>
+					
+					<label for="status">
+						<g:message code="condominio.reserva.status.label" default="Status" />
+					</label>
+					<g:select id="status_reserva" name="status_reserva" from="${[message(code: 'todos.label', default: 'Todos'), message(code: 'aprovada.label', default: 'Aprovada'), message(code: 'cancelada.label', default: 'Cancelada'), message(code: 'pendente.label', default: 'Pendente')]}" keys="${[0, 1, 2, 3]}" required="" value="0" class="many-to-one"/>
+					
+					<label for="dataInicio">
+						<g:message code="condominio.reserva.data.inicio.label" default="A partir de" />
+					</label>
+					<g:datePicker name="dataInicio" precision="day"/>
+					
+					<label for="dataFim">
+						<g:message code="condominio.reserva.data.fim.label" default="Até" />
+					</label>
+					<g:datePicker name="dataFim" precision="day" value="${dataFim}" />
 									
 			        <g:submitButton name="search" value="Buscar"/>
 			        
