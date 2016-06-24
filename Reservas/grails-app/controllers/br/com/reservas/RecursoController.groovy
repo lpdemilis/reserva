@@ -2,6 +2,7 @@ package br.com.reservas
 
 import java.text.SimpleDateFormat
 
+import org.hibernate.Criteria
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -296,5 +297,54 @@ class RecursoController {
 		}   
 		
 		result
+	}
+	
+	@Secured(['ROLE_USER'])
+	def buscaRecursos(){
+		def recursoInstanceList
+		
+		Usuario usuario = springSecurityService.currentUser
+		
+		switch(params.condominio){
+			case "-1":
+				recursoInstanceList = Recurso.list()
+				break;
+			
+			case "0":
+				def condominioCriteria = Condominio.createCriteria()
+				def condominioInstanceList = condominioCriteria.list(){
+					createAlias('usuarios', 'usuarios', Criteria.LEFT_JOIN)
+					createAlias("administradores", "administradores", Criteria.LEFT_JOIN)
+								
+					or {
+						eq('administradores.id', usuario.id)
+						eq('usuarios.id', usuario.id)
+					}
+				}
+			
+				def recursoCriteria = Recurso.createCriteria()
+				recursoInstanceList = recursoCriteria.list(){
+					or {
+						for (condominioInstance in condominioInstanceList) {
+							eq('condominio.id', condominioInstance.id)
+						}						
+					}					
+				}
+				break;
+			
+			default:				
+				def recursoCriteria = Recurso.createCriteria()
+				recursoInstanceList = recursoCriteria.list(){
+					eq('condominio.id', Long.valueOf(params.condominio))
+				}		
+				break;
+		}
+		
+		def recursoInstance = new Recurso()
+		recursoInstance.id = 0
+		recursoInstance.nome = message(code: 'todos.recursos.label', default: 'Todos os recursos')
+		recursoInstanceList.add(0, recursoInstance)
+		
+		render(template: '/recurso/recurso', model:  [recursoInstanceList: recursoInstanceList])
 	}
 }

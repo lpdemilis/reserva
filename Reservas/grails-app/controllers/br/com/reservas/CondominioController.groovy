@@ -252,7 +252,6 @@ class CondominioController {
 	 * Index page with search form and results
 	 */
 	def search = {
-		println params
 		def condominioCriteria = Condominio.createCriteria()
 		def condominioInstanceList = condominioCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			endereco {

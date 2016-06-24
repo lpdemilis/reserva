@@ -1,5 +1,7 @@
 package br.com.reservas
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.hibernate.Criteria
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.access.annotation.Secured
 
@@ -17,17 +19,53 @@ class ReservaController {
 
 	@Secured(['ROLE_USER'])
     def list(Integer max) {
+        Usuario usuario = springSecurityService.currentUser
 		
-		Usuario usuario = springSecurityService.currentUser
-		
-        params.max = Math.min(max ?: 10, 100)
+		params.max = Math.min(max ?: 10, 100)
 		
 		def reservaCriteria = Reserva.createCriteria()
 		def reservaInstanceList = reservaCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			eq('usuario.id', usuario.id)
 		}
 		
-        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()]
+		def condominioCriteria = Condominio.createCriteria()
+		def condominioInstanceList = condominioCriteria.list(){
+			createAlias('usuarios', 'usuarios', Criteria.LEFT_JOIN)
+			createAlias("administradores", "administradores", Criteria.LEFT_JOIN)
+						
+			or {
+				eq('administradores.id', usuario.id)
+				eq('usuarios.id', usuario.id)
+			}
+		}
+		
+		def condominioInstance = new Condominio()
+		condominioInstance.id = 0
+		condominioInstance.nome = message(code: 'meus.condominios.label', default: 'Meus condom\u00EDnios')
+		condominioInstanceList.add(0, condominioInstance)
+		
+		if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
+			condominioInstance = new Condominio()
+			condominioInstance.id = -1
+			condominioInstance.nome = message(code: 'todos.condominios.label', default: 'Todos os condom\u00EDnios')
+			condominioInstanceList.add(0, condominioInstance)
+		}
+		
+		def recursoCriteria = Recurso.createCriteria()
+		def recursoInstanceList = recursoCriteria.list(){
+			or {
+				for (condominio in condominioInstanceList) {
+					eq('condominio.id', condominio.id)
+				}
+			}
+		}
+		
+		def recursoInstance = new Recurso()
+		recursoInstance.id = 0
+		recursoInstance.nome = message(code: 'todos.recursos.label', default: 'Todos os recursos')
+		recursoInstanceList.add(0, recursoInstance)
+						
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList]
     }
 
 	@Secured(['ROLE_USER'])
@@ -251,4 +289,18 @@ class ReservaController {
             redirect(action: "show", id: id)
         }
     }
+	
+	@Secured(['ROLE_USER'])
+	def search(Integer max) {
+		Usuario usuario = springSecurityService.currentUser
+		
+		params.max = Math.min(max ?: 10, 100)
+		
+		def reservaCriteria = Reserva.createCriteria()
+		def reservaInstanceList = reservaCriteria.list(max: params.max?:10, offset: params.offset?:0){
+			eq('usuario.id', usuario.id)
+		}
+		
+		render(template: 'list', model:  [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()])		
+	}	
 }
