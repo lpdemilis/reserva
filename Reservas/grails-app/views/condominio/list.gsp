@@ -23,10 +23,11 @@
 				<g:if test="${params.todos}">
 					<li><g:link class="list" action="list"><g:message code="default.meus.condominio.label" args="[entityName]" default="Meus Condomínios"/></g:link></li>
 				</g:if>
+				<li><g:link class="list" controller="reserva" action="list"><g:message code="default.list.reservas.label" default="Lista de Reservas" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-condominio" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.list.condominio.label" default="Meus Condomínios" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

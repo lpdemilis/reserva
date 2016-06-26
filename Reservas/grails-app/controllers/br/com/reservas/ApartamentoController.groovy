@@ -33,9 +33,7 @@ class ApartamentoController {
 			redirect(controller: "login", action: "denied")
 			return
 		}
-		
-        params.max = Math.min(max ?: 10, 100)
-		
+		        		
 		def apartamentoCriteria = Apartamento.createCriteria()
 		def apartamentoInstanceList = apartamentoCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			if(params.condominio && Long.valueOf(params.condominio) != 0){

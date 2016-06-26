@@ -39,16 +39,20 @@ class ReservaController {
 			}
 		}
 		
+		List<Condominio> condominioInstanceListSelect = new ArrayList<Condominio>() 
+		
+		condominioInstanceListSelect.addAll(condominioInstanceList)
+		
 		def condominioInstance = new Condominio()
 		condominioInstance.id = 0
 		condominioInstance.nome = message(code: 'meus.condominios.label', default: 'Meus condom\u00EDnios')
-		condominioInstanceList.add(0, condominioInstance)
+		condominioInstanceListSelect.add(0, condominioInstance)
 		
 		if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN')){
 			condominioInstance = new Condominio()
 			condominioInstance.id = -1
 			condominioInstance.nome = message(code: 'todos.condominios.label', default: 'Todos os condom\u00EDnios')
-			condominioInstanceList.add(0, condominioInstance)
+			condominioInstanceListSelect.add(0, condominioInstance)
 		}
 		
 		def recursoCriteria = Recurso.createCriteria()
@@ -67,8 +71,12 @@ class ReservaController {
 		
 		Calendar c = Calendar.getInstance()
 		c.add(Calendar.DAY_OF_MONTH, 90)
+		
+		CondominioController condominioController = new CondominioController()
+		
+		def verificarCriacaoCondominio = condominioController.verificarCriacaoCondominio()
 						
-        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime()]
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime(), condominioInstanceTotal: condominioInstanceList.size(), verificarCriacaoCondominio:verificarCriacaoCondominio, condominioInstanceListSelect: condominioInstanceListSelect]
     }
 
 	@Secured(['ROLE_USER'])
@@ -296,9 +304,7 @@ class ReservaController {
 	@Secured(['ROLE_USER'])
 	def search(Integer max) {
 		Usuario usuario = springSecurityService.currentUser
-		
-		params.max = Math.min(max ?: 10, 100)
-				
+								
 		def reservaCriteria = Reserva.createCriteria()
 		def reservaInstanceList = reservaCriteria.list(max: params.max?:10, offset: params.offset?:0){
 			and{
@@ -319,7 +325,15 @@ class ReservaController {
 				}
 				
 				between("dataInicioEvento", params.dataInicio, params.dataFim)
-			}					
+			}	
+			
+			if(Long.valueOf(params.condominio.id) > 0){
+				recurso{
+					condominio{
+						eq('id', Long.valueOf(params.condominio.id))
+					}
+				}
+			}
 		}
 		
 		render(template: 'list', model:  [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()])		

@@ -15,10 +15,11 @@
 				<sec:ifAnyGranted roles="ROLE_ADMIN">
 					<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				</sec:ifAnyGranted>	
+				<li><g:link class="list" controller="condominio" action="list"><g:message code="default.list.reservas.label" default="Lista de Condomínios" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-reserva" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.list.reservas.label" default="Lista de Reservas" /></h1>
 			
 			<div class="nav">
 				<g:formRemote name="search" url="[action:'search']" update="searchResult">	
@@ -26,7 +27,7 @@
 						<g:message code="condominio.label" default="Condomínio" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select id="condominio" name="condominio.id" from="${condominioInstanceList}" optionKey="id" required="" value="0" class="many-to-one" onchange="${remoteFunction(controller: 'recurso', action: 'buscaRecursos', params: '\'condominio=\' + this.value', update:'recursoSelect')}" />
+					<g:select id="condominio" name="condominio.id" from="${condominioInstanceListSelect}" optionKey="id" required="" value="0" class="many-to-one" onchange="${remoteFunction(controller: 'recurso', action: 'buscaRecursos', params: '\'condominio=\' + this.value', update:'recursoSelect')}" />
 					
 					<label for="recurso">
 						<g:message code="condominio.recurso.label" default="Recurso" />
@@ -66,5 +67,97 @@
 				<g:render template="list"/>
 			</div>
 		</div>
+		
+<%--		<div class="spacer"></div>--%>
+<%----%>
+<%--		--%>
+<%--	 Lista condomínio --%>
+<%--		<div id="list-condominio" class="content scaffold-list" role="main">--%>
+<%--			<h1><g:message code="default.list.condominio.label" default="Lista de Condomínios" /></h1>--%>
+<%--			<g:if test="${flash.message}">--%>
+<%--			<div class="message" role="status">${flash.message}</div>--%>
+<%--			</g:if>--%>
+<%--			<table>--%>
+<%--				<thead>--%>
+<%--					<tr>--%>
+<%--					--%>
+<%--						<g:sortableColumn property="nome" title="${message(code: 'condominio.nome.label', default: 'Nome do Condomínio')}" />--%>
+<%--					--%>
+<%--						<th><g:message code="condominio.endereco.label" default="Endereço" /></th>--%>
+<%--						--%>
+<%--						<th><g:message code="condominio.recurso.label" default="Recursos" /></th>--%>
+<%--						--%>
+<%--						<th><g:message code="condominio.administradores.label" default="Administradores" /></th>--%>
+<%--					--%>
+<%--					</tr>--%>
+<%--				</thead>--%>
+<%--				<tbody>--%>
+<%--				<g:each in="${condominioInstanceList}" status="i" var="condominioInstance">--%>
+<%--					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">--%>
+<%--					--%>
+<%--						<td><g:link action="show" id="${condominioInstance.id}">${fieldValue(bean: condominioInstance, field: "nome")}</g:link></td>--%>
+<%--					--%>
+<%--						<td>${condominioInstance.endereco.toHTML()}</td>--%>
+<%--						--%>
+<%--						<td>--%>
+<%--							<g:each in="${condominioInstance.recursos.sort { it.nome }}" status="k" var="recursoInstance">--%>
+<%--								<div class="tab-value"><g:link controller="recurso" action="show" id="${recursoInstance.id}"><span class="marker">► </span>${recursoInstance}</g:link></div>--%>
+<%--							</g:each>--%>
+<%--						</td>--%>
+<%--						--%>
+<%--						<td>--%>
+<%--							<g:each in="${condominioInstance.administradores}" status="k" var="administradorInstance">--%>
+<%--								<div class="tab-value"><g:link controller="usuario" action="show" id="${administradorInstance.id}"><span class="marker">► </span>${fieldValue(bean: administradorInstance, field: "nome")}</g:link></div>--%>
+<%--							</g:each> --%>
+<%--						</td>--%>
+<%--					--%>
+<%--					</tr>--%>
+<%--				</g:each>--%>
+<%--				</tbody>--%>
+<%--			</table>--%>
+<%--			--%>
+<%--			<div class="pagination">--%>
+<%--				<g:paginate total="${condominioInstanceTotal}" />--%>
+<%--			</div>--%>
+<%--			--%>
+<%--		</div>--%>
+<%--		--%>
+<%--		<div class="spacer"></div>--%>
+<%--		--%>
+<%--		<div id="list-condominio" class="content scaffold-list" role="main">--%>
+<%--			<h1><g:message code="condominio.buscar.label" default="Buscar Condomínios" /></h1>--%>
+<%----%>
+<%--			<div class="nav">--%>
+<%--				<g:formRemote name="search" url="[action:'search']" update="searchResult">	--%>
+<%--					<label for="nome">--%>
+<%--						<g:message code="condominio.nome.label" default="Nome" />--%>
+<%--						<span class="required-indicator">*</span>--%>
+<%--					</label>--%>
+<%--					<g:textField name="nome" value="${params.nome}" required="true"/>--%>
+<%--					--%>
+<%--					<label for="estado">--%>
+<%--						<g:message code="condominio.estado.label" default="Estado" />--%>
+<%--						<span class="required-indicator">*</span>--%>
+<%--					</label>--%>
+<%--					<g:select id="estado" name="estado.id" from="${br.com.reservas.Estado.list()}" optionKey="id" required="" value="" class="many-to-one" noSelection="['':'Selecione um Estado...']" onchange="${remoteFunction(controller: 'cidade', action: 'buscaCidades', params: '\'estado=\' + this.value', update:'cidadeSelect')}" />--%>
+<%--					--%>
+<%--					<label for="cidade">--%>
+<%--						<g:message code="condominio.cidade.label" default="Cidade" />--%>
+<%--						<span class="required-indicator">*</span>--%>
+<%--					</label>--%>
+<%--					<div id="cidadeSelect" style="display: inline;">--%>
+<%--						<g:render template="/cidade/cidade" model="[cidades: cidades]" ></g:render>--%>
+<%--					</div>--%>
+<%--									--%>
+<%--			        <g:submitButton name="search" value="Buscar"/>--%>
+<%--			        --%>
+<%--	    		</g:formRemote>--%>
+<%--			</div>--%>
+<%--			--%>
+<%--			<div id="searchResult"></div>--%>
+<%--		</div>--%>
+<%--		--%>
+<%--	 Lista condomínio --%>
+		
 	</body>
 </html>
