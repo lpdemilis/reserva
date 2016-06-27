@@ -70,7 +70,7 @@
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${apartamentoInstanceTotal}" />
+				<g:paginate total="${apartamentoInstanceTotal}" params="['condominio':params.condominio]" />
 			</div>
 		</div>
 	</body>

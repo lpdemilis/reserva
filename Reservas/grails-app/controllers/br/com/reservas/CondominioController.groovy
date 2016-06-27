@@ -33,7 +33,7 @@ class CondominioController {
 			}
 		}
 				
-        [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size(), verificarCriacaoCondominio:verificarCriacaoCondominio]
+        [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.totalCount, verificarCriacaoCondominio:verificarCriacaoCondominio]
     }
 
     def create() {
@@ -263,7 +263,7 @@ class CondominioController {
 			like("nome", '%' + params.nome + '%')
 		}
 				
-		render(template: 'list', model:  [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.size()])
+		render(template: 'list', model:  [condominioInstanceList: condominioInstanceList, condominioInstanceTotal: condominioInstanceList.totalCount])
 		
 //		if (!params.q?.trim()) {
 //			return [:]

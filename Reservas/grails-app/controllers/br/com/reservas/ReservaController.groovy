@@ -76,7 +76,7 @@ class ReservaController {
 		
 		def verificarCriacaoCondominio = condominioController.verificarCriacaoCondominio()
 						
-        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size(), condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime(), condominioInstanceTotal: condominioInstanceList.size(), verificarCriacaoCondominio:verificarCriacaoCondominio, condominioInstanceListSelect: condominioInstanceListSelect]
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.totalCount, condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime(), condominioInstanceTotal: condominioInstanceList.totalCount, verificarCriacaoCondominio:verificarCriacaoCondominio, condominioInstanceListSelect: condominioInstanceListSelect]
     }
 
 	@Secured(['ROLE_USER'])
@@ -336,6 +336,6 @@ class ReservaController {
 			}
 		}
 		
-		render(template: 'list', model:  [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.size()])		
+		render(template: 'list', model:  [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.totalCount])		
 	}	
 }

@@ -43,7 +43,7 @@ class ApartamentoController {
 			}			
 		}
 		
-        [apartamentoInstanceList: apartamentoInstanceList, apartamentoInstanceTotal: apartamentoInstanceList.size()]
+        [apartamentoInstanceList: apartamentoInstanceList, apartamentoInstanceTotal: apartamentoInstanceList.totalCount]
     }
 
 	@Secured(['ROLE_USER'])
