@@ -123,16 +123,16 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${reservaInstance?.convidados}">
-				<li class="fieldcontain">
-					<span id="convidados-label" class="property-label"><g:message code="reserva.convidados.label" default="Convidados" /></span>
-					
-						<g:each in="${reservaInstance.convidados}" var="c">
-						<span class="property-value" aria-labelledby="convidados-label"><g:link controller="convidado" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+<%--				<g:if test="${reservaInstance?.convidados}">--%>
+<%--				<li class="fieldcontain">--%>
+<%--					<span id="convidados-label" class="property-label"><g:message code="reserva.convidados.label" default="Convidados" /></span>--%>
+<%--					--%>
+<%--						<g:each in="${reservaInstance.convidados}" var="c">--%>
+<%--						<span class="property-value" aria-labelledby="convidados-label"><g:link controller="convidado" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>--%>
+<%--						</g:each>--%>
+<%--					--%>
+<%--				</li>--%>
+<%--				</g:if>--%>
 			
 				<g:if test="${reservaInstance?.aprovada}">
 					<li class="fieldcontain">
@@ -177,7 +177,26 @@
 				</li>
 				</g:if>
 				
-				<g:render template="/recurso/calendar"/>
+<%--				<g:if test="${ehAdministrador}">--%>
+					<li class="fieldcontain">
+						<span id="convidados-label" class="property-label"><g:message code="recurso.convidados.label" default="Convidados" /></span>
+						
+						<div class="property-value" aria-labelledby="convidados-label">
+							<div class="add">
+								<g:if test="${reservaInstance?.id}">
+									<g:link class="adicionar-button" controller="convidado" action="create" params="['reserva.id': reservaInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'convidado.label', default: 'Convidado')])}</g:link>
+								</g:if>
+								<g:else>
+									<div class="adicionar-button disabled">${message(code: 'default.add.label', args: [message(code: 'convidado.label', default: 'Convidado')])}</div>				
+								</g:else>	
+							</div>
+						</div>
+					</li>
+<%--				</g:if>--%>
+				
+<%--				<g:render template="/recurso/calendar"/>--%>
+
+				<g:render template="/convidado/list"/>
 			
 			</ol>
 			<g:form>

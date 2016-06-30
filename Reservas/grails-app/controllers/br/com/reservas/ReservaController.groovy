@@ -76,7 +76,7 @@ class ReservaController {
 		
 		def verificarCriacaoCondominio = condominioController.verificarCriacaoCondominio()
 						
-        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.totalCount, condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime(), condominioInstanceTotal: condominioInstanceList.totalCount, verificarCriacaoCondominio:verificarCriacaoCondominio, condominioInstanceListSelect: condominioInstanceListSelect]
+        [reservaInstanceList: reservaInstanceList, reservaInstanceTotal: reservaInstanceList.totalCount, condominioInstanceList: condominioInstanceList, recursoInstanceList: recursoInstanceList, dataFim: c.getTime(), /*condominioInstanceTotal: condominioInstanceList.totalCount,*/ verificarCriacaoCondominio:verificarCriacaoCondominio, condominioInstanceListSelect: condominioInstanceListSelect]
     }
 
 	@Secured(['ROLE_USER'])
@@ -239,9 +239,10 @@ class ReservaController {
 		
 		def recursoController = new RecursoController()
 
-        [reservaInstance: reservaInstance, recursoInstance: reservaInstance.recurso, tipoCalendario:recursoController.tipoCalendario(reservaInstance.recurso)]
+        [reservaInstance: reservaInstance, recursoInstance: reservaInstance.recurso, tipoCalendario:recursoController.tipoCalendario(reservaInstance.recurso), convidadoInstanceList:reservaInstance.convidados, convidadoInstanceTotal:reservaInstance.convidados.size()]
     }
 
+	@Secured(['ROLE_USER'])
     def edit(Long id) {
         def reservaInstance = Reserva.get(id)
         if (!reservaInstance) {
@@ -251,6 +252,7 @@ class ReservaController {
         }
 
         [reservaInstance: reservaInstance]
+		[reservaInstance: reservaInstance, recursoInstance: recursoInstance, action: 'create', apartamentoInstanceList: apartamentoInstanceList, precision:precision, anoEvento: params.anoEvento, mesEvento: params.mesEvento, diaEvento: params.diaEvento, horaEvento: params.horaEvento, minutoEvento: params.minutoEvento, segundoEvento: params.segundoEvento, tipoCalendario: recursoController.tipoCalendario(recursoInstance)]
     }
 
     def update(Long id, Long version) {

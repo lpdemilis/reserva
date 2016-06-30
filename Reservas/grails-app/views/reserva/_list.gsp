@@ -54,5 +54,5 @@
 			</table>
 			
 			<div class="pagination">
-				<g:paginate total="${reservaInstanceTotal}" />
+				<g:paginate total="${reservaInstanceTotal}" params="['recurso.id':1, 'condominio.id':2, 'reserva':3, 'status_reserva':4, 'dataInicio':5, 'dataFim':6]" />
 			</div>

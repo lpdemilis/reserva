@@ -17,6 +17,7 @@ class ConvidadoController {
         [convidadoInstanceList: Convidado.list(params), convidadoInstanceTotal: Convidado.count()]
     }
 
+	@Secured(['ROLE_USER'])
     def create() {
 		if (!params.reserva?.id) {
 			if(flash.message == null){
@@ -30,6 +31,7 @@ class ConvidadoController {
         [convidadoInstance: new Convidado(params)]
     }
 
+	@Secured(['ROLE_USER'])
     def save() {
         def convidadoInstance = new Convidado(params)
         if (!convidadoInstance.save(flush: true)) {
